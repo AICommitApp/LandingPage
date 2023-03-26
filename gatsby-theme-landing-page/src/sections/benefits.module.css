@@ -1,0 +1,38 @@
+.secondaryHeading {
+  margin-bottom: var(--space-4);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.contentCard p {
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+}
+
+.contentHeading {
+  font-size: var(--font-size-4);
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+}
+
+.contentImage {
+  margin-bottom: var(--space-3);
+}
+
+@media screen and (min-width: 48em) {
+  .content {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .contentCard {
+    /* ensure cards are equal width */
+    /* 0px unit is included for IE */
+    flex: 1 1 0px;
+  }
+}

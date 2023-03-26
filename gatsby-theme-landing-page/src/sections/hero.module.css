@@ -1,0 +1,40 @@
+.root {
+  display: flex;
+  gap: var(--space-3);
+  flex-direction: column;
+}
+
+.root .heading {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-6);
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+}
+
+.root .secondaryHeading {
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-3);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-caps);
+}
+
+.buttonContainer {
+  display: flex;
+  gap: var(--space-3);
+}
+
+@media screen and (min-width: 640px) {
+  .root {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .content {
+    width: 50%;
+  }
+
+  .image {
+    width: 50%;
+  }
+}

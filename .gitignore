@@ -1,0 +1,7 @@
+.cache
+public
+node_modules
+.env
+.env.development
+.env.production
+.contentful/export-model-and-content.json
