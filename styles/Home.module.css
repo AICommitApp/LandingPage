@@ -315,12 +315,11 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .vercelLogo {
+  .aicommit-logo {
     filter: invert(1);
   }
 
-  .logo,
-  .thirteen img {
+  .logo img {
     filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
   }
 }

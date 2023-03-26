@@ -3,20 +3,24 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import React, { useEffect } from "react";
-import Script from 'next/script'
+import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <>
-    <Script
-          async
-          src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"
-          onLoad={() => {
-            // @ts-ignore
-            MarketplaceWidget.setupMarketplaceWidget("install",21289,"#jetbrainMarket");
-          }}
-        />
+      <Script
+        async
+        src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"
+        onLoad={() => {
+          // @ts-ignore
+          MarketplaceWidget.setupMarketplaceWidget(
+            "install",
+            21289,
+            "#jetbrainMarket"
+          );
+        }}
+      />
       <Head>
         <title>AICommit</title>
         <meta
@@ -38,7 +42,7 @@ export default function Home() {
             <Image
               src="/favicon.svg"
               alt="AICommit logo"
-              className={styles.vercelLogo}
+              className={`styles.aicommit-logo`}
               width={80}
               height={80}
               priority
@@ -119,8 +123,11 @@ export default function Home() {
         </div>
 
         <div className={styles.footer}>
-            {/* Built with nextjs by rosuh for aicommit.app */}
-            <p>Developed by <a href="https://github.com/rosuH">rosuh</a> using Next.js for <a href="https://aicommit.app"> aicommit.app </a> </p>
+          {/* Built with nextjs by rosuh for aicommit.app */}
+          <p>
+            Developed by <a href="https://github.com/rosuH">rosuh</a> using
+            Next.js for <a href="https://aicommit.app"> aicommit.app </a>{" "}
+          </p>
         </div>
       </main>
     </>
