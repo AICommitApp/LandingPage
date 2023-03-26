@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import React, { useEffect } from "react";
 import Script from 'next/script'
-
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -14,6 +13,7 @@ export default function Home() {
           async
           src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"
           onLoad={() => {
+            // @ts-ignore
             MarketplaceWidget.setupMarketplaceWidget("install",21289,"#jetbrainMarket");
           }}
         />
