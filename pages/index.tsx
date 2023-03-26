@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import React, { useEffect } from "react";
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,10 @@ export default function Home() {
 
   return (
     <>
+    <Script
+          async
+          src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"
+        />
       <Head>
         <title>AICommit</title>
         <meta
@@ -39,10 +44,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type=" image/svg+xml" />
         <meta name="theme-color" content="#4a4a4a" />
-        <script
-          async
-          src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"
-        />
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
@@ -72,9 +73,9 @@ export default function Home() {
             height="100%"
             src="https://www.youtube.com/embed/sDG8cx6i_kM"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </div>
         <div className={styles.jetbrainMarket} id="jetbrainMarket"></div>
