@@ -31,6 +31,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type=" image/svg+xml" />
         <meta name="theme-color" content="#4a4a4a" />
+        <meta property="og:title" content="Automates your commit by AI!" />
+        <meta
+          property="og:description"
+          content="AICommit automates commit messages and streamlines the development process for developers."
+        />
+        <meta
+          property="og:image"
+          content="/og-image.png"
+        />
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
