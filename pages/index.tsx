@@ -8,31 +8,14 @@ import Script from 'next/script'
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const loadMarketplaceWidget = () => {
-    MarketplaceWidget.setupMarketplaceWidget(
-      "install",
-      21289,
-      "#jetbrainMarket"
-    );
-  };
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://plugins.jetbrains.com/assets/scripts/mp-widget.js";
-    script.async = true;
-    script.addEventListener("load", loadMarketplaceWidget);
-    document.body.appendChild(script);
-    return () => {
-      script.removeEventListener("load", loadMarketplaceWidget);
-      document.body.removeChild(script);
-    };
-  }, []);
-
   return (
     <>
     <Script
           async
           src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"
+          onLoad={() => {
+            MarketplaceWidget.setupMarketplaceWidget("install",21289,"#jetbrainMarket");
+          }}
         />
       <Head>
         <title>AICommit</title>
