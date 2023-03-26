@@ -1,0 +1,23 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_45_79)">
+<ellipse cx="54.8117" cy="230.489" rx="19.6923" ry="24.6154" transform="rotate(71.5404 54.8117 230.489)" fill="#F2C94C"/>
+<ellipse cx="19.6923" cy="24.6154" rx="19.6923" ry="24.6154" transform="matrix(-0.316636 0.948547 0.948547 0.316636 178.755 206.47)" fill="#F2C94C"/>
+<path d="M256 141.357C256 211.349 198.692 241.374 128 241.374C57.3076 241.374 0 211.349 0 141.357C0 71.3653 57.3076 14.6255 128 14.6255C198.692 14.6255 256 71.3653 256 141.357Z" fill="url(#paint0_linear_45_79)"/>
+<path d="M47.0762 97.81C47.0762 94.5473 49.7211 91.9023 52.9839 91.9023H203.016C206.279 91.9023 208.924 94.5473 208.924 97.81V212.834C208.924 216.097 206.279 218.742 203.016 218.742H128H52.9839C49.7211 218.742 47.0762 216.097 47.0762 212.834V97.81Z" fill="#333333"/>
+<rect x="59.2246" y="101.067" width="78.7692" height="19.0771" fill="#FF0500"/>
+<rect x="59.2246" y="158.616" width="78.7692" height="19.0771" fill="#FF0500"/>
+<rect x="59.2246" y="129.844" width="128.886" height="19.0771" fill="#00FA15"/>
+<rect x="59.2246" y="187.392" width="128.886" height="19.0771" fill="#00FA15"/>
+<ellipse cx="71.736" cy="62.2953" rx="16.924" ry="22.0302" fill="#F2F2F2"/>
+<ellipse cx="178.755" cy="62.27" rx="16.924" ry="22.0554" fill="#F2F2F2"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_45_79" x1="128" y1="14.6255" x2="128" y2="241.374" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F2E607"/>
+<stop offset="1" stop-color="#D79535"/>
+</linearGradient>
+<clipPath id="clip0_45_79">
+<rect width="256" height="256" fill="white"/>
+</clipPath>
+</defs>
+</svg>
