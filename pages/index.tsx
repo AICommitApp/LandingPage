@@ -21,6 +21,20 @@ export default function Home() {
           );
         }}
       />
+      <Script 
+        async 
+        src="https://www.googletagmanager.com/gtag/js?id=G-HEJVZLQ4GV"
+        onLoad={() => {
+          // @ts-ignore
+          window.dataLayer = window.dataLayer || [];
+          // @ts-ignore
+          function gtag(){dataLayer.push(arguments);}
+          // @ts-ignore
+          gtag('js', new Date());
+          // @ts-ignore
+          gtag('config', 'G-HEJVZLQ4GV');
+        }}
+      />
       <Head>
         <title>AICommit</title>
         <meta
