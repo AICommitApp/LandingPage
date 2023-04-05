@@ -45,6 +45,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.svg" type=" image/svg+xml" />
         <meta name="theme-color" content="#4a4a4a" />
         <meta property="og:title" content="Automates your commit by AI!" />
+        <meta name="google-site-verification" content="XYctT5gtc4q0PyFyA7mLFRlGQxCplYC5XM_SBLjdV6Y" />
         <meta
           property="og:description"
           content="AICommit automates commit messages and streamlines the development process for developers."
