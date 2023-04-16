@@ -79,7 +79,7 @@ export default function Home() {
         </div>
         <div className={styles.jetbrainMarket} id="jetbrainMarket">
           <a
-            href="https://plugins.jetbrains.com/plugin/8579-translation"
+            href="https://plugins.jetbrains.com/plugin/21289-aicommit"
             target="_blank"
           >
             <Image
