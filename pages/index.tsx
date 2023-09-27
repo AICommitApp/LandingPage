@@ -7,6 +7,8 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 import ReactPlayer from "react-player";
 import marketImage from "../public/installation_button.svg";
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 // import videoExplainCode from '../public/assets/explain_code_eng.mp4'
 // import videoCodeGen from '../public/installation_button.svg'
 // import videoCodeOptimization from '../public/installation_button.svg'
@@ -136,9 +138,13 @@ export default function Home() {
             </video>
           </div>
           <div>
-            <h3>Started Guide</h3>
+            <h3>Getting Started</h3>
             <div className={styles.video}>
-              <iframe
+            <LiteYouTubeEmbed
+                id="sDG8cx6i_kM"
+                title="AICommit Plugin Getting Started"
+              />
+              {/* <iframe
                 width="100%"
                 height="100%"
                 src="https://www.youtube.com/embed/sDG8cx6i_kM"
@@ -146,7 +152,7 @@ export default function Home() {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-              ></iframe>
+              ></iframe> */}
             </div>
           </div>
         </div>
