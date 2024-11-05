@@ -49,7 +49,11 @@ const HalfStar = () => (
   </svg>
 );
 
-const Rating = ({ score }) => {
+interface RatingProps {
+  score: number;
+}
+
+const Rating = ({ score }: RatingProps) => {
   return (
     <div className="flex items-center gap-2">
       <div className="flex">
@@ -61,14 +65,14 @@ const Rating = ({ score }) => {
                 className="w-5 h-5 text-yellow-400 fill-yellow-400"
               />
             );
-          } else if (
-            starPosition === Math.ceil(score) &&
-            !Number.isInteger(score)
-          ) {
+          } else if (starPosition === Math.ceil(score) && !Number.isInteger(score)) {
             return <HalfStar key={starPosition} />;
           } else {
             return (
-              <Star key={starPosition} className="w-5 h-5 text-gray-600" />
+              <Star
+                key={starPosition}
+                className="w-5 h-5 text-gray-600"
+              />
             );
           }
         })}
@@ -83,7 +87,7 @@ const LandingPage = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   useEffect(() => {
-    const handleMouseMove = (event) => {
+    const handleMouseMove = (event: MouseEvent) => {
       setMousePosition({
         x: event.clientX,
         y: event.clientY,
