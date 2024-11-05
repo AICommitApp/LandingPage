@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from "react";
-import Head from "next/head";
-import Script from "next/script";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import {
-  ChevronRight,
-  Zap,
-  Lock,
-  Code,
-  Star,
-  Bug,
-  FileText,
-  HelpCircle,
-  Play,
-  Space,
-} from "lucide-react";
-import { Background } from "@/components/Background";
+import React, { useState, useEffect, useRef } from 'react';
+import Head from 'next/head';
+import Script from 'next/script';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { 
+  ChevronRight, Zap, Lock, Code, Star,
+  Bug, FileText, HelpCircle, Play
+} from 'lucide-react';
+import { Background } from '@/components/Background';
 
 const HalfStar = () => (
   <svg
@@ -65,14 +57,14 @@ const Rating = ({ score }: RatingProps) => {
                 className="w-5 h-5 text-yellow-400 fill-yellow-400"
               />
             );
-          } else if (starPosition === Math.ceil(score) && !Number.isInteger(score)) {
+          } else if (
+            starPosition === Math.ceil(score) &&
+            !Number.isInteger(score)
+          ) {
             return <HalfStar key={starPosition} />;
           } else {
             return (
-              <Star
-                key={starPosition}
-                className="w-5 h-5 text-gray-600"
-              />
+              <Star key={starPosition} className="w-5 h-5 text-gray-600" />
             );
           }
         })}
@@ -85,6 +77,13 @@ const Rating = ({ score }: RatingProps) => {
 const LandingPage = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef(null);
+  
+  const handlePlayVideo = () => {
+    setIsVideoPlaying(true);
+    // 确保视频开始播放
+    videoRef.current?.play();
+  };
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -138,7 +137,7 @@ const LandingPage = () => {
     {
       text: "Found that students and teachers can use it for free, thanks",
       author: "ki***us,student",
-    }
+    },
   ];
 
   return (
@@ -217,6 +216,8 @@ const LandingPage = () => {
                     width={32}
                     height={32}
                     className="w-8 h-8"
+                    priority
+                    unoptimized
                   />
                 </div>
                 <span className="font-semibold text-lg leading-none">
@@ -357,42 +358,50 @@ const LandingPage = () => {
 
           {/* Video Section */}
           <section className="py-20 px-6">
-            <div className="container mx-auto max-w-6xl">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-                See AICommit in Action
-              </h2>
-              <motion.div
-                className="relative rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
+      <div className="container mx-auto max-w-6xl">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          See AICommit in Action
+        </h2>
+        <motion.div
+          className="relative rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="aspect-w-16 aspect-h-9">
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover"
+              poster="/api/placeholder/1920/1080"
+              controls={isVideoPlaying}
+              onClick={handlePlayVideo}
+              playsInline
+            >
+              <source
+                src="/assets/commit_vcs_window.mp4"
+                type="video/mp4"
+              />
+            </video>
+            {!isVideoPlaying && (
+              <div 
+                className="absolute inset-0 flex items-center justify-center bg-black/50 cursor-pointer"
+                onClick={handlePlayVideo}
               >
-                <div className="aspect-w-16 aspect-h-9">
-                  <video
-                    className="w-full h-full object-cover"
-                    poster="/api/placeholder/1920/1080"
-                    controls={isVideoPlaying}
-                    onClick={() => setIsVideoPlaying(true)}
-                  >
-                    <source src="/assets/commit_vcs_window.mp4" type="video/mp4" />
-                  </video>
-                  {!isVideoPlaying && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                      <motion.button
-                        className="p-4 bg-[#ded14f] hover:bg-[#ded14f]/90 rounded-full
-                               transition-colors duration-200"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => setIsVideoPlaying(true)}
-                      >
-                        <Play className="w-8 h-8 text-black" />
-                      </motion.button>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            </div>
-          </section>
+                <motion.button
+                  className="p-4 bg-[#ded14f] hover:bg-[#ded14f]/90 rounded-full
+                           transition-colors duration-200"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={handlePlayVideo}
+                >
+                  <Play className="w-8 h-8 text-black" />
+                </motion.button>
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </div>
+    </section>
 
           {/* Footer */}
           <footer className="py-8 px-6 border-t border-white/10">
