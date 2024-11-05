@@ -77,7 +77,7 @@ const Rating = ({ score }: RatingProps) => {
 const LandingPage = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   
   const handlePlayVideo = () => {
     setIsVideoPlaying(true);
