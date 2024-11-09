@@ -224,41 +224,41 @@ const LandingPage = () => {
                   AICommit
                 </span>
               </div>
-              <a
+                <a
                 href="https://plugins.jetbrains.com/plugin/21289-aicommit/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-1.5 bg-[#ded14f] hover:bg-[#ded14f]/90 text-black font-medium 
-                      rounded-full transition-all duration-200"
-              >
+                    rounded-full transition-all duration-200 hidden md:inline-block"
+                >
                 Install Plugin
-              </a>
+                </a>
             </div>
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-6 hidden md:flex">
               <a
-                href="#faq"
-                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+              href="#faq"
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
               >
-                <HelpCircle className="w-4 h-4" />
-                <span>FAQ</span>
+              <HelpCircle className="w-4 h-4" />
+              <span>FAQ</span>
               </a>
               <a
-                href="https://github.com/AICommitApp/community/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+              href="https://github.com/AICommitApp/community/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
               >
-                <Bug className="w-4 h-4" />
-                <span>Bug Report</span>
+              <Bug className="w-4 h-4" />
+              <span>Bug Report</span>
               </a>
               <a
-                href="https://github.com/AICommitApp/community/blob/main/EULA.md"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+              href="https://github.com/AICommitApp/community/blob/main/EULA.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
               >
-                <FileText className="w-4 h-4" />
-                <span>EULA</span>
+              <FileText className="w-4 h-4" />
+              <span>EULA</span>
               </a>
             </div>
           </div>
