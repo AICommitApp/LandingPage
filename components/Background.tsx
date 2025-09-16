@@ -1,5 +1,6 @@
 // components/Background.tsx
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useReducedMotion } from 'framer-motion';
 
 interface MousePosition {
   x: number;
@@ -8,21 +9,29 @@ interface MousePosition {
 
 export const Background = () => {
   const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
+  const shouldReduceMotion = useReducedMotion();
+  const rafRef = useRef<number | null>(null);
+  const latestPos = useRef<MousePosition>({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (shouldReduceMotion) return;
     const handleMouseMove = (event: MouseEvent) => {
-      setMousePosition({
-        x: event.clientX,
-        y: event.clientY
-      });
+      latestPos.current = { x: event.clientX, y: event.clientY };
+      if (rafRef.current == null) {
+        rafRef.current = requestAnimationFrame(() => {
+          setMousePosition(latestPos.current);
+          rafRef.current = null;
+        });
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [shouldReduceMotion]);
 
   return (
     <>
@@ -66,16 +75,18 @@ export const Background = () => {
       </div>
 
       {/* Mouse follow effect */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-10"
-        style={{
-          background: mousePosition.x > 0 || mousePosition.y > 0 
-            ? `radial-gradient(800px at ${mousePosition.x}px ${mousePosition.y}px, 
-                rgba(222, 209, 79, 0.08), transparent 70%)`
-            : 'none',
-          transition: 'background 0.3s ease'
-        }}
-      />
+      {!shouldReduceMotion && (
+        <div 
+          className="fixed inset-0 pointer-events-none z-10"
+          style={{
+            background: mousePosition.x > 0 || mousePosition.y > 0 
+              ? `radial-gradient(800px at ${mousePosition.x}px ${mousePosition.y}px, 
+                  rgba(222, 209, 79, 0.08), transparent 70%)`
+              : 'none',
+            transition: 'background 0.3s ease'
+          }}
+        />
+      )}
 
       {/* Noise texture overlay */}
       <div className="fixed inset-0 noise" />

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { 
   ChevronRight, Zap, Lock, Code, Star,
   Bug, FileText, HelpCircle, Play
@@ -77,6 +77,7 @@ const Rating = ({ score }: RatingProps) => {
 const LandingPage = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const shouldReduceMotion = useReducedMotion();
   
   const handlePlayVideo = () => {
     setIsVideoPlaying(true);
@@ -163,6 +164,10 @@ const LandingPage = () => {
         <meta name="twitter:title" content="One‑click AI commits for JetBrains — AICommit" />
         <meta name="twitter:description" content="Generate precise, context‑aware commit messages in one click. Privacy‑first with local processing." />
         <meta name="twitter:image" content="/og-image.jpg" />
+        <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </Head>
 
       <div className="relative min-h-screen text-white overflow-hidden">
@@ -240,9 +245,7 @@ const LandingPage = () => {
           <section className="pt-32 pb-20 px-6">
             <div className="container mx-auto text-center max-w-3xl">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                {...(!shouldReduceMotion ? { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8, ease: 'easeOut' } } : {})}
               >
                 <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight text-white">
                   One‑click AI commit messages
@@ -254,8 +257,7 @@ const LandingPage = () => {
                   Privacy‑first with local processing. Works across IntelliJ IDEA, WebStorm and more.
                 </p>
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  {...(!shouldReduceMotion ? { whileHover: { scale: 1.05 }, whileTap: { scale: 0.95 } } : {})}
                 >
                   <a
                     href="https://plugins.jetbrains.com/plugin/21289-aicommit/"
@@ -284,10 +286,7 @@ const LandingPage = () => {
                 {features.map((feature, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    viewport={{ once: true }}
+                    {...(!shouldReduceMotion ? { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: index * 0.1 }, viewport: { once: true } } : {})}
                     className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 
                            hover:bg-white/10 transition-colors duration-300"
                   >
@@ -318,9 +317,7 @@ const LandingPage = () => {
                 {reviews.map((review, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    {...(!shouldReduceMotion ? { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } } : {})}
                     className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
                   >
                     <p className="text-lg mb-4">&quot;{review.text}&quot;</p>
@@ -339,11 +336,9 @@ const LandingPage = () => {
         </h2>
         <motion.div
           className="relative rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          {...(!shouldReduceMotion ? { initial: { opacity: 0 }, whileInView: { opacity: 1 }, viewport: { once: true } } : {})}
         >
-          <div className="aspect-w-16 aspect-h-9">
+          <div className="aspect-[16/9]">
             <video
               ref={videoRef}
               className="w-full h-full object-cover"
