@@ -75,7 +75,6 @@ const Rating = ({ score }: RatingProps) => {
 };
 
 const LandingPage = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   
@@ -84,21 +83,6 @@ const LandingPage = () => {
     // 确保视频开始播放
     videoRef.current?.play();
   };
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      setMousePosition({
-        x: event.clientX,
-        y: event.clientY,
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   const features = [
     {
@@ -156,53 +140,33 @@ const LandingPage = () => {
         `}
       </Script>
       <Head>
-        <title>AICommit</title>
+        <title>AICommit — One‑click AI commit messages for JetBrains IDEs</title>
         <meta
           name="description"
-          content="AI-powered programming assistant for JetBrains IDEs!"
+          content="Generate precise, context‑aware commit messages in one click. Works across IntelliJ IDEA, WebStorm and more. Privacy‑first with local processing."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <meta name="theme-color" content="#4a4a4a" />
-        <meta property="og:title" content="Automates your commit by AI!" />
+        <meta property="og:title" content="One‑click AI commits for JetBrains — AICommit" />
         <meta
           name="google-site-verification"
           content="XYctT5gtc4q0PyFyA7mLFRlGQxCplYC5XM_SBLjdV6Y"
         />
         <meta
           property="og:description"
-          content="AI-powered programming assistant for JetBrains IDEs!"
+          content="Generate precise, context‑aware commit messages in one click. Privacy‑first with local processing."
         />
         <meta property="og:image" content="/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="One‑click AI commits for JetBrains — AICommit" />
+        <meta name="twitter:description" content="Generate precise, context‑aware commit messages in one click. Privacy‑first with local processing." />
+        <meta name="twitter:image" content="/og-image.jpg" />
       </Head>
 
       <div className="relative min-h-screen text-white overflow-hidden">
-        {/* Rest of your existing JSX code remains the same */}
-        <style jsx global>{`
-          .noise {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.05;
-            pointer-events: none;
-          }
-        `}</style>
-
         <Background />
-
-        {/* Mouse follow effect */}
-        <div
-          className="fixed inset-0 pointer-events-none z-10"
-          style={{
-            background:
-              mousePosition.x > 0 || mousePosition.y > 0
-                ? `radial-gradient(300px at ${mousePosition.x}px ${mousePosition.y}px, 
-                rgba(222, 209, 79, 0.05), transparent 75%)`
-                : "none",
-          }}
-        />
-
-        {/* Noise texture overlay */}
-        <div className="fixed inset-0 noise" />
 
         {/* Navigation */}
         <nav className="fixed top-0 w-full z-50 bg-[#21252f]/50 backdrop-blur-md border-b border-white/10">
@@ -217,7 +181,6 @@ const LandingPage = () => {
                     height={32}
                     className="w-8 h-8"
                     priority
-                    unoptimized
                   />
                 </div>
                 <span className="font-semibold text-lg leading-none">
@@ -230,13 +193,20 @@ const LandingPage = () => {
                 rel="noopener noreferrer"
                 className="px-4 py-1.5 bg-[#ded14f] hover:bg-[#ded14f]/90 text-black font-medium 
                     rounded-full transition-all duration-200 hidden md:inline-block"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'click_install_plugin', { location: 'nav' });
+                  }
+                }}
                 >
                 Install Plugin
                 </a>
             </div>
             <div className="flex items-center space-x-6 hidden md:flex">
               <a
-              href="#faq"
+              href="https://github.com/AICommitApp/community/blob/main/FAQ.md"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
               >
               <HelpCircle className="w-4 h-4" />
@@ -275,13 +245,13 @@ const LandingPage = () => {
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
                 <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight text-white">
-                  Your AI companion for
+                  One‑click AI commit messages
                   <br />
-                  better commits
+                  for JetBrains IDEs
                 </h1>
                 <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-                  Transform your development workflow with intelligent commit
-                  messages, code optimization, and documentation generation.
+                  Stop writing commit messages by hand. Generate precise, context‑aware messages in one click.
+                  Privacy‑first with local processing. Works across IntelliJ IDEA, WebStorm and more.
                 </p>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -293,6 +263,11 @@ const LandingPage = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center px-8 py-4 bg-[#ded14f] hover:bg-[#ded14f]/90 
                             text-black font-semibold rounded-lg gap-2 transition-colors duration-200"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && (window as any).gtag) {
+                        (window as any).gtag('event', 'click_install_plugin', { location: 'hero' });
+                      }
+                    }}
                   >
                     Install Plugin
                     <ChevronRight className="w-4 h-4" />
@@ -372,10 +347,13 @@ const LandingPage = () => {
             <video
               ref={videoRef}
               className="w-full h-full object-cover"
-              poster="/api/placeholder/1920/1080"
+              poster="/og-image.jpg"
+              preload="metadata"
               controls={isVideoPlaying}
               onClick={handlePlayVideo}
               playsInline
+              title="AICommit commit flow demo"
+              aria-label="AICommit commit flow demo video"
             >
               <source
                 src="/assets/commit_vcs_window.mp4"
