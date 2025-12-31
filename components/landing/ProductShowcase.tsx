@@ -7,6 +7,7 @@ export const ProductShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const firstRenderRef = React.useRef(true);
   
   const screenshots = [
     {
@@ -34,8 +35,14 @@ export const ProductShowcase = () => {
 
   // Auto-rotate through screenshots
   useEffect(() => {
+    // Ensure autoplay is running right after mount (some browsers report hover state late)
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false;
+      setIsPaused(false);
+    }
+
     if (shouldReduceMotion || isPaused) return;
-    
+
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % screenshots.length);
     }, 4000);
@@ -82,12 +89,14 @@ export const ProductShowcase = () => {
                     ? 'bg-white/10 border-[#ded14f]/50 shadow-[0_0_30px_-10px_rgba(222,209,79,0.3)]'
                     : 'bg-white/5 border-white/10 hover:bg-white/8 hover:border-white/20'
                 }`}
-                {...(!shouldReduceMotion ? {
-                  initial: { opacity: 0, x: -20 },
-                  whileInView: { opacity: 1, x: 0 },
-                  transition: { delay: index * 0.1 },
-                  viewport: { once: true }
-                } : {})}
+                {...(!shouldReduceMotion
+                  ? {
+                      initial: { opacity: 0, x: -16 },
+                      whileInView: { opacity: 1, x: 0 },
+                      transition: { delay: index * 0.08, duration: 0.35, ease: 'easeOut' },
+                      viewport: { once: true },
+                    }
+                  : {})}
               >
                 <div className="flex items-start gap-4">
                   <div className={`p-2.5 rounded-xl transition-all duration-300 ${
@@ -113,6 +122,7 @@ export const ProductShowcase = () => {
                 {/* Progress bar for active item (keep space to avoid hover jitter) */}
                 <div className="mt-4 h-0.5 bg-white/10 rounded-full overflow-hidden">
                   <motion.div
+                    key={`${activeIndex}-${isPaused}`}
                     className={`h-full bg-[#ded14f] ${activeIndex === index ? 'opacity-100' : 'opacity-0'}`}
                     initial={{ width: '0%' }}
                     animate={{ width: activeIndex === index && !isPaused ? '100%' : '0%' }}
