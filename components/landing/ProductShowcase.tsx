@@ -110,18 +110,18 @@ export const ProductShowcase = () => {
                     </p>
                   </div>
                 </div>
-                {/* Progress bar for active item */}
-                {activeIndex === index && !isPaused && (
-                  <div className="mt-4 h-0.5 bg-white/10 rounded-full overflow-hidden">
-                    <motion.div
-                      className="h-full bg-[#ded14f]"
-                      initial={{ width: '0%' }}
-                      animate={{ width: '100%' }}
-                      transition={{ duration: 4, ease: 'linear' }}
-                      key={activeIndex}
-                    />
-                  </div>
-                )}
+                {/* Progress bar for active item (keep space to avoid hover jitter) */}
+                <div className="mt-4 h-0.5 bg-white/10 rounded-full overflow-hidden">
+                  <motion.div
+                    className={`h-full bg-[#ded14f] ${activeIndex === index ? 'opacity-100' : 'opacity-0'}`}
+                    initial={{ width: '0%' }}
+                    animate={{ width: activeIndex === index && !isPaused ? '100%' : '0%' }}
+                    transition={{
+                      duration: activeIndex === index && !isPaused ? 4 : 0.2,
+                      ease: 'linear',
+                    }}
+                  />
+                </div>
               </motion.button>
             ))}
           </div>

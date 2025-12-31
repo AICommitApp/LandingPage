@@ -3,9 +3,13 @@ const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   compress: true,
   output: 'standalone',
+  experimental: {
+    // Keep Next.js scoped to this project instead of the parent dir to avoid
+    // dev-server restarts and hot-update 404s when other lockfiles exist.
+    outputFileTracingRoot: __dirname,
+  },
   async headers() {
     return [
       {
