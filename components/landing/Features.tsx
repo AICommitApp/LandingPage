@@ -9,19 +9,19 @@ export const Features = () => {
       icon: <Zap className="w-6 h-6 text-[#ded14f]" />,
       title: "Smart Commit Messages",
       description:
-        "Advanced diff analysis for precise, meaningful commits automatically generated based on your changes.",
+        "Advanced AI-powered analysis generates professional, meaningful commits in seconds. Save hours each week on documentation.",
     },
     {
       icon: <Code className="w-6 h-6 text-[#ded14f]" />,
       title: "Multi-Platform AI",
       description:
-        "Seamless integration with OpenAI, Azure, and Google Gemini for flexible AI processing options.",
+        "Works with OpenAI, Azure, and Google Gemini. Choose your preferred AI provider or switch anytime - complete flexibility.",
     },
     {
       icon: <Lock className="w-6 h-6 text-[#ded14f]" />,
-      title: "Privacy First",
+      title: "Enterprise-Grade Security",
       description:
-        "Your code stays secure with local processing and encrypted communications.",
+        "Your code never leaves your machine. Bank-level encryption for all communications. Perfect for sensitive projects.",
     },
   ];
 

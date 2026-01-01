@@ -15,8 +15,8 @@ export const Hero = () => {
             for JetBrains IDEs
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 md:mb-10 max-w-2xl mx-auto">
-            Stop writing commit messages by hand. Generate precise, context‑aware messages in one click.
-            Privacy‑first with local processing. Works across IntelliJ IDEA, WebStorm and more.
+            Save 30+ minutes daily writing commit messages. Generate precise, context‑aware messages in one click.
+            Privacy‑first with local processing. Trusted by 19,000+ developers worldwide.
           </p>
           <motion.div
             className="mb-12 md:mb-16 inline-block"

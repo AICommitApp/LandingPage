@@ -31,8 +31,21 @@ export const Reviews = () => {
           <div className="inline-flex flex-col items-center gap-4">
             <Rating score={4.5} />
             <p className="text-gray-400">
-              Based on 12000+ Downloads on JetBrains Marketplace
+              Based on 19,483+ Downloads on JetBrains Marketplace
             </p>
+            
+            {/* 统计数据展示 */}
+            <div className="flex gap-8 mt-4 text-center">
+              <div>
+                <div className="text-3xl font-bold text-[#ded14f]">58%</div>
+                <div className="text-sm text-gray-400 mt-1">Renewal Rate</div>
+              </div>
+              <div className="w-px bg-white/10"></div>
+              <div>
+                <div className="text-3xl font-bold text-[#ded14f]">19K+</div>
+                <div className="text-sm text-gray-400 mt-1">Active Users</div>
+              </div>
+            </div>
           </div>
         </div>
 
