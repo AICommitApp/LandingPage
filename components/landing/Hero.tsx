@@ -1,43 +1,145 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+import { m, useReducedMotion } from 'framer-motion';
+import { ChevronRight, Users, RefreshCw } from 'lucide-react';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
+
+const formatHeroDownloads = (n: number) => n.toLocaleString() + '+';
+
+const springFast = { type: 'spring', stiffness: 300, damping: 30 } as const;
+const springBase = { type: 'spring', stiffness: 80, damping: 20 } as const;
 
 export const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
 
+  const transition = (delay = 0) =>
+    shouldReduceMotion ? {} : { ...springBase, delay };
+
   return (
-    <section className="pt-28 pb-8 md:pt-32 md:pb-12 px-6">
-      <div className="container mx-auto text-center max-w-4xl">
-        <div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 tracking-tight text-white">
-            Still the best AI commit messages
-            <br />
-            for JetBrains IDEs
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 md:mb-10 max-w-2xl mx-auto">
-            Save 30+ minutes daily writing commit messages. Generate precise, context‑aware messages in one click.
-            Privacy‑first with local processing. Trusted by 19,000+ developers worldwide.
-          </p>
-          <motion.div
-            className="mb-12 md:mb-16 inline-block"
-            {...(!shouldReduceMotion ? { whileHover: { scale: 1.05 }, whileTap: { scale: 0.95 } } : {})}
-          >
-            <a
-              href="https://plugins.jetbrains.com/plugin/21289-aicommit/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-4 bg-[#ded14f] hover:bg-[#ded14f]/90 
-                      text-black font-semibold rounded-lg gap-2 transition-colors duration-200"
-              onClick={() => {
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                  (window as any).gtag('event', 'click_install_plugin', { location: 'hero' });
-                }
-              }}
+    <section className="pt-28 pb-12 md:pt-36 md:pb-20 px-6 overflow-hidden">
+      <div className="container mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+          {/* Left — Content */}
+          <div className="lg:col-span-6 xl:col-span-7 flex flex-col items-start">
+            <m.div
+              {...(!shouldReduceMotion ? {
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+                transition: transition(0),
+              } : {})}
             >
-              Install Plugin
-              <ChevronRight className="w-4 h-4" />
-            </a>
-          </motion.div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.08] mb-6">
+                Still the best AI
+                <br />
+                commit messages
+                <br />
+                <span className="text-[#ded14f]">for JetBrains IDEs</span>
+              </h1>
+            </m.div>
+
+            <m.p
+              className="text-base sm:text-lg text-gray-400 mb-10 max-w-lg leading-relaxed"
+              {...(!shouldReduceMotion ? {
+                initial: { opacity: 0, y: 16 },
+                animate: { opacity: 1, y: 0 },
+                transition: transition(0.1),
+              } : {})}
+            >
+              Save 30+ minutes daily writing commit messages. Generate precise,
+              context-aware messages in one click. Privacy-first with local
+              processing.
+            </m.p>
+
+            <m.div
+              {...(!shouldReduceMotion ? {
+                initial: { opacity: 0, y: 12 },
+                animate: { opacity: 1, y: 0 },
+                transition: transition(0.18),
+              } : {})}
+            >
+              <m.a
+                href="https://plugins.jetbrains.com/plugin/21289-aicommit/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-7 py-3.5 bg-[#ded14f] hover:bg-[#ded14f]/90
+                         text-black font-semibold rounded-lg gap-2 transition-colors duration-200"
+                whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
+                whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+                transition={springFast}
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'click_install_plugin', { location: 'hero' });
+                  }
+                }}
+              >
+                Install Plugin
+                <ChevronRight className="w-4 h-4" />
+              </m.a>
+            </m.div>
+
+            {/* Social proof stats */}
+            <m.div
+              className="flex items-center gap-6 mt-8 pt-8 border-t border-white/10"
+              {...(!shouldReduceMotion ? {
+                initial: { opacity: 0 },
+                animate: { opacity: 1 },
+                transition: transition(0.28),
+              } : {})}
+            >
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <Users className="w-4 h-4 text-[#ded14f]" />
+                <span>
+                  <strong className="text-white font-semibold">
+                    <AnimatedCounter
+                      value={20626}
+                      format={formatHeroDownloads}
+                      fallback="20,626+"
+                    />
+                  </strong>{' '}
+                  developers
+                </span>
+              </div>
+              <div className="w-px h-4 bg-white/10" />
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <RefreshCw className="w-4 h-4 text-[#ded14f]" />
+                <span><strong className="text-white font-semibold">58%</strong> renewal rate</span>
+              </div>
+            </m.div>
+          </div>
+
+          {/* Right — Product screenshot */}
+          <m.div
+            className="lg:col-span-6 xl:col-span-5 relative"
+            {...(!shouldReduceMotion ? {
+              initial: { opacity: 0, x: 32, scale: 0.97 },
+              animate: { opacity: 1, x: 0, scale: 1 },
+              transition: { ...springBase, delay: 0.12 },
+            } : {})}
+          >
+            {/* Ambient glow behind screenshot */}
+            <div className="absolute -inset-6 bg-gradient-to-br from-[#ded14f]/15 to-transparent rounded-3xl blur-3xl opacity-70 pointer-events-none" />
+
+            <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#12141b] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)]">
+              {/* Fake IDE window chrome */}
+              <div className="flex items-center gap-1.5 px-4 py-3 bg-white/[0.04] border-b border-white/10">
+                <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
+              </div>
+              <div className="relative aspect-[16/11] overflow-hidden">
+                <Image
+                  src="/screenshots/s_0_action_icon.png"
+                  alt="AICommit one-click generation button in JetBrains IDE VCS panel"
+                  fill
+                  className="object-cover object-top"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+          </m.div>
+
         </div>
       </div>
     </section>

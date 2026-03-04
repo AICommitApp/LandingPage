@@ -1,35 +1,20 @@
 import '@/styles/globals.css';
 import type { AppProps, NextWebVitalsMetric } from 'next/app';
-import localFont from 'next/font/local';
+import { LazyMotion } from 'framer-motion';
+import { zedSans, zedMono } from '@/lib/fonts';
 
-// Trimmed font set: only woff2 + required weights to cut unused bytes.
-const zedSans = localFont({
-  src: [
-    { path: '../public/fonts/zed/zed-sans-extended.woff2', weight: '400', style: 'normal' },
-    { path: '../public/fonts/zed/zed-sans-extendeditalic.woff2', weight: '400', style: 'italic' },
-    { path: '../public/fonts/zed/zed-sans-extendedbold.woff2', weight: '700', style: 'normal' },
-    { path: '../public/fonts/zed/zed-sans-extendedbolditalic.woff2', weight: '700', style: 'italic' },
-  ],
-  display: 'swap',
-  variable: '--font-zed-sans',
-  preload: true,
-});
-
-const zedMono = localFont({
-  src: [
-    { path: '../public/fonts/zed/zed-mono-extended.woff2', weight: '400', style: 'normal' },
-    { path: '../public/fonts/zed/zed-mono-extendedbold.woff2', weight: '700', style: 'normal' },
-  ],
-  display: 'swap',
-  variable: '--font-zed-mono',
-  preload: false,
-});
+// Load animation features asynchronously so they don't block the initial render.
+// The ~16 kB domAnimation chunk is deferred until after first paint.
+const loadMotionFeatures = () =>
+  import('framer-motion').then((mod) => mod.domAnimation);
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={`${zedSans.variable} ${zedMono.variable} font-sans`}>
-      <Component {...pageProps} />
-    </div>
+    <LazyMotion features={loadMotionFeatures}>
+      <div className={`${zedSans.variable} ${zedMono.variable} font-sans`}>
+        <Component {...pageProps} />
+      </div>
+    </LazyMotion>
   );
 }
 

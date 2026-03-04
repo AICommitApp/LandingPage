@@ -5,10 +5,12 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   output: 'standalone',
+  // Keep Next.js scoped to this project instead of the parent dir to avoid
+  // dev-server restarts and hot-update 404s when other lockfiles exist.
+  outputFileTracingRoot: __dirname,
   experimental: {
-    // Keep Next.js scoped to this project instead of the parent dir to avoid
-    // dev-server restarts and hot-update 404s when other lockfiles exist.
-    outputFileTracingRoot: __dirname,
+    // Tree-shake icon packages so only imported icons are bundled.
+    optimizePackageImports: ['lucide-react', '@icons-pack/react-simple-icons'],
   },
   async headers() {
     return [
@@ -33,7 +35,7 @@ const nextConfig = {
       {
         source: '/assets/:path*',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' },
+          { key: 'Cache-Control', value: `public, max-age=${ONE_YEAR_SECONDS}, immutable` },
         ],
       },
     ];

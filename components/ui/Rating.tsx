@@ -1,25 +1,16 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 
+// Brand yellow — matches #ded14f used across the entire site
+const BRAND_YELLOW = '#ded14f';
+const STAR_EMPTY = 'rgba(255,255,255,0.15)';
+
 export const HalfStar = () => (
-  <svg
-    viewBox="0 0 24 24"
-    className="w-5 h-5"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="halfFill" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop
-          offset="50%"
-          className="fill-yellow-400"
-          style={{ stopColor: "#facc15" }}
-        />
-        <stop
-          offset="50%"
-          className="fill-gray-600"
-          style={{ stopColor: "#4b5563" }}
-        />
+        <stop offset="50%" style={{ stopColor: BRAND_YELLOW }} />
+        <stop offset="50%" style={{ stopColor: STAR_EMPTY }} />
       </linearGradient>
     </defs>
     <path
@@ -46,17 +37,15 @@ export const Rating = ({ score }: RatingProps) => {
             return (
               <Star
                 key={starPosition}
-                className="w-5 h-5 text-yellow-400 fill-yellow-400"
+                className="w-5 h-5"
+                style={{ color: BRAND_YELLOW, fill: BRAND_YELLOW }}
               />
             );
-          } else if (
-            starPosition === Math.ceil(score) &&
-            !Number.isInteger(score)
-          ) {
+          } else if (starPosition === Math.ceil(score) && !Number.isInteger(score)) {
             return <HalfStar key={starPosition} />;
           } else {
             return (
-              <Star key={starPosition} className="w-5 h-5 text-gray-600" />
+              <Star key={starPosition} className="w-5 h-5" style={{ color: STAR_EMPTY }} />
             );
           }
         })}
@@ -65,5 +54,3 @@ export const Rating = ({ score }: RatingProps) => {
     </div>
   );
 };
-
-

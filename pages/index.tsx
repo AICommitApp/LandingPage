@@ -34,13 +34,11 @@ const VideoSection = dynamic(
 const FinalCTA = dynamic(
   () => import('@/components/landing/FinalCTA').then((mod) => mod.FinalCTA),
   {
-    ssr: false,
     loading: () => <SectionFallback title="CTA is loading…" />,
   }
 );
 
 const Footer = dynamic(() => import('@/components/landing/Footer').then((mod) => mod.Footer), {
-  ssr: false,
   loading: () => <SectionFallback title="Footer is loading…" />,
 });
 

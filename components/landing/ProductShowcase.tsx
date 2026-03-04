@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { Sparkles, Layers, Settings2 } from 'lucide-react';
 
 export const ProductShowcase = () => {
@@ -54,29 +54,30 @@ export const ProductShowcase = () => {
     <section className="py-20 lg:py-32 px-6 overflow-hidden">
       <div className="container mx-auto max-w-7xl">
         {/* Section header */}
-        <motion.div
+        <m.div
           className="text-center mb-12 lg:mb-20"
           {...(!shouldReduceMotion ? {
             initial: { opacity: 0, y: 20 },
             whileInView: { opacity: 1, y: 0 },
+            transition: { type: 'spring', stiffness: 80, damping: 20 },
             viewport: { once: true }
           } : {})}
         >
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent pb-2">
-            Designed for Developer Experience
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-white tracking-tight">
+            Built into your JetBrains workflow
           </h2>
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
-            Seamlessly integrated into your JetBrains IDE workflow. 
             Generate precise commit messages without leaving your editor.
+            Works wherever you commit — VCS panel, terminal, or Git integration.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Desktop: Feature tabs + large screenshot */}
         <div className="hidden lg:grid lg:grid-cols-12 gap-8 items-start">
           {/* Left: Feature tabs */}
           <div className="col-span-4 space-y-3">
             {screenshots.map((screenshot, index) => (
-              <motion.button
+              <m.button
                 key={index}
                 onClick={() => {
                   setActiveIndex(index);
@@ -86,14 +87,14 @@ export const ProductShowcase = () => {
                 onMouseLeave={() => setIsPaused(false)}
                 className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 group ${
                   activeIndex === index
-                    ? 'bg-white/10 border-[#ded14f]/50 shadow-[0_0_30px_-10px_rgba(222,209,79,0.3)]'
+                    ? 'bg-white/10 border-[#ded14f]/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
                     : 'bg-white/5 border-white/10 hover:bg-white/8 hover:border-white/20'
                 }`}
                 {...(!shouldReduceMotion
                   ? {
                       initial: { opacity: 0, x: -16 },
                       whileInView: { opacity: 1, x: 0 },
-                      transition: { delay: index * 0.08, duration: 0.35, ease: 'easeOut' },
+                      transition: { type: 'spring', stiffness: 80, damping: 20, delay: index * 0.08 },
                       viewport: { once: true },
                     }
                   : {})}
@@ -121,7 +122,7 @@ export const ProductShowcase = () => {
                 </div>
                 {/* Progress bar for active item (keep space to avoid hover jitter) */}
                 <div className="mt-4 h-0.5 bg-white/10 rounded-full overflow-hidden">
-                  <motion.div
+                  <m.div
                     key={`${activeIndex}-${isPaused}`}
                     className={`h-full bg-[#ded14f] ${activeIndex === index ? 'opacity-100' : 'opacity-0'}`}
                     initial={{ width: '0%' }}
@@ -132,7 +133,7 @@ export const ProductShowcase = () => {
                     }}
                   />
                 </div>
-              </motion.button>
+              </m.button>
             ))}
           </div>
 
@@ -142,22 +143,23 @@ export const ProductShowcase = () => {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <motion.div
+            <m.div
               className="relative"
               {...(!shouldReduceMotion ? {
                 initial: { opacity: 0, scale: 0.95 },
                 whileInView: { opacity: 1, scale: 1 },
+                transition: { type: 'spring', stiffness: 80, damping: 20 },
                 viewport: { once: true }
               } : {})}
             >
               {/* Glow effect behind screenshot */}
               <div className="absolute -inset-4 bg-gradient-to-r from-[#ded14f]/20 via-[#ded14f]/10 to-transparent rounded-3xl blur-2xl opacity-60" />
-              
+
               {/* Window frame decoration (clean, no title bar) */}
               <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#12141b] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]">
                 <div className="relative aspect-[16/10] overflow-hidden">
                   {screenshots.map((screenshot, index) => (
-                    <motion.div
+                    <m.div
                       key={index}
                       className="absolute inset-0"
                       initial={false}
@@ -175,11 +177,11 @@ export const ProductShowcase = () => {
                         priority={index === 0}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px" 
                       />
-                    </motion.div>
+                    </m.div>
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
 
@@ -189,7 +191,7 @@ export const ProductShowcase = () => {
           <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#12141b] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]">
             <div className="relative aspect-[4/3]">
               {screenshots.map((screenshot, index) => (
-                <motion.div
+                <m.div
                   key={index}
                   className="absolute inset-0"
                   initial={false}
@@ -206,7 +208,7 @@ export const ProductShowcase = () => {
                     priority={index === 0}
                     sizes="(max-width: 768px) 100vw, 500px"
                   />
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
