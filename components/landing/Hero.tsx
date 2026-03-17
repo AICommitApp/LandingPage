@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { m, useReducedMotion } from 'framer-motion';
-import { ChevronRight, Users, RefreshCw } from 'lucide-react';
+import { ChevronRight, Download, RefreshCw } from 'lucide-react';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { CommitPreview } from '@/components/ui/CommitPreview';
 import { DOWNLOAD_COUNT } from '@/lib/constants';
@@ -87,7 +87,7 @@ export const Hero = () => {
               } : {})}
             >
               <div className="flex items-center gap-2 text-sm text-gray-400">
-                <Users className="w-4 h-4 text-brand" />
+                <Download className="w-4 h-4 text-brand" />
                 <span>
                   <strong className="text-white font-semibold">
                     <AnimatedCounter
@@ -96,7 +96,7 @@ export const Hero = () => {
                       fallback="20,626+"
                     />
                   </strong>{' '}
-                  developers
+                  downloads
                 </span>
               </div>
               <div className="w-px h-4 bg-white/10" />

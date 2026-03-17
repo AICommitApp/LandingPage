@@ -77,7 +77,7 @@ const LandingPage = () => {
           const pageUrl = siteUrl ? `${siteUrl}/` : undefined;
           const title = 'Still the best AI commit messages for JetBrains IDEs — AICommit';
           const description =
-            'Save 30+ minutes daily with AI-powered commit messages. Trusted by 19,000+ developers. One-click generation with privacy-first local processing. Works with IntelliJ IDEA, WebStorm & more.';
+            'Save 30+ minutes daily with AI-powered commit messages. 20,000+ downloads on JetBrains Marketplace. One-click generation with privacy-first local processing. Works with IntelliJ IDEA, WebStorm & more.';
 
           return (
             <>

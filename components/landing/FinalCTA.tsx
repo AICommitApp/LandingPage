@@ -51,14 +51,13 @@ export const FinalCTA = () => {
                   messages manually.
                 </h2>
                 <p className="text-gray-400 text-base max-w-md">
-                  Join{' '}
                   <AnimatedCounter
                     value={DOWNLOAD_COUNT}
                     format={(n) => n.toLocaleString() + '+'}
                     fallback="20,626+"
                     triggerOnView
                   />
-                  {' '}developers who commit faster without the mental overhead.
+                  {' '}downloads on JetBrains Marketplace. Commit faster without the mental overhead.
                 </p>
               </div>
 

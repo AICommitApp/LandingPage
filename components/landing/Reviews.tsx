@@ -89,7 +89,7 @@ export const Reviews = () => {
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand" />
                   </span>
                 </div>
-                <div className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Active users</div>
+                <div className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Downloads</div>
               </div>
             </div>
           </div>
