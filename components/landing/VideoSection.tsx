@@ -49,7 +49,6 @@ export const VideoSection = () => {
               poster="/og-image.jpg"
               preload="metadata"
               controls={isVideoPlaying}
-              onClick={handlePlayVideo}
               playsInline
               title="AICommit commit flow demo"
               aria-label="AICommit commit flow demo video"
@@ -58,12 +57,9 @@ export const VideoSection = () => {
             </video>
 
             {!isVideoPlaying && (
-              <div
-                className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer"
-                onClick={handlePlayVideo}
-              >
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer">
                 <m.button
-                  className="p-4 bg-[#ded14f] rounded-full border-2 border-black/10
+                  className="p-4 bg-brand rounded-full border-2 border-black/10
                              shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
                   whileHover={shouldReduceMotion ? {} : { scale: 1.08 }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.94 }}

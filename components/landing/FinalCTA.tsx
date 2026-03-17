@@ -1,6 +1,9 @@
 import React from 'react';
 import { m, useReducedMotion } from 'framer-motion';
 import { ChevronRight, Terminal } from 'lucide-react';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
+import { DOWNLOAD_COUNT } from '@/lib/constants';
+import { trackEvent } from '@/lib/analytics';
 
 const springFast = { type: 'spring', stiffness: 300, damping: 30 } as const;
 const springBase = { type: 'spring', stiffness: 80, damping: 20 } as const;
@@ -20,7 +23,7 @@ export const FinalCTA = () => {
         } : {})}
       >
         <div className="relative rounded-3xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ded14f]/15 via-[#ded14f]/5 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand/15 via-brand/5 to-transparent" />
           <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-sm" />
 
           <div className="relative p-8 md:p-12 border border-white/10 rounded-3xl">
@@ -30,7 +33,7 @@ export const FinalCTA = () => {
               <div className="flex-1">
                 <m.div
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full
-                             bg-[#ded14f]/15 border border-[#ded14f]/25 text-[#ded14f] text-xs font-medium mb-5"
+                             bg-brand/15 border border-brand/25 text-brand text-xs font-medium mb-5"
                   {...(!shouldReduceMotion ? {
                     initial: { scale: 0.9, opacity: 0 },
                     whileInView: { scale: 1, opacity: 1 },
@@ -48,7 +51,14 @@ export const FinalCTA = () => {
                   messages manually.
                 </h2>
                 <p className="text-gray-400 text-base max-w-md">
-                  Join 19,000+ developers who commit faster without the mental overhead.
+                  Join{' '}
+                  <AnimatedCounter
+                    value={DOWNLOAD_COUNT}
+                    format={(n) => n.toLocaleString() + '+'}
+                    fallback="20,626+"
+                    triggerOnView
+                  />
+                  {' '}developers who commit faster without the mental overhead.
                 </p>
               </div>
 
@@ -58,17 +68,13 @@ export const FinalCTA = () => {
                   href="https://plugins.jetbrains.com/plugin/21289-aicommit/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-7 py-3.5 bg-[#ded14f] hover:bg-[#ded14f]/90
+                  className="inline-flex items-center px-7 py-3.5 bg-brand hover:bg-brand/90
                            text-black font-semibold rounded-lg gap-2 transition-colors duration-200
                            shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
                   whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
                   transition={springFast}
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && (window as any).gtag) {
-                      (window as any).gtag('event', 'click_install_plugin', { location: 'final_cta' });
-                    }
-                  }}
+                  onClick={() => trackEvent('click_install_plugin', { location: 'final_cta' })}
                 >
                   Install for Free
                   <ChevronRight className="w-4 h-4" />

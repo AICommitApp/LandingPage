@@ -6,6 +6,12 @@
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 33, 37, 47;
   --background-end-rgb: 33, 37, 47;
+  --color-brand: 222 209 79;
+}
+
+*:focus-visible {
+  outline: 2px solid #ded14f;
+  outline-offset: 2px;
 }
 
 body {

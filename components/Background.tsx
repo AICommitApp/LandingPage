@@ -1,6 +1,7 @@
 // components/Background.tsx
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
+import { BRAND_COLOR_RGB } from '@/lib/constants';
 
 interface MousePosition {
   x: number;
@@ -40,18 +41,16 @@ export const Background = () => {
 
       {/* Mesh gradient overlay */}
       <div className="fixed inset-0">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             background: `
-              radial-gradient(800px circle at 100% 100%, rgba(222, 209, 79, 0.12), transparent 40%),
-              radial-gradient(600px circle at 0% 0%, rgba(222, 209, 79, 0.1), transparent 40%),
-              radial-gradient(800px circle at 100% 0%, rgba(222, 209, 79, 0.08), transparent 40%),
-              radial-gradient(600px circle at 0% 100%, rgba(222, 209, 79, 0.08), transparent 40%),
-              radial-gradient(1200px circle at 50% 50%, rgba(222, 209, 79, 0.05), transparent 60%)
-            `,
-            backdropFilter: 'blur(120px)',
-            WebkitBackdropFilter: 'blur(120px)'
+              radial-gradient(800px circle at 100% 100%, rgba(${BRAND_COLOR_RGB}, 0.12), transparent 40%),
+              radial-gradient(600px circle at 0% 0%, rgba(${BRAND_COLOR_RGB}, 0.1), transparent 40%),
+              radial-gradient(800px circle at 100% 0%, rgba(${BRAND_COLOR_RGB}, 0.08), transparent 40%),
+              radial-gradient(600px circle at 0% 100%, rgba(${BRAND_COLOR_RGB}, 0.08), transparent 40%),
+              radial-gradient(1200px circle at 50% 50%, rgba(${BRAND_COLOR_RGB}, 0.05), transparent 60%)
+            `
           }}
         />
       </div>
@@ -64,10 +63,10 @@ export const Background = () => {
             background: `
               conic-gradient(
                 from 230.29deg at 51.63% 52.16%,
-                rgba(222, 209, 79, 0.2) 0deg,
+                rgba(${BRAND_COLOR_RGB}, 0.2) 0deg,
                 transparent 67.5deg,
                 transparent 292.5deg,
-                rgba(222, 209, 79, 0.2) 360deg
+                rgba(${BRAND_COLOR_RGB}, 0.2) 360deg
               )
             `
           }}
@@ -79,11 +78,9 @@ export const Background = () => {
         <div 
           className="fixed inset-0 pointer-events-none z-10"
           style={{
-            background: mousePosition.x > 0 || mousePosition.y > 0 
-              ? `radial-gradient(800px at ${mousePosition.x}px ${mousePosition.y}px, 
-                  rgba(222, 209, 79, 0.08), transparent 70%)`
-              : 'none',
-            transition: 'background 0.3s ease'
+            background: mousePosition.x > 0 || mousePosition.y > 0
+              ? `radial-gradient(800px at ${mousePosition.x}px ${mousePosition.y}px, rgba(${BRAND_COLOR_RGB}, 0.08), transparent 70%)`
+              : 'none'
           }}
         />
       )}

@@ -11,7 +11,7 @@ const ProductShowcase = dynamic(
   () => import('@/components/landing/ProductShowcase').then((mod) => mod.ProductShowcase),
   {
     ssr: false,
-    loading: () => <SectionFallback title="Product showcase is loading…" />,
+    loading: () => <SectionFallback />,
   }
 );
 
@@ -19,7 +19,7 @@ const Reviews = dynamic(
   () => import('@/components/landing/Reviews').then((mod) => mod.Reviews),
   {
     ssr: false,
-    loading: () => <SectionFallback title="Reviews are loading…" />,
+    loading: () => <SectionFallback />,
   }
 );
 
@@ -27,27 +27,25 @@ const VideoSection = dynamic(
   () => import('@/components/landing/VideoSection').then((mod) => mod.VideoSection),
   {
     ssr: false,
-    loading: () => <SectionFallback title="Video is loading…" />,
+    loading: () => <SectionFallback />,
   }
 );
 
 const FinalCTA = dynamic(
   () => import('@/components/landing/FinalCTA').then((mod) => mod.FinalCTA),
   {
-    loading: () => <SectionFallback title="CTA is loading…" />,
+    loading: () => <SectionFallback />,
   }
 );
 
 const Footer = dynamic(() => import('@/components/landing/Footer').then((mod) => mod.Footer), {
-  loading: () => <SectionFallback title="Footer is loading…" />,
+  loading: () => <SectionFallback />,
 });
 
-const SectionFallback = ({ title }: { title: string }) => (
+const SectionFallback = () => (
   <section className="py-16 px-6">
     <div className="container mx-auto max-w-6xl">
-      <div className="h-40 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 text-sm">
-        {title}
-      </div>
+      <div className="h-40 rounded-2xl bg-white/5 animate-pulse" />
     </div>
   </section>
 );
@@ -95,12 +93,13 @@ const LandingPage = () => {
               {pageUrl ? <meta property="og:url" content={pageUrl} /> : null}
               <meta property="og:title" content={title} />
               <meta property="og:description" content={description} />
-              <meta property="og:image" content="/og-image.jpg" />
+              {/* og:image / twitter:image must be absolute URLs for social crawlers */}
+              <meta property="og:image" content={siteUrl ? `${siteUrl}/og-image.jpg` : '/og-image.jpg'} />
 
               <meta name="twitter:card" content="summary_large_image" />
               <meta name="twitter:title" content={title} />
               <meta name="twitter:description" content={description} />
-              <meta name="twitter:image" content="/og-image.jpg" />
+              <meta name="twitter:image" content={siteUrl ? `${siteUrl}/og-image.jpg` : '/og-image.jpg'} />
             </>
           );
         })()}
@@ -119,11 +118,18 @@ const LandingPage = () => {
       </Head>
 
       <div className="relative min-h-screen text-white overflow-hidden">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand focus:text-black focus:font-semibold focus:rounded-lg"
+        >
+          Skip to main content
+        </a>
+
         <Background />
 
         <Header />
 
-        <main className="relative z-20">
+        <main id="main-content" className="relative z-20">
           <Hero />
           <ProductShowcase />
           <Features />

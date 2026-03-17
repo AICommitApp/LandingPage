@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { m, useReducedMotion } from 'framer-motion';
 import { ChevronRight, Users, RefreshCw } from 'lucide-react';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
+import { DOWNLOAD_COUNT } from '@/lib/constants';
+import { trackEvent } from '@/lib/analytics';
 
 const formatHeroDownloads = (n: number) => n.toLocaleString() + '+';
 
@@ -34,7 +36,7 @@ export const Hero = () => {
                 <br />
                 commit messages
                 <br />
-                <span className="text-[#ded14f]">for JetBrains IDEs</span>
+                <span className="text-brand">for JetBrains IDEs</span>
               </h1>
             </m.div>
 
@@ -62,16 +64,12 @@ export const Hero = () => {
                 href="https://plugins.jetbrains.com/plugin/21289-aicommit/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-7 py-3.5 bg-[#ded14f] hover:bg-[#ded14f]/90
+                className="inline-flex items-center px-7 py-3.5 bg-brand hover:bg-brand/90
                          text-black font-semibold rounded-lg gap-2 transition-colors duration-200"
                 whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
                 whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
                 transition={springFast}
-                onClick={() => {
-                  if (typeof window !== 'undefined' && (window as any).gtag) {
-                    (window as any).gtag('event', 'click_install_plugin', { location: 'hero' });
-                  }
-                }}
+                onClick={() => trackEvent('click_install_plugin', { location: 'hero' })}
               >
                 Install Plugin
                 <ChevronRight className="w-4 h-4" />
@@ -88,11 +86,11 @@ export const Hero = () => {
               } : {})}
             >
               <div className="flex items-center gap-2 text-sm text-gray-400">
-                <Users className="w-4 h-4 text-[#ded14f]" />
+                <Users className="w-4 h-4 text-brand" />
                 <span>
                   <strong className="text-white font-semibold">
                     <AnimatedCounter
-                      value={20626}
+                      value={DOWNLOAD_COUNT}
                       format={formatHeroDownloads}
                       fallback="20,626+"
                     />
@@ -102,7 +100,7 @@ export const Hero = () => {
               </div>
               <div className="w-px h-4 bg-white/10" />
               <div className="flex items-center gap-2 text-sm text-gray-400">
-                <RefreshCw className="w-4 h-4 text-[#ded14f]" />
+                <RefreshCw className="w-4 h-4 text-brand" />
                 <span><strong className="text-white font-semibold">58%</strong> renewal rate</span>
               </div>
             </m.div>
@@ -118,7 +116,7 @@ export const Hero = () => {
             } : {})}
           >
             {/* Ambient glow behind screenshot */}
-            <div className="absolute -inset-6 bg-gradient-to-br from-[#ded14f]/15 to-transparent rounded-3xl blur-3xl opacity-70 pointer-events-none" />
+            <div className="absolute -inset-6 bg-gradient-to-br from-brand/15 to-transparent rounded-3xl blur-3xl opacity-70 pointer-events-none" />
 
             <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#12141b] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)]">
               {/* Fake IDE window chrome */}

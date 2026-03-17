@@ -6,6 +6,9 @@ module.exports = {
     ],
     theme: {
       extend: {
+        colors: {
+          brand: '#ded14f',
+        },
         fontFamily: {
           sans: ['var(--font-zed-sans)', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
           mono: ['var(--font-zed-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],

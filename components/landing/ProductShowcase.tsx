@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { m, useReducedMotion } from 'framer-motion';
 import { Sparkles, Layers, Settings2 } from 'lucide-react';
@@ -6,8 +6,9 @@ import { Sparkles, Layers, Settings2 } from 'lucide-react';
 export const ProductShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [loaded, setLoaded] = useState(() => new Set([0]));
   const shouldReduceMotion = useReducedMotion();
-  const firstRenderRef = React.useRef(true);
+  const firstRenderRef = useRef(true);
   
   const screenshots = [
     {
@@ -15,23 +16,28 @@ export const ProductShowcase = () => {
       alt: 'AICommit action button in JetBrains IDE commit panel',
       title: 'One-Click Generation',
       description: 'Generate commit messages instantly from the VCS commit panel with a single click',
-      icon: <Sparkles className="w-5 h-5 text-[#ded14f]" />
+      icon: <Sparkles className="w-5 h-5 text-brand" />
     },
     {
       src: '/screenshots/s_1_commit_panel.png',
       alt: 'AICommit panel showing provider switch, prompt templates, and history',
       title: 'Prompt Lab & Provider Switch',
       description: 'Pick provider/model, apply prompt templates, and review generation history in one place',
-      icon: <Settings2 className="w-5 h-5 text-[#ded14f]" />
+      icon: <Settings2 className="w-5 h-5 text-brand" />
     },
     {
       src: '/screenshots/s_2_template.png',
       alt: 'AICommit template dropdown with multiple preset options',
       title: 'Custom Templates',
       description: 'Use built-in templates or create your own for Conventional Commits, Release Notes & more',
-      icon: <Layers className="w-5 h-5 text-[#ded14f]" />
+      icon: <Layers className="w-5 h-5 text-brand" />
     }
   ];
+
+  // Lazy-load images as they become active
+  useEffect(() => {
+    setLoaded((prev) => { const next = new Set(prev); next.add(activeIndex); return next; });
+  }, [activeIndex]);
 
   // Auto-rotate through screenshots
   useEffect(() => {
@@ -87,8 +93,8 @@ export const ProductShowcase = () => {
                 onMouseLeave={() => setIsPaused(false)}
                 className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 group ${
                   activeIndex === index
-                    ? 'bg-white/10 border-[#ded14f]/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
-                    : 'bg-white/5 border-white/10 hover:bg-white/8 hover:border-white/20'
+                    ? 'bg-white/10 border-brand/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                    : 'bg-white/5 border-white/10 hover:bg-white/[0.08] hover:border-white/20'
                 }`}
                 {...(!shouldReduceMotion
                   ? {
@@ -102,7 +108,7 @@ export const ProductShowcase = () => {
                 <div className="flex items-start gap-4">
                   <div className={`p-2.5 rounded-xl transition-all duration-300 ${
                     activeIndex === index
-                      ? 'bg-[#ded14f]/20 border border-[#ded14f]/30'
+                      ? 'bg-brand/20 border border-brand/30'
                       : 'bg-white/10 border border-white/10 group-hover:bg-white/15'
                   }`}>
                     {screenshot.icon}
@@ -124,7 +130,7 @@ export const ProductShowcase = () => {
                 <div className="mt-4 h-0.5 bg-white/10 rounded-full overflow-hidden">
                   <m.div
                     key={`${activeIndex}-${isPaused}`}
-                    className={`h-full bg-[#ded14f] ${activeIndex === index ? 'opacity-100' : 'opacity-0'}`}
+                    className={`h-full bg-brand ${activeIndex === index ? 'opacity-100' : 'opacity-0'}`}
                     initial={{ width: '0%' }}
                     animate={{ width: activeIndex === index && !isPaused ? '100%' : '0%' }}
                     transition={{
@@ -153,7 +159,7 @@ export const ProductShowcase = () => {
               } : {})}
             >
               {/* Glow effect behind screenshot */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-[#ded14f]/20 via-[#ded14f]/10 to-transparent rounded-3xl blur-2xl opacity-60" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-brand/20 via-brand/10 to-transparent rounded-3xl blur-2xl opacity-60" />
 
               {/* Window frame decoration (clean, no title bar) */}
               <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#12141b] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]">
@@ -169,14 +175,18 @@ export const ProductShowcase = () => {
                       }}
                       transition={{ duration: 0.5, ease: 'easeInOut' }}
                     >
-                      <Image
-                        src={screenshot.src}
-                        alt={screenshot.alt}
-                        fill
-                        className="object-cover object-center"
-                        priority={index === 0}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px" 
-                      />
+                      {loaded.has(index) ? (
+                        <Image
+                          src={screenshot.src}
+                          alt={screenshot.alt}
+                          fill
+                          className="object-cover object-center"
+                          priority={index === 0}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-[#12141b]" />
+                      )}
                     </m.div>
                   ))}
                 </div>
@@ -221,7 +231,7 @@ export const ProductShowcase = () => {
                 onClick={() => setActiveIndex(index)}
                 className={`flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full border transition-all duration-300 ${
                   activeIndex === index
-                    ? 'bg-[#ded14f]/20 border-[#ded14f]/50 text-white'
+                    ? 'bg-brand/20 border-brand/50 text-white'
                     : 'bg-white/5 border-white/10 text-gray-400'
                 }`}
               >

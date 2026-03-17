@@ -67,6 +67,7 @@ export const Features = () => {
 
   return (
     <section className="py-20 px-6">
+      <h2 className="sr-only">Features</h2>
       <div className="container mx-auto max-w-6xl">
         <div className="divide-y divide-white/[0.06]">
           {features.map((feature, index) => {
@@ -75,9 +76,7 @@ export const Features = () => {
             return (
               <m.div
                 key={index}
-                className={`py-14 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center ${
-                  isRight ? 'md:[direction:rtl]' : ''
-                }`}
+                className="py-14 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center"
                 {...(!shouldReduceMotion ? {
                   initial: { opacity: 0, y: 24 },
                   whileInView: { opacity: 1, y: 0 },
@@ -86,7 +85,7 @@ export const Features = () => {
                 } : {})}
               >
                 {/* ── Visual side ── */}
-                <div className={`flex items-center justify-center ${isRight ? 'md:[direction:ltr]' : ''}`}>
+                <div className={`flex items-center justify-center ${isRight ? 'md:order-last' : ''}`}>
                   {feature.visual === 'providers' ? (
                     <div className="w-full max-w-[300px]">
                       <div className="grid grid-cols-2 gap-3">
@@ -97,7 +96,7 @@ export const Features = () => {
                                        bg-white/[0.04] border border-white/[0.08]
                                        shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
                           >
-                            <span className="text-[#ded14f]/70 flex-shrink-0">
+                            <span className="text-brand/70 flex-shrink-0">
                               <Icon />
                             </span>
                             <span className="text-sm font-medium text-gray-300">{name}</span>
@@ -109,14 +108,14 @@ export const Features = () => {
                   ) : (
                     <div className="relative w-full max-w-[280px] aspect-square flex items-center justify-center">
                       <div className="absolute inset-0 rounded-3xl bg-white/[0.03] border border-white/[0.07]" />
-                      <div className="absolute inset-8 rounded-2xl border border-[#ded14f]/10" />
+                      <div className="absolute inset-8 rounded-2xl border border-brand/10" />
                       <div className="relative flex flex-col items-center gap-4">
-                        <div className="p-5 rounded-2xl bg-[#ded14f]/10 border border-[#ded14f]/20">
+                        <div className="p-5 rounded-2xl bg-brand/10 border border-brand/20">
                           {feature.icon && (
-                            <feature.icon className="w-10 h-10 text-[#ded14f]" strokeWidth={1.5} />
+                            <feature.icon className="w-10 h-10 text-brand" strokeWidth={1.5} />
                           )}
                         </div>
-                        <span className="text-xs font-mono text-[#ded14f]/60 tracking-widest uppercase">
+                        <span className="text-xs font-mono text-brand/60 tracking-widest uppercase">
                           {feature.label}
                         </span>
                       </div>
@@ -125,7 +124,7 @@ export const Features = () => {
                 </div>
 
                 {/* ── Text side ── */}
-                <div className={isRight ? 'md:[direction:ltr]' : ''}>
+                <div className={isRight ? 'md:order-first' : ''}>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">
                     {feature.title}
                   </h3>
