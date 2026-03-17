@@ -4,6 +4,17 @@ import { Zap, Lock } from 'lucide-react';
 import { SiGooglegemini, SiOllama } from '@icons-pack/react-simple-icons';
 
 const springBase = { type: 'spring', stiffness: 80, damping: 20 } as const;
+const springSnappy = { type: 'spring', stiffness: 400, damping: 28 } as const;
+
+const providerCardVariants = {
+  rest: { scale: 1, y: 0 },
+  hover: { scale: 1.04, y: -2 },
+};
+
+const providerIconVariants = {
+  rest: { rotate: 0, scale: 1 },
+  hover: { rotate: 12, scale: 1.2 },
+};
 
 // ── Provider icons ─────────────────────────────────────────────────────────
 // Gemini + Ollama: official icons from @icons-pack/react-simple-icons (Simple Icons CC0-1.0)
@@ -90,17 +101,27 @@ export const Features = () => {
                     <div className="w-full max-w-[300px]">
                       <div className="grid grid-cols-2 gap-3">
                         {providers.map(({ name, Icon }) => (
-                          <div
+                          <m.div
                             key={name}
                             className="flex items-center gap-2.5 px-4 py-3 rounded-xl
                                        bg-white/[0.04] border border-white/[0.08]
-                                       shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
+                                       shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]
+                                       cursor-default transition-colors duration-200
+                                       hover:bg-brand/[0.06] hover:border-brand/20"
+                            variants={providerCardVariants}
+                            initial="rest"
+                            whileHover={shouldReduceMotion ? {} : 'hover'}
+                            transition={springSnappy}
                           >
-                            <span className="text-brand/70 flex-shrink-0">
+                            <m.span
+                              className="text-brand/70 flex-shrink-0"
+                              variants={providerIconVariants}
+                              transition={springSnappy}
+                            >
                               <Icon />
-                            </span>
+                            </m.span>
                             <span className="text-sm font-medium text-gray-300">{name}</span>
-                          </div>
+                          </m.div>
                         ))}
                       </div>
                       <p className="text-center text-xs text-gray-600 mt-3">+ custom API endpoints</p>

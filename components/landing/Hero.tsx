@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { m, useReducedMotion } from 'framer-motion';
 import { ChevronRight, Users, RefreshCw } from 'lucide-react';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
+import { CommitPreview } from '@/components/ui/CommitPreview';
 import { DOWNLOAD_COUNT } from '@/lib/constants';
 import { trackEvent } from '@/lib/analytics';
 
@@ -64,7 +65,7 @@ export const Hero = () => {
                 href="https://plugins.jetbrains.com/plugin/21289-aicommit/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-7 py-3.5 bg-brand hover:bg-brand/90
+                className="btn-shimmer inline-flex items-center px-7 py-3.5 bg-brand hover:bg-brand/90
                          text-black font-semibold rounded-lg gap-2 transition-colors duration-200"
                 whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
                 whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
@@ -136,6 +137,8 @@ export const Hero = () => {
                 />
               </div>
             </div>
+
+            <CommitPreview />
           </m.div>
 
         </div>

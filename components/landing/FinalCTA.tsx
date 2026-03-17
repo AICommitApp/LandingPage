@@ -68,7 +68,7 @@ export const FinalCTA = () => {
                   href="https://plugins.jetbrains.com/plugin/21289-aicommit/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-7 py-3.5 bg-brand hover:bg-brand/90
+                  className="btn-shimmer inline-flex items-center px-7 py-3.5 bg-brand hover:bg-brand/90
                            text-black font-semibold rounded-lg gap-2 transition-colors duration-200
                            shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
                   whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
