@@ -133,7 +133,7 @@ export const Hero = () => {
               </div>
               <div className="relative aspect-[16/11] overflow-hidden">
                 <Image
-                  src="/screenshots/s_0_action_icon.png"
+                  src="/screenshots/s_0_action_icon.webp"
                   alt="AICommit one-click generation button in JetBrains IDE VCS panel"
                   fill
                   className="object-cover object-top"

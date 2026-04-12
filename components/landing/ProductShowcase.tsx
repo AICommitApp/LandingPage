@@ -13,21 +13,21 @@ export const ProductShowcase = () => {
   
   const screenshots = [
     {
-      src: '/screenshots/s_0_action_icon.png',
+      src: '/screenshots/s_0_action_icon.webp',
       alt: 'AICommit action button in JetBrains IDE commit panel',
       title: 'One-Click Generation',
       description: 'Generate commit messages instantly from the VCS commit panel with a single click',
       icon: <Sparkles className="w-5 h-5 text-brand" />
     },
     {
-      src: '/screenshots/s_1_commit_panel.png',
+      src: '/screenshots/s_1_commit_panel.webp',
       alt: 'AICommit panel showing provider switch, prompt templates, and history',
       title: 'Prompt Lab & Provider Switch',
       description: 'Pick provider/model, apply prompt templates, and review generation history in one place',
       icon: <Settings2 className="w-5 h-5 text-brand" />
     },
     {
-      src: '/screenshots/s_2_template.png',
+      src: '/screenshots/s_2_template.webp',
       alt: 'AICommit template dropdown with multiple preset options',
       title: 'Custom Templates',
       description: 'Use built-in templates or create your own for Conventional Commits, Release Notes & more',
@@ -182,7 +182,6 @@ export const ProductShowcase = () => {
                           alt={screenshot.alt}
                           fill
                           className="object-cover object-center"
-                          priority={index === 0}
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px"
                         />
                       ) : (
@@ -216,7 +215,6 @@ export const ProductShowcase = () => {
                     alt={screenshot.alt}
                     fill
                     className="object-cover object-center"
-                    priority={index === 0}
                     sizes="(max-width: 768px) 100vw, 500px"
                   />
                 </m.div>
@@ -251,4 +249,3 @@ export const ProductShowcase = () => {
     </section>
   );
 };
-
