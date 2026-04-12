@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { m, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
+import { useMotionReady } from '@/lib/useMotionReady';
 
 const COMMIT_MESSAGES = [
   'feat(auth): implement OAuth2 token refresh with retry logic',
@@ -10,7 +11,7 @@ const COMMIT_MESSAGES = [
 ];
 
 export const CommitPreview = () => {
-  const shouldReduceMotion = useReducedMotion();
+  const { canAnimate, shouldReduceMotion } = useMotionReady();
   const [msgIndex, setMsgIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [phase, setPhase] = useState<'typing' | 'pause' | 'erasing'>('typing');
@@ -54,9 +55,13 @@ export const CommitPreview = () => {
   return (
     <m.div
       className="mt-3 rounded-xl overflow-hidden border border-white/[0.09] bg-[#0e1016]"
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.55, duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+      {...(canAnimate
+        ? {
+            initial: { opacity: 0, y: 6 },
+            animate: { opacity: 1, y: 0 },
+            transition: { delay: 0.55, duration: 0.4, ease: [0.25, 1, 0.5, 1] },
+          }
+        : {})}
     >
       {/* Terminal chrome bar */}
       <div className="flex items-center gap-2 px-3 py-1.5 border-b border-white/[0.06] bg-white/[0.015]">

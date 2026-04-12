@@ -1,9 +1,9 @@
 import React from 'react';
-import { m, useReducedMotion } from 'framer-motion';
-import { Rating } from '@/components/ui/Rating';
+import { m } from 'framer-motion';
 import { Star } from 'lucide-react';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { DOWNLOAD_COUNT } from '@/lib/constants';
+import { useMotionReady } from '@/lib/useMotionReady';
 
 const springBase = { type: 'spring', stiffness: 80, damping: 20 } as const;
 
@@ -38,7 +38,7 @@ const reviews = [
 ];
 
 export const Reviews = () => {
-  const shouldReduceMotion = useReducedMotion();
+  const { canAnimate } = useMotionReady();
 
   return (
     <section className="py-20 px-6">
@@ -47,7 +47,7 @@ export const Reviews = () => {
         {/* Header */}
         <m.div
           className="mb-14"
-          {...(!shouldReduceMotion ? {
+          {...(canAnimate ? {
             initial: { opacity: 0, y: 20 },
             whileInView: { opacity: 1, y: 0 },
             transition: springBase,
@@ -56,16 +56,21 @@ export const Reviews = () => {
         >
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
             <div>
-              <Rating score={4.5} />
-              <p className="text-gray-400 mt-2 text-sm">
-                Based on{' '}
+              <p className="text-xs font-mono uppercase tracking-[0.28em] text-brand/70">
+                Customer feedback
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mt-3">
+                Feedback from AICommit users
+              </h2>
+              <p className="text-gray-400 mt-3 text-sm md:text-base max-w-xl leading-relaxed">
                 <AnimatedCounter
                   value={DOWNLOAD_COUNT}
                   format={formatDownloadsText}
                   fallback="20,626+"
                   triggerOnView
                 />
-                {' '}downloads on JetBrains Marketplace
+                {' '}JetBrains Marketplace installs and a steady stream of user reviews, bug reports,
+                and onboarding feedback from the IDE workflow itself.
               </p>
             </div>
             <div className="flex gap-8">
@@ -89,7 +94,7 @@ export const Reviews = () => {
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand" />
                   </span>
                 </div>
-                <div className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Downloads</div>
+                <div className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Marketplace installs</div>
               </div>
             </div>
           </div>
@@ -100,7 +105,7 @@ export const Reviews = () => {
           {reviews.map((review, index) => (
             <m.div
               key={index}
-              {...(!shouldReduceMotion ? {
+              {...(canAnimate ? {
                 initial: { opacity: 0, y: 20 },
                 whileInView: { opacity: 1, y: 0 },
                 transition: { ...springBase, delay: index * 0.07 },

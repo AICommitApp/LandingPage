@@ -1,7 +1,8 @@
 import React from 'react';
-import { m, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Zap, Lock } from 'lucide-react';
 import { SiGooglegemini, SiOllama } from '@icons-pack/react-simple-icons';
+import { useMotionReady } from '@/lib/useMotionReady';
 
 const springBase = { type: 'spring', stiffness: 80, damping: 20 } as const;
 const springSnappy = { type: 'spring', stiffness: 400, damping: 28 } as const;
@@ -74,7 +75,7 @@ const features = [
 // ── Component ──────────────────────────────────────────────────────────────
 
 export const Features = () => {
-  const shouldReduceMotion = useReducedMotion();
+  const { canAnimate } = useMotionReady();
 
   return (
     <section className="py-20 px-6">
@@ -88,7 +89,7 @@ export const Features = () => {
               <m.div
                 key={index}
                 className="py-14 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center"
-                {...(!shouldReduceMotion ? {
+                {...(canAnimate ? {
                   initial: { opacity: 0, y: 24 },
                   whileInView: { opacity: 1, y: 0 },
                   transition: { ...springBase, delay: 0.05 },
@@ -107,10 +108,10 @@ export const Features = () => {
                                        bg-white/[0.04] border border-white/[0.08]
                                        shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]
                                        cursor-default transition-colors duration-200
-                                       hover:bg-brand/[0.06] hover:border-brand/20"
+                            hover:bg-brand/[0.06] hover:border-brand/20"
                             variants={providerCardVariants}
                             initial="rest"
-                            whileHover={shouldReduceMotion ? {} : 'hover'}
+                            whileHover={canAnimate ? 'hover' : {}}
                             transition={springSnappy}
                           >
                             <m.span

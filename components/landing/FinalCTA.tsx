@@ -1,21 +1,23 @@
 import React from 'react';
-import { m, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ChevronRight, Terminal } from 'lucide-react';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { DOWNLOAD_COUNT } from '@/lib/constants';
 import { trackEvent } from '@/lib/analytics';
+import { MARKETPLACE_URL } from '@/lib/seo';
+import { useMotionReady } from '@/lib/useMotionReady';
 
 const springFast = { type: 'spring', stiffness: 300, damping: 30 } as const;
 const springBase = { type: 'spring', stiffness: 80, damping: 20 } as const;
 
 export const FinalCTA = () => {
-  const shouldReduceMotion = useReducedMotion();
+  const { canAnimate } = useMotionReady();
 
   return (
     <section className="py-20 px-6">
       <m.div
         className="container mx-auto max-w-4xl"
-        {...(!shouldReduceMotion ? {
+        {...(canAnimate ? {
           initial: { opacity: 0, y: 24 },
           whileInView: { opacity: 1, y: 0 },
           transition: springBase,
@@ -34,7 +36,7 @@ export const FinalCTA = () => {
                 <m.div
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full
                              bg-brand/15 border border-brand/25 text-brand text-xs font-medium mb-5"
-                  {...(!shouldReduceMotion ? {
+                  {...(canAnimate ? {
                     initial: { scale: 0.9, opacity: 0 },
                     whileInView: { scale: 1, opacity: 1 },
                     transition: { ...springFast, delay: 0.1 },
@@ -57,21 +59,22 @@ export const FinalCTA = () => {
                     fallback="20,626+"
                     triggerOnView
                   />
-                  {' '}downloads on JetBrains Marketplace. Commit faster without the mental overhead.
+                  {' '}installs on JetBrains Marketplace. Connect a provider, stage your diff,
+                  and generate a commit message without leaving your IDE.
                 </p>
               </div>
 
               {/* Right — CTA */}
               <div className="flex-shrink-0">
                 <m.a
-                  href="https://plugins.jetbrains.com/plugin/21289-aicommit/"
+                  href={MARKETPLACE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-shimmer inline-flex items-center px-7 py-3.5 bg-brand hover:bg-brand/90
                            text-black font-semibold rounded-lg gap-2 transition-colors duration-200
                            shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
-                  whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
-                  whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+                  whileHover={canAnimate ? { scale: 1.03 } : {}}
+                  whileTap={canAnimate ? { scale: 0.97 } : {}}
                   transition={springFast}
                   onClick={() => trackEvent('click_install_plugin', { location: 'final_cta' })}
                 >

@@ -1,54 +1,24 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Script from 'next/script';
 import { Background } from '@/components/Background';
 import { Header } from '@/components/landing/Header';
 import { Hero } from '@/components/landing/Hero';
 import { Features } from '@/components/landing/Features';
-
-const ProductShowcase = dynamic(
-  () => import('@/components/landing/ProductShowcase').then((mod) => mod.ProductShowcase),
-  {
-    ssr: false,
-    loading: () => <SectionFallback />,
-  }
-);
-
-const Reviews = dynamic(
-  () => import('@/components/landing/Reviews').then((mod) => mod.Reviews),
-  {
-    ssr: false,
-    loading: () => <SectionFallback />,
-  }
-);
-
-const VideoSection = dynamic(
-  () => import('@/components/landing/VideoSection').then((mod) => mod.VideoSection),
-  {
-    ssr: false,
-    loading: () => <SectionFallback />,
-  }
-);
-
-const FinalCTA = dynamic(
-  () => import('@/components/landing/FinalCTA').then((mod) => mod.FinalCTA),
-  {
-    loading: () => <SectionFallback />,
-  }
-);
-
-const Footer = dynamic(() => import('@/components/landing/Footer').then((mod) => mod.Footer), {
-  loading: () => <SectionFallback />,
-});
-
-const SectionFallback = () => (
-  <section className="py-16 px-6">
-    <div className="container mx-auto max-w-6xl">
-      <div className="h-40 rounded-2xl bg-white/5 animate-pulse" />
-    </div>
-  </section>
-);
+import { ProductShowcase } from '@/components/landing/ProductShowcase';
+import { Reviews } from '@/components/landing/Reviews';
+import { VideoSection } from '@/components/landing/VideoSection';
+import { FinalCTA } from '@/components/landing/FinalCTA';
+import { Footer } from '@/components/landing/Footer';
+import { CompatibilityFaq } from '@/components/landing/CompatibilityFaq';
+import {
+  HOME_DESCRIPTION,
+  HOME_TITLE,
+  HOME_URL,
+  OG_IMAGE_URL,
+  SITE_NAME,
+  homeStructuredData,
+} from '@/lib/seo';
 
 const LandingPage = () => {
   return (
@@ -67,42 +37,24 @@ const LandingPage = () => {
         `}
       </Script>
       <Head>
-        {/*
-          SEO notes:
-          - Set NEXT_PUBLIC_SITE_URL (e.g. https://your-domain.com) to enable canonical + og:url.
-          - Keep title/og/twitter aligned for consistent previews.
-        */}
-        {(() => {
-          const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '');
-          const pageUrl = siteUrl ? `${siteUrl}/` : undefined;
-          const title = 'Still the best AI commit messages for JetBrains IDEs — AICommit';
-          const description =
-            'Save 30+ minutes daily with AI-powered commit messages. 20,000+ downloads on JetBrains Marketplace. One-click generation with privacy-first local processing. Works with IntelliJ IDEA, WebStorm & more.';
+        <title>{HOME_TITLE}</title>
+        <meta name="description" content={HOME_DESCRIPTION} />
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+        <meta name="application-name" content={SITE_NAME} />
+        <link rel="canonical" href={HOME_URL} />
 
-          return (
-            <>
-              <title>{title}</title>
-              <meta name="description" content={description} />
-              <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-              <meta name="application-name" content="AICommit" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:url" content={HOME_URL} />
+        <meta property="og:title" content={HOME_TITLE} />
+        <meta property="og:description" content={HOME_DESCRIPTION} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta property="og:image:alt" content="AICommit landing page preview" />
 
-              {pageUrl ? <link rel="canonical" href={pageUrl} /> : null}
-
-              <meta property="og:type" content="website" />
-              <meta property="og:site_name" content="AICommit" />
-              {pageUrl ? <meta property="og:url" content={pageUrl} /> : null}
-              <meta property="og:title" content={title} />
-              <meta property="og:description" content={description} />
-              {/* og:image / twitter:image must be absolute URLs for social crawlers */}
-              <meta property="og:image" content={siteUrl ? `${siteUrl}/og-image.jpg` : '/og-image.jpg'} />
-
-              <meta name="twitter:card" content="summary_large_image" />
-              <meta name="twitter:title" content={title} />
-              <meta name="twitter:description" content={description} />
-              <meta name="twitter:image" content={siteUrl ? `${siteUrl}/og-image.jpg` : '/og-image.jpg'} />
-            </>
-          );
-        })()}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={HOME_TITLE} />
+        <meta name="twitter:description" content={HOME_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -115,6 +67,10 @@ const LandingPage = () => {
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData) }}
+        />
       </Head>
 
       <div className="relative min-h-screen text-white overflow-hidden">
@@ -135,6 +91,7 @@ const LandingPage = () => {
           <Features />
           <Reviews />
           <VideoSection />
+          <CompatibilityFaq />
           <FinalCTA />
           <Footer />
         </main>

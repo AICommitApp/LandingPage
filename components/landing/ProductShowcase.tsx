@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { m, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Sparkles, Layers, Settings2 } from 'lucide-react';
+import { useMotionReady } from '@/lib/useMotionReady';
 
 export const ProductShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [loaded, setLoaded] = useState(() => new Set([0]));
-  const shouldReduceMotion = useReducedMotion();
+  const { canAnimate, shouldReduceMotion } = useMotionReady();
   const firstRenderRef = useRef(true);
   
   const screenshots = [
@@ -62,7 +63,7 @@ export const ProductShowcase = () => {
         {/* Section header */}
         <m.div
           className="text-center mb-12 lg:mb-20"
-          {...(!shouldReduceMotion ? {
+          {...(canAnimate ? {
             initial: { opacity: 0, y: 20 },
             whileInView: { opacity: 1, y: 0 },
             transition: { type: 'spring', stiffness: 80, damping: 20 },
@@ -96,7 +97,7 @@ export const ProductShowcase = () => {
                     ? 'bg-white/10 border-brand/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
                     : 'bg-white/5 border-white/10 hover:bg-white/[0.08] hover:border-white/20'
                 }`}
-                {...(!shouldReduceMotion
+                {...(canAnimate
                   ? {
                       initial: { opacity: 0, x: -16 },
                       whileInView: { opacity: 1, x: 0 },
@@ -151,7 +152,7 @@ export const ProductShowcase = () => {
           >
             <m.div
               className="relative"
-              {...(!shouldReduceMotion ? {
+              {...(canAnimate ? {
                 initial: { opacity: 0, scale: 0.95 },
                 whileInView: { opacity: 1, scale: 1 },
                 transition: { type: 'spring', stiffness: 80, damping: 20 },
@@ -250,5 +251,4 @@ export const ProductShowcase = () => {
     </section>
   );
 };
-
 
