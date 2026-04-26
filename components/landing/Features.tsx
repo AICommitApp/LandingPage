@@ -78,7 +78,7 @@ export const Features = () => {
   const { canAnimate } = useMotionReady();
 
   return (
-    <section className="py-20 px-6">
+    <section id="features" className="py-20 px-6">
       <h2 className="sr-only">Features</h2>
       <div className="container mx-auto max-w-6xl">
         <div className="divide-y divide-white/[0.06]">

@@ -41,7 +41,7 @@ export const Reviews = () => {
   const { canAnimate } = useMotionReady();
 
   return (
-    <section className="py-20 px-6">
+    <section id="reviews" className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
 
         {/* Header */}
@@ -66,7 +66,7 @@ export const Reviews = () => {
                 <AnimatedCounter
                   value={DOWNLOAD_COUNT}
                   format={formatDownloadsText}
-                  fallback="20,626+"
+                  fallback="21,712+"
                   triggerOnView
                 />
                 {' '}JetBrains Marketplace installs and a steady stream of user reviews, bug reports,
@@ -76,7 +76,7 @@ export const Reviews = () => {
             <div className="flex gap-8">
               <div>
                 <div className="text-3xl font-bold text-brand tabular-nums">58%</div>
-                <div className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Renewal rate</div>
+                <div className="text-xs text-gray-400 mt-1 uppercase tracking-wide">Renewal rate</div>
               </div>
               <div className="w-px bg-white/10" />
               <div>
@@ -85,7 +85,7 @@ export const Reviews = () => {
                     <AnimatedCounter
                       value={DOWNLOAD_COUNT}
                       format={formatDownloadsStat}
-                      fallback="21k+"
+                      fallback="22k+"
                       triggerOnView
                     />
                   </div>
@@ -94,7 +94,7 @@ export const Reviews = () => {
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand" />
                   </span>
                 </div>
-                <div className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Marketplace installs</div>
+                <div className="text-xs text-gray-400 mt-1 uppercase tracking-wide">Marketplace installs</div>
               </div>
             </div>
           </div>
@@ -132,7 +132,7 @@ export const Reviews = () => {
                 </div>
                 <div>
                   <span className="text-sm font-medium text-gray-300">{review.author}</span>
-                  <span className="text-sm text-gray-500"> · {review.role}</span>
+                  <span className="text-sm text-gray-400"> · {review.role}</span>
                 </div>
               </div>
             </m.div>

@@ -98,7 +98,7 @@ export const Hero = () => {
                     <AnimatedCounter
                       value={DOWNLOAD_COUNT}
                       format={formatHeroDownloads}
-                      fallback="20,626+"
+                      fallback="21,712+"
                     />
                   </strong>{' '}
                   Marketplace installs

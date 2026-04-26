@@ -5,6 +5,13 @@ import { HelpCircle, Bug, FileText, ChevronRight, Menu, X } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 
 const navLinks = [
+  { label: 'Features', href: '#features', external: false },
+  { label: 'Showcase', href: '#showcase', external: false },
+  { label: 'Reviews', href: '#reviews', external: false },
+  { label: 'FAQ', href: '#compatibility-faq', external: false },
+];
+
+const externalLinks = [
   { label: 'FAQ', href: 'https://github.com/AICommitApp/community/blob/main/FAQ.md', icon: HelpCircle },
   { label: 'Bug Report', href: 'https://github.com/AICommitApp/community/', icon: Bug },
   { label: 'EULA', href: 'https://github.com/AICommitApp/community/blob/main/EULA.md', icon: FileText },
@@ -24,12 +31,23 @@ export const Header = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [isMenuOpen]);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        setIsMenuOpen(false);
+      }
+    }
+  };
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#21252f]/50 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto px-6 h-16 flex justify-between items-center">
 
         {/* Left — Logo + name */}
-        <div className="flex items-center space-x-3">
+        <a href="#" className="flex items-center space-x-3" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
           <Image
             src="/favicon.svg"
             alt="AICommit Logo"
@@ -38,20 +56,19 @@ export const Header = () => {
             className="w-8 h-8"
           />
           <span className="font-semibold text-lg leading-none">AICommit</span>
-        </div>
+        </a>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
-          {navLinks.map(({ label, href, icon: Icon }) => (
+          {navLinks.map(({ label, href, external }) => (
             <a
               key={label}
               href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors"
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              className="text-sm text-gray-400 hover:text-white transition-colors"
+              onClick={(e) => !external && handleNavClick(e, href)}
             >
-              <Icon className="w-4 h-4" />
-              <span>{label}</span>
+              {label}
             </a>
           ))}
 
@@ -92,7 +109,19 @@ export const Header = () => {
             transition={{ duration: 0.18 }}
           >
             <div className="container mx-auto px-6 py-4 flex flex-col gap-3">
-              {navLinks.map(({ label, href, icon: Icon }) => (
+              {navLinks.map(({ label, href, external }) => (
+                <a
+                  key={label}
+                  href={href}
+                  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="flex items-center gap-2 py-2 text-sm text-gray-400 hover:text-white transition-colors"
+                  onClick={(e) => !external ? handleNavClick(e, href) : setIsMenuOpen(false)}
+                >
+                  <span>{label}</span>
+                </a>
+              ))}
+              <div className="border-t border-white/10 my-1" />
+              {externalLinks.map(({ label, href, icon: Icon }) => (
                 <a
                   key={label}
                   href={href}

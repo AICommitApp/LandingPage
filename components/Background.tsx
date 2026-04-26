@@ -1,26 +1,27 @@
 // components/Background.tsx
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { BRAND_COLOR_RGB } from '@/lib/constants';
 
-interface MousePosition {
-  x: number;
-  y: number;
-}
-
 export const Background = () => {
-  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
   const shouldReduceMotion = useReducedMotion();
   const rafRef = useRef<number | null>(null);
-  const latestPos = useRef<MousePosition>({ x: 0, y: 0 });
+  const latestPos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
+
+    const el = glowRef.current;
+    if (!el) return;
+
     const handleMouseMove = (event: MouseEvent) => {
       latestPos.current = { x: event.clientX, y: event.clientY };
       if (rafRef.current == null) {
         rafRef.current = requestAnimationFrame(() => {
-          setMousePosition(latestPos.current);
+          el.style.setProperty('--mouse-x', `${latestPos.current.x}px`);
+          el.style.setProperty('--mouse-y', `${latestPos.current.y}px`);
+          el.style.opacity = '1';
           rafRef.current = null;
         });
       }
@@ -50,14 +51,14 @@ export const Background = () => {
               radial-gradient(800px circle at 100% 0%, rgba(${BRAND_COLOR_RGB}, 0.08), transparent 40%),
               radial-gradient(600px circle at 0% 100%, rgba(${BRAND_COLOR_RGB}, 0.08), transparent 40%),
               radial-gradient(1200px circle at 50% 50%, rgba(${BRAND_COLOR_RGB}, 0.05), transparent 60%)
-            `
+            `,
           }}
         />
       </div>
 
       {/* Animated glow effect */}
       <div className="fixed inset-0">
-        <div 
+        <div
           className="absolute inset-0 opacity-30"
           style={{
             background: `
@@ -68,19 +69,20 @@ export const Background = () => {
                 transparent 292.5deg,
                 rgba(${BRAND_COLOR_RGB}, 0.2) 360deg
               )
-            `
+            `,
           }}
         />
       </div>
 
-      {/* Mouse follow effect */}
+      {/* Mouse follow effect — updated via CSS custom properties for zero React re-renders */}
       {!shouldReduceMotion && (
-        <div 
+        <div
+          ref={glowRef}
           className="fixed inset-0 pointer-events-none z-10"
           style={{
-            background: mousePosition.x > 0 || mousePosition.y > 0
-              ? `radial-gradient(800px at ${mousePosition.x}px ${mousePosition.y}px, rgba(${BRAND_COLOR_RGB}, 0.08), transparent 70%)`
-              : 'none'
+            background: `radial-gradient(800px at var(--mouse-x, -9999px) var(--mouse-y, -9999px), rgba(${BRAND_COLOR_RGB}, 0.08), transparent 70%)`,
+            opacity: 0,
+            transition: 'opacity 0.4s ease',
           }}
         />
       )}

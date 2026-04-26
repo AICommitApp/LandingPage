@@ -44,7 +44,7 @@ export const FinalCTA = () => {
                   } : {})}
                 >
                   <Terminal className="w-3.5 h-3.5" />
-                  Free to start
+                  Free trial on Marketplace
                 </m.div>
 
                 <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">
@@ -56,7 +56,7 @@ export const FinalCTA = () => {
                   <AnimatedCounter
                     value={DOWNLOAD_COUNT}
                     format={(n) => n.toLocaleString() + '+'}
-                    fallback="20,626+"
+                    fallback="21,712+"
                     triggerOnView
                   />
                   {' '}installs on JetBrains Marketplace. Connect a provider, stage your diff,

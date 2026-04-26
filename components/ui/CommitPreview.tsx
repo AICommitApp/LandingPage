@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { m } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
 import { useMotionReady } from '@/lib/useMotionReady';
 
 const COMMIT_MESSAGES = [
@@ -63,9 +64,12 @@ export const CommitPreview = () => {
           }
         : {})}
     >
-      {/* Terminal chrome bar */}
+      {/* IDE tool window chrome — mimics JetBrains VCS panel header */}
       <div className="flex items-center gap-2 px-3 py-1.5 border-b border-white/[0.06] bg-white/[0.015]">
-        <span className="font-mono text-[10px] text-gray-600 tracking-wide">AICommit</span>
+        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/[0.06]">
+          <span className="w-1.5 h-1.5 rounded-full bg-brand/60" />
+          <span className="font-mono text-[10px] text-gray-400 tracking-wide">Commit</span>
+        </div>
         <div className="ml-auto flex items-center gap-1.5">
           <span className="relative flex h-1.5 w-1.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-50 [animation-duration:2s]" />
@@ -75,15 +79,23 @@ export const CommitPreview = () => {
         </div>
       </div>
 
-      {/* Commit message line — fixed height prevents layout shift when text fills */}
-      <div className="px-3 py-2 font-mono text-[11px] flex items-center gap-1.5 h-[34px] overflow-hidden">
-        <span className="text-brand/50 select-none shrink-0">$</span>
-        <span className="text-gray-500 select-none shrink-0">git commit -m</span>
-        <span className="text-gray-200 whitespace-nowrap overflow-hidden">
-          &ldquo;{displayedText}
-          <span className="cursor-blink inline-block w-[1px] h-[0.85em] bg-brand/80 mx-px align-middle" />
-          &rdquo;
-        </span>
+      {/* Commit message input area — mimics IDE message field */}
+      <div className="px-3 py-2.5">
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="text-[10px] text-gray-500 font-medium">Commit Message</span>
+          <div className="flex items-center gap-1 text-brand/60">
+            <Sparkles className="w-3 h-3" />
+            <span className="text-[10px]">AI</span>
+          </div>
+        </div>
+
+        {/* Fake text area */}
+        <div className="relative rounded-md border border-white/[0.08] bg-white/[0.03] px-3 py-2 min-h-[32px]">
+          <span className="text-gray-200 text-[11px] font-mono leading-relaxed">
+            {displayedText}
+            <span className="cursor-blink inline-block w-[1px] h-[0.85em] bg-brand/80 mx-px align-middle" />
+          </span>
+        </div>
       </div>
     </m.div>
   );

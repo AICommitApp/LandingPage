@@ -8,6 +8,9 @@ const nextConfig = {
   // Keep Next.js scoped to this project instead of the parent dir to avoid
   // dev-server restarts and hot-update 404s when other lockfiles exist.
   outputFileTracingRoot: __dirname,
+  images: {
+    formats: ['image/webp', 'image/avif'],
+  },
   experimental: {
     // Tree-shake icon packages so only imported icons are bundled.
     optimizePackageImports: ['lucide-react', '@icons-pack/react-simple-icons'],

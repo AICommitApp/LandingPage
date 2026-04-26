@@ -58,7 +58,7 @@ const LandingPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <meta name="theme-color" content="#4a4a4a" />
+        <meta name="theme-color" content="#21252f" />
         <meta
           name="google-site-verification"
           content="XYctT5gtc4q0PyFyA7mLFRlGQxCplYC5XM_SBLjdV6Y"

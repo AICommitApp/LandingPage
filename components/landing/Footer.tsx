@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { Github } from 'lucide-react';
 
 const links = [
   { label: 'FAQ', href: 'https://github.com/AICommitApp/community/blob/main/FAQ.md' },
@@ -33,6 +34,15 @@ export const Footer = () => {
                 {link.label}
               </a>
             ))}
+            <a
+              href="https://github.com/AICommitApp/community/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-200 transition-colors duration-200"
+            >
+              <Github className="w-4 h-4" />
+              GitHub
+            </a>
           </nav>
 
         </div>

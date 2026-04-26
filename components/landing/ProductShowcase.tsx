@@ -58,7 +58,7 @@ export const ProductShowcase = () => {
   }, [shouldReduceMotion, isPaused, screenshots.length]);
 
   return (
-    <section className="py-20 lg:py-32 px-6 overflow-hidden">
+    <section id="showcase" className="py-20 lg:py-32 px-6 overflow-hidden">
       <div className="container mx-auto max-w-7xl">
         {/* Section header */}
         <m.div
@@ -82,10 +82,15 @@ export const ProductShowcase = () => {
         {/* Desktop: Feature tabs + large screenshot */}
         <div className="hidden lg:grid lg:grid-cols-12 gap-8 items-start">
           {/* Left: Feature tabs */}
-          <div className="col-span-4 space-y-3">
+          <div className="col-span-4 space-y-3" role="tablist" aria-label="Product features">
             {screenshots.map((screenshot, index) => (
               <m.button
                 key={index}
+                role="tab"
+                aria-selected={activeIndex === index}
+                aria-controls={`showcase-panel-${index}`}
+                id={`showcase-tab-${index}`}
+                tabIndex={activeIndex === index ? 0 : -1}
                 onClick={() => {
                   setActiveIndex(index);
                   setIsPaused(true);
@@ -121,7 +126,7 @@ export const ProductShowcase = () => {
                       {screenshot.title}
                     </h3>
                     <p className={`text-sm leading-relaxed transition-colors duration-300 ${
-                      activeIndex === index ? 'text-gray-300' : 'text-gray-500 group-hover:text-gray-400'
+                      activeIndex === index ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300'
                     }`}>
                       {screenshot.description}
                     </p>
@@ -145,8 +150,11 @@ export const ProductShowcase = () => {
           </div>
 
           {/* Right: Large screenshot display */}
-          <div 
+          <div
             className="col-span-8 relative"
+            role="tabpanel"
+            id={`showcase-panel-${activeIndex}`}
+            aria-labelledby={`showcase-tab-${activeIndex}`}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -198,7 +206,12 @@ export const ProductShowcase = () => {
         {/* Mobile/Tablet: Swipeable cards */}
         <div className="lg:hidden space-y-6">
           {/* Mobile screenshot display */}
-          <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#12141b] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]">
+          <div
+            className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#12141b] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]"
+            role="tabpanel"
+            id={`showcase-panel-mobile-${activeIndex}`}
+            aria-labelledby={`showcase-tab-mobile-${activeIndex}`}
+          >
             <div className="relative aspect-[4/3]">
               {screenshots.map((screenshot, index) => (
                 <m.div
@@ -223,15 +236,20 @@ export const ProductShowcase = () => {
           </div>
 
           {/* Mobile feature tabs */}
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide" role="tablist" aria-label="Product features">
             {screenshots.map((screenshot, index) => (
               <button
                 key={index}
+                role="tab"
+                aria-selected={activeIndex === index}
+                aria-controls={`showcase-panel-mobile-${index}`}
+                id={`showcase-tab-mobile-${index}`}
+                tabIndex={activeIndex === index ? 0 : -1}
                 onClick={() => setActiveIndex(index)}
                 className={`flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full border transition-all duration-300 ${
                   activeIndex === index
                     ? 'bg-brand/20 border-brand/50 text-white'
-                    : 'bg-white/5 border-white/10 text-gray-400'
+                    : 'bg-white/5 border-white/10 text-gray-300'
                 }`}
               >
                 {screenshot.icon}

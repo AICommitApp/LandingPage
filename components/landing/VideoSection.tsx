@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { m } from 'framer-motion';
 import { Play } from 'lucide-react';
 import { useMotionReady } from '@/lib/useMotionReady';
@@ -8,8 +8,29 @@ const springBase = { type: 'spring', stiffness: 80, damping: 20 } as const;
 
 export const VideoSection = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const { canAnimate } = useMotionReady();
+
+  // Lazy-load video source only when section approaches viewport
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   const handlePlayVideo = () => {
     setIsVideoPlaying(true);
@@ -17,7 +38,7 @@ export const VideoSection = () => {
   };
 
   return (
-    <section className="py-20 px-6">
+    <section ref={sectionRef} className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
         <m.div
           className="mb-10"
@@ -50,13 +71,15 @@ export const VideoSection = () => {
               ref={videoRef}
               className="w-full h-full object-cover"
               poster="/og-image.jpg"
-              preload="metadata"
+              preload="none"
               controls={isVideoPlaying}
               playsInline
               title="AICommit commit flow demo"
               aria-label="AICommit commit flow demo video"
             >
-              <source src="/assets/commit_vcs_window.mp4" type="video/mp4" />
+              {shouldLoadVideo && (
+                <source src="/assets/commit_vcs_window.mp4" type="video/mp4" />
+              )}
             </video>
 
             {!isVideoPlaying && (
