@@ -1,0 +1,40 @@
+{
+  "name": "AICommit",
+  "description": "AICommit is a JetBrains IDE plugin that generates editable commit messages from staged changes.",
+  "homepage": "https://aicommit.app/",
+  "llms_txt": "https://aicommit.app/llms.txt",
+  "llms_full": "https://aicommit.app/llms-full.txt",
+  "markdown_snapshot": "https://aicommit.app/index.md",
+  "marketplace": {
+    "name": "JetBrains Marketplace",
+    "url": "https://plugins.jetbrains.com/plugin/21289-aicommit/"
+  },
+  "support": {
+    "community": "https://github.com/AICommitApp/community/",
+    "faq": "https://github.com/AICommitApp/community/blob/main/FAQ.md",
+    "eula": "https://github.com/AICommitApp/community/blob/main/EULA.md"
+  },
+  "lastUpdated": "2026-05-09",
+  "capabilities": {
+    "generateCommitMessages": {
+      "surface": "JetBrains IDE plugin",
+      "description": "Generate an editable commit-message draft from staged changes in the JetBrains Commit tool window.",
+      "providers": [
+        "OpenAI",
+        "Azure OpenAI",
+        "Google Gemini",
+        "Anthropic Claude",
+        "Ollama"
+      ],
+      "input": "Developer-selected staged changes inside the IDE",
+      "output": "Editable commit-message draft"
+    }
+  },
+  "apiSurface": {
+    "publicHttpApi": false,
+    "oauthAuthorizationServer": false,
+    "mcpServer": false,
+    "a2aTaskEndpoint": false,
+    "notes": "AICommit is installed and operated inside JetBrains IDEs rather than through a public hosted API."
+  }
+}

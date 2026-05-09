@@ -1,0 +1,24 @@
+# AICommit
+
+> AICommit is a JetBrains plugin that generates commit messages from staged changes inside IntelliJ-platform IDEs.
+
+Last updated: 2026-05-09
+
+## Essential links
+
+- [Homepage](https://aicommit.app/): Product overview and installation entry point.
+- [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/21289-aicommit/): Official plugin listing and installation source.
+- [Community and support](https://github.com/AICommitApp/community/): FAQ, EULA, issue reporting, and product support.
+- [Full agent context](https://aicommit.app/llms-full.txt): Extended product, privacy, integration, and API-surface notes.
+- [Markdown page snapshot](https://aicommit.app/index.md): Text-first version of the landing page.
+- [Agent manifest](https://aicommit.app/.well-known/ai-agent.json): Machine-readable product and integration metadata.
+
+## Product summary
+
+AICommit runs inside JetBrains IDEs and drafts commit messages from the changes the developer has staged. The draft remains editable before commit.
+
+Supported provider options include OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama. Cloud generation sends content only to the provider configured by the user. Ollama supports local model workflows.
+
+## Agent and API surface
+
+AICommit is a locally installed IDE plugin, not a hosted SaaS API. It does not expose a public OpenAPI endpoint, OAuth authorization server, MCP server, or A2A task endpoint.

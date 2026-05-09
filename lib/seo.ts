@@ -73,5 +73,40 @@ export const homeStructuredData = {
         '@id': `${HOME_URL}#organization`,
       },
     },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': `${HOME_URL}#software`,
+      name: SITE_NAME,
+      url: HOME_URL,
+      description: HOME_DESCRIPTION,
+      applicationCategory: 'DeveloperApplication',
+      applicationSubCategory: 'JetBrains IDE plugin',
+      operatingSystem: 'JetBrains IDEs',
+      installUrl: MARKETPLACE_URL,
+      downloadUrl: MARKETPLACE_URL,
+      softwareRequirements: 'IntelliJ-platform IDE with the JetBrains Commit tool window',
+      featureList: [
+        'Generate commit messages from staged changes inside JetBrains IDEs',
+        'Use OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, or Ollama',
+        'Edit generated commit messages before committing',
+        'Keep cloud usage controlled by the provider and model configured by the user',
+      ],
+      publisher: {
+        '@id': `${HOME_URL}#organization`,
+      },
+      sameAs: [MARKETPLACE_URL, COMMUNITY_URL],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${HOME_URL}#faq`,
+      mainEntity: HOME_FAQ.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answer,
+        },
+      })),
+    },
   ],
 } as const;

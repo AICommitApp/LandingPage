@@ -1,0 +1,44 @@
+# AICommit full agent context
+
+Last updated: 2026-05-09
+
+## What AICommit is
+
+AICommit is a JetBrains IDE plugin for generating commit messages from staged source changes. It is designed for IntelliJ-platform IDEs including IntelliJ IDEA and WebStorm, and it works from the normal JetBrains Commit tool window.
+
+The workflow is:
+
+1. Install AICommit from JetBrains Marketplace.
+2. Configure a model provider and credentials inside the IDE.
+3. Stage the intended changes.
+4. Generate a commit message.
+5. Review and edit the draft before committing.
+
+## Provider support
+
+AICommit supports OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama. Ollama is the local-first option for users who do not want staged diffs sent to a cloud provider.
+
+## Privacy model
+
+AICommit does not collect source code or generated commit messages for the landing-page service. For cloud generation, staged content is sent only to the provider configured by the user. Users control provider selection, credentials, and model configuration inside their IDE.
+
+## Agent and API surface
+
+AICommit does not operate a public HTTP API, OAuth authorization server, MCP server, or A2A task endpoint.
+
+This means there is currently no OpenAPI file, OAuth discovery document, MCP server manifest, or agent-to-agent task endpoint to call from a hosted agent. The product surface is the JetBrains IDE plugin distributed through JetBrains Marketplace.
+
+## Canonical links
+
+- Homepage: https://aicommit.app/
+- JetBrains Marketplace: https://plugins.jetbrains.com/plugin/21289-aicommit/
+- Community repository: https://github.com/AICommitApp/community/
+- FAQ: https://github.com/AICommitApp/community/blob/main/FAQ.md
+- EULA: https://github.com/AICommitApp/community/blob/main/EULA.md
+- LLM summary: https://aicommit.app/llms.txt
+- Markdown page snapshot: https://aicommit.app/index.md
+- Agent manifest: https://aicommit.app/.well-known/ai-agent.json
+
+## Who should install it
+
+AICommit is for developers using JetBrains IDEs who want commit-message drafting inside their existing commit workflow. It is especially useful for teams that want provider choice, local model support, and editable commit-message drafts rather than a fully automated commit flow.

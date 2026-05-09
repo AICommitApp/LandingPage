@@ -42,6 +42,8 @@ const LandingPage = () => {
         <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
         <meta name="application-name" content={SITE_NAME} />
         <link rel="canonical" href={HOME_URL} />
+        <link rel="alternate" type="text/plain" title="AICommit for LLMs" href={`${HOME_URL}llms.txt`} />
+        <link rel="alternate" type="text/markdown" title="AICommit Markdown Snapshot" href={`${HOME_URL}index.md`} />
 
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />

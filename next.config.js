@@ -18,6 +18,19 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: [
+              '<https://aicommit.app/llms.txt>; rel="describedby"; type="text/plain"',
+              '<https://aicommit.app/index.md>; rel="alternate"; type="text/markdown"',
+              '<https://aicommit.app/.well-known/ai-agent.json>; rel="service-desc"; type="application/json"',
+            ].join(', '),
+          },
+        ],
+      },
+      {
         source: '/_next/static/:path*',
         headers: [
           { key: 'Cache-Control', value: `public, max-age=${ONE_YEAR_SECONDS}, immutable` },
