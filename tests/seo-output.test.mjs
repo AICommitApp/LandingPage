@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const root = '/Users/rosu/Coding/AI-COMMIT/LandingPage';
+const testDir = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(testDir, '..');
 const buildMarker = path.join(root, '.next', 'server', 'pages', 'index.html');
 const robotsPath = path.join(root, 'public', 'robots.txt');
 const sitemapPath = path.join(root, 'public', 'sitemap.xml');
