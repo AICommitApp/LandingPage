@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const root = '/Users/rosu/Coding/AI-COMMIT/LandingPage';
+const testDir = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(testDir, '..');
 const buildMarker = path.join(root, '.next', 'server', 'pages', 'index.html');
 const robotsPath = path.join(root, 'public', 'robots.txt');
 const sitemapPath = path.join(root, 'public', 'sitemap.xml');
@@ -124,6 +125,48 @@ test('root response advertises agent-readable alternates with Link headers', asy
   assert.match(linkHeaders, /<https:\/\/aicommit\.app\/llms\.txt>;\s*rel="describedby"/);
   assert.match(linkHeaders, /<https:\/\/aicommit\.app\/index\.md>;\s*rel="alternate"/);
   assert.match(linkHeaders, /<https:\/\/aicommit\.app\/\.well-known\/ai-agent\.json>;\s*rel="service-desc"/);
+});
+
+test('canonical host redirects and non-page agent resources are not search-index candidates', async () => {
+  const { default: nextConfig } = await import(pathToFileURL(path.join(root, 'next.config.js')).href);
+  const redirects = await nextConfig.redirects();
+  const headers = await nextConfig.headers();
+
+  assert.deepEqual(redirects, [
+    {
+      source: '/:path*',
+      has: [
+        {
+          type: 'host',
+          value: 'www.aicommit.app',
+        },
+      ],
+      destination: 'https://aicommit.app/:path*',
+      permanent: true,
+    },
+  ]);
+
+  const indexMarkdownHeaders = headers.find((route) => route.source === '/index.md')?.headers ?? [];
+  assert.ok(
+    indexMarkdownHeaders.some(
+      (header) =>
+        header.key === 'Link' &&
+        header.value === '<https://aicommit.app/>; rel="canonical"'
+    ),
+    'markdown snapshot should point Google at the canonical homepage'
+  );
+
+  for (const source of ['/llms.txt', '/llms-full.txt', '/.well-known/ai-agent.json']) {
+    const routeHeaders = headers.find((route) => route.source === source)?.headers ?? [];
+    assert.ok(
+      routeHeaders.some(
+        (header) =>
+          header.key === 'X-Robots-Tag' &&
+          header.value === 'noindex, follow'
+      ),
+      `${source} should be crawlable but explicitly excluded from search indexing`
+    );
+  }
 });
 
 test('screenshot source assets are webp and kept compact', () => {

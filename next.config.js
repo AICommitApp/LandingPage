@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+const HOME_URL = 'https://aicommit.app/';
+const AGENT_RESOURCE_NO_INDEX_HEADERS = [
+  { key: 'X-Robots-Tag', value: 'noindex, follow' },
+];
 
 const nextConfig = {
   reactStrictMode: true,
@@ -15,6 +19,21 @@ const nextConfig = {
     // Tree-shake icon packages so only imported icons are bundled.
     optimizePackageImports: ['lucide-react', '@icons-pack/react-simple-icons'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.aicommit.app',
+          },
+        ],
+        destination: `${HOME_URL}:path*`,
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
@@ -29,6 +48,27 @@ const nextConfig = {
             ].join(', '),
           },
         ],
+      },
+      {
+        source: '/index.md',
+        headers: [
+          {
+            key: 'Link',
+            value: `<${HOME_URL}>; rel="canonical"`,
+          },
+        ],
+      },
+      {
+        source: '/llms.txt',
+        headers: AGENT_RESOURCE_NO_INDEX_HEADERS,
+      },
+      {
+        source: '/llms-full.txt',
+        headers: AGENT_RESOURCE_NO_INDEX_HEADERS,
+      },
+      {
+        source: '/.well-known/ai-agent.json',
+        headers: AGENT_RESOURCE_NO_INDEX_HEADERS,
       },
       {
         source: '/_next/static/:path*',
