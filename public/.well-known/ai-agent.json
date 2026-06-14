@@ -9,12 +9,28 @@
     "name": "JetBrains Marketplace",
     "url": "https://plugins.jetbrains.com/plugin/21289-aicommit/"
   },
+  "traction": {
+    "installs": 22490,
+    "rating": 4.1,
+    "ratingCount": 15,
+    "source": "JetBrains Marketplace"
+  },
+  "pricing": {
+    "model": "paid",
+    "freeTrialDays": 30,
+    "currency": "USD",
+    "plans": {
+      "personal": { "monthly": 1.0, "annual": 10.0 },
+      "commercial": { "monthly": 3.0, "annual": 30.0 }
+    },
+    "billedThrough": "JetBrains Marketplace"
+  },
   "support": {
     "community": "https://github.com/AICommitApp/community/",
     "faq": "https://github.com/AICommitApp/community/blob/main/FAQ.md",
     "eula": "https://github.com/AICommitApp/community/blob/main/EULA.md"
   },
-  "lastUpdated": "2026-05-09",
+  "lastUpdated": "2026-06-14",
   "capabilities": {
     "generateCommitMessages": {
       "surface": "JetBrains IDE plugin",

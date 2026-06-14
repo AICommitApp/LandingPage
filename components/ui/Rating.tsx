@@ -8,12 +8,12 @@ interface RatingProps {
   score: number;
 }
 
-const HalfStar = ({ gradientId }: { gradientId: string }) => (
+const FractionalStar = ({ gradientId, fraction }: { gradientId: string; fraction: number }) => (
   <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="50%" style={{ stopColor: BRAND_COLOR }} />
-        <stop offset="50%" style={{ stopColor: STAR_EMPTY }} />
+        <stop offset={`${Math.round(fraction * 100)}%`} style={{ stopColor: BRAND_COLOR }} />
+        <stop offset={`${Math.round(fraction * 100)}%`} style={{ stopColor: STAR_EMPTY }} />
       </linearGradient>
     </defs>
     <path
@@ -45,7 +45,13 @@ export const Rating = ({ score }: RatingProps) => {
               />
             );
           } else if (starPosition === Math.ceil(score) && !Number.isInteger(score)) {
-            return <HalfStar key={starPosition} gradientId={gradientId} />;
+            return (
+              <FractionalStar
+                key={starPosition}
+                gradientId={gradientId}
+                fraction={score - Math.floor(score)}
+              />
+            );
           } else {
             return (
               <Star key={starPosition} className="w-5 h-5" style={{ color: STAR_EMPTY }} aria-hidden="true" />

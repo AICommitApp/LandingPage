@@ -50,13 +50,11 @@ const nextConfig = {
         ],
       },
       {
+        // index.md mirrors the homepage copy verbatim, so exclude it from search
+        // indexing outright (a directive) rather than only hinting via canonical.
+        // AI crawlers are gated by robots.txt, not X-Robots-Tag, so they still read it.
         source: '/index.md',
-        headers: [
-          {
-            key: 'Link',
-            value: `<${HOME_URL}>; rel="canonical"`,
-          },
-        ],
+        headers: AGENT_RESOURCE_NO_INDEX_HEADERS,
       },
       {
         source: '/llms.txt',

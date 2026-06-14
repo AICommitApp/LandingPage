@@ -2,7 +2,9 @@ import React from 'react';
 import { m } from 'framer-motion';
 import { Star } from 'lucide-react';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
-import { DOWNLOAD_COUNT } from '@/lib/constants';
+import { Rating } from '@/components/ui/Rating';
+import { DOWNLOAD_COUNT, MARKETPLACE_RATING, MARKETPLACE_RATING_COUNT } from '@/lib/constants';
+import { MARKETPLACE_REVIEWS_URL } from '@/lib/seo';
 import { useMotionReady } from '@/lib/useMotionReady';
 
 const springBase = { type: 'spring', stiffness: 80, damping: 20 } as const;
@@ -72,6 +74,17 @@ export const Reviews = () => {
                 {' '}JetBrains Marketplace installs and a steady stream of user reviews, bug reports,
                 and onboarding feedback from the IDE workflow itself.
               </p>
+              <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
+                <Rating score={MARKETPLACE_RATING} />
+                <a
+                  href={MARKETPLACE_REVIEWS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-gray-400 hover:text-brand transition-colors"
+                >
+                  {MARKETPLACE_RATING_COUNT} ratings on JetBrains Marketplace
+                </a>
+              </div>
             </div>
             <div className="flex gap-8">
               <div>
