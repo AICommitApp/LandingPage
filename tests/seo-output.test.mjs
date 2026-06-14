@@ -51,6 +51,10 @@ test('homepage build output contains SSR SEO content and metadata', () => {
   assert.match(html, /"@type":"FAQPage"/);
   assert.match(html, /"applicationCategory":"DeveloperApplication"/);
   assert.match(html, /"operatingSystem":"JetBrains IDEs"/);
+  assert.match(html, /"@type":"AggregateRating"/);
+  assert.match(html, /"@type":"Offer"/);
+  assert.match(html, /"priceCurrency":"USD"/);
+  assert.match(html, /"@type":"InteractionCounter"/);
 
   const screenshotPreloads = [...html.matchAll(/<link rel="preload" as="image"[^>]*imageSrcSet="([^"]+)"/g)]
     .map((match) => match[1])
@@ -146,17 +150,7 @@ test('canonical host redirects and non-page agent resources are not search-index
     },
   ]);
 
-  const indexMarkdownHeaders = headers.find((route) => route.source === '/index.md')?.headers ?? [];
-  assert.ok(
-    indexMarkdownHeaders.some(
-      (header) =>
-        header.key === 'Link' &&
-        header.value === '<https://aicommit.app/>; rel="canonical"'
-    ),
-    'markdown snapshot should point Google at the canonical homepage'
-  );
-
-  for (const source of ['/llms.txt', '/llms-full.txt', '/.well-known/ai-agent.json']) {
+  for (const source of ['/index.md', '/llms.txt', '/llms-full.txt', '/.well-known/ai-agent.json']) {
     const routeHeaders = headers.find((route) => route.source === source)?.headers ?? [];
     assert.ok(
       routeHeaders.some(

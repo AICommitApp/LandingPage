@@ -1,10 +1,12 @@
 # AICommit full agent context
 
-Last updated: 2026-05-09
+Last updated: 2026-06-14
 
 ## What AICommit is
 
-AICommit is a JetBrains IDE plugin for generating commit messages from staged source changes. It is designed for IntelliJ-platform IDEs including IntelliJ IDEA and WebStorm, and it works from the normal JetBrains Commit tool window.
+AICommit is a JetBrains IDE plugin for generating commit messages from staged source changes. It is designed for IntelliJ-platform IDEs including IntelliJ IDEA, PyCharm, WebStorm, GoLand, Rider, PhpStorm, RubyMine, CLion, Android Studio, DataGrip, and RustRover, and it works from the normal JetBrains Commit tool window.
+
+It has 22,490+ JetBrains Marketplace installs and is rated 4.1/5.
 
 The workflow is:
 
@@ -17,6 +19,10 @@ The workflow is:
 ## Provider support
 
 AICommit supports OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama. Ollama is the local-first option for users who do not want staged diffs sent to a cloud provider.
+
+## Pricing
+
+AICommit is a paid JetBrains Marketplace plugin with a 30-day free trial. Personal plans start at $1/month (or $10/year) and commercial plans at $3/month (or $30/year). Licensing and billing are handled through JetBrains Marketplace.
 
 ## Privacy model
 

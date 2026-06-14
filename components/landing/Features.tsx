@@ -1,7 +1,7 @@
 import React from 'react';
 import { m } from 'framer-motion';
 import { Zap, Lock } from 'lucide-react';
-import { SiGooglegemini, SiOllama } from '@icons-pack/react-simple-icons';
+import { SiGooglegemini, SiClaude, SiOllama } from '@icons-pack/react-simple-icons';
 import { useMotionReady } from '@/lib/useMotionReady';
 
 const springBase = { type: 'spring', stiffness: 80, damping: 20 } as const;
@@ -37,6 +37,7 @@ const providers = [
   { name: 'OpenAI',  Icon: OpenAIIcon  },
   { name: 'Azure',   Icon: AzureIcon   },
   { name: 'Gemini',  Icon: () => <SiGooglegemini size={20} color="currentColor" /> },
+  { name: 'Claude',  Icon: () => <SiClaude size={20} color="currentColor" /> },
   { name: 'Ollama',  Icon: () => <SiOllama size={20} color="currentColor" /> },
 ];
 
@@ -57,16 +58,16 @@ const features = [
     label: 'Multi-Platform AI',
     title: 'Your model, your rules.',
     description:
-      'Works with OpenAI, Azure OpenAI, Google Gemini, and Ollama — including local models. Switch providers without touching a config file.',
+      'Works with OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama — including local models. Switch providers without touching a config file.',
     align: 'right',
     visual: 'providers',
   },
   {
     icon: Lock,
     label: 'Privacy First',
-    title: 'Code stays on your machine.',
+    title: 'You control where your code goes.',
     description:
-      "All diffs are processed locally before any API call. No code is stored, logged, or shared. Built for teams who can't compromise on data security.",
+      "AICommit never collects or logs your code or commit messages. For cloud generation, your staged diff is sent only to the provider you configure — or keep everything on your machine with Ollama. Built for teams that can't compromise on data security.",
     align: 'left',
     visual: 'icon',
   },
@@ -79,8 +80,23 @@ export const Features = () => {
 
   return (
     <section id="features" className="py-20 px-6">
-      <h2 className="sr-only">Features</h2>
       <div className="container mx-auto max-w-6xl">
+        <m.div
+          className="max-w-3xl mb-12"
+          {...(canAnimate ? {
+            initial: { opacity: 0, y: 20 },
+            whileInView: { opacity: 1, y: 0 },
+            transition: springBase,
+            viewport: { once: true },
+          } : {})}
+        >
+          <p className="text-xs font-mono uppercase tracking-[0.28em] text-brand/70 mb-3">
+            Why developers choose AICommit
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+            AI commit messages, native to your JetBrains workflow
+          </h2>
+        </m.div>
         <div className="divide-y divide-white/[0.06]">
           {features.map((feature, index) => {
             const isRight = feature.align === 'right';
