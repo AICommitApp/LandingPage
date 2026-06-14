@@ -42,7 +42,7 @@ export const CompatibilityFaq = () => {
                 transition: { ...springBase, delay: index * 0.06 },
                 viewport: { once: true, margin: '-40px' },
               } : {})}
-              className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
+              className="rounded-2xl border border-white/10 bg-white/4 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
             >
               <h3 className="text-lg font-semibold text-white tracking-tight">
                 {item.question}

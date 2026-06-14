@@ -124,7 +124,7 @@ export const Reviews = () => {
                 transition: { ...springBase, delay: index * 0.07 },
                 viewport: { once: true },
               } : {})}
-              className="p-6 rounded-2xl bg-white/[0.04] border border-white/10
+              className="p-6 rounded-2xl bg-white/4 border border-white/10
                          shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
             >
               {/* Stars */}

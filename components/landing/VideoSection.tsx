@@ -66,7 +66,7 @@ export const VideoSection = () => {
             viewport: { once: true },
           } : {})}
         >
-          <div className="aspect-[16/9]">
+          <div className="aspect-video">
             <video
               ref={videoRef}
               className="w-full h-full object-cover"

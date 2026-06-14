@@ -25,8 +25,8 @@ export const FinalCTA = () => {
         } : {})}
       >
         <div className="relative rounded-3xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-brand/15 via-brand/5 to-transparent" />
-          <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-linear-to-br from-brand/15 via-brand/5 to-transparent" />
+          <div className="absolute inset-0 bg-white/3 backdrop-blur-xs" />
 
           <div className="relative p-8 md:p-12 border border-white/10 rounded-3xl">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
@@ -65,7 +65,7 @@ export const FinalCTA = () => {
               </div>
 
               {/* Right — CTA */}
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <m.a
                   href={MARKETPLACE_URL}
                   target="_blank"

@@ -100,7 +100,7 @@ export const ProductShowcase = () => {
                 className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 group ${
                   activeIndex === index
                     ? 'bg-white/10 border-brand/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
-                    : 'bg-white/5 border-white/10 hover:bg-white/[0.08] hover:border-white/20'
+                    : 'bg-white/5 border-white/10 hover:bg-white/8 hover:border-white/20'
                 }`}
                 {...(canAnimate
                   ? {
@@ -168,11 +168,11 @@ export const ProductShowcase = () => {
               } : {})}
             >
               {/* Glow effect behind screenshot */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-brand/20 via-brand/10 to-transparent rounded-3xl blur-2xl opacity-60" />
+              <div className="absolute -inset-4 bg-linear-to-r from-brand/20 via-brand/10 to-transparent rounded-3xl blur-2xl opacity-60" />
 
               {/* Window frame decoration (clean, no title bar) */}
               <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#12141b] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]">
-                <div className="relative aspect-[16/10] overflow-hidden">
+                <div className="relative aspect-16/10 overflow-hidden">
                   {screenshots.map((screenshot, index) => (
                     <m.div
                       key={index}
@@ -212,7 +212,7 @@ export const ProductShowcase = () => {
             id={`showcase-panel-mobile-${activeIndex}`}
             aria-labelledby={`showcase-tab-mobile-${activeIndex}`}
           >
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-4/3">
               {screenshots.map((screenshot, index) => (
                 <m.div
                   key={index}
@@ -246,7 +246,7 @@ export const ProductShowcase = () => {
                 id={`showcase-tab-mobile-${index}`}
                 tabIndex={activeIndex === index ? 0 : -1}
                 onClick={() => setActiveIndex(index)}
-                className={`flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full border transition-all duration-300 ${
+                className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full border transition-all duration-300 ${
                   activeIndex === index
                     ? 'bg-brand/20 border-brand/50 text-white'
                     : 'bg-white/5 border-white/10 text-gray-300'
