@@ -55,7 +55,7 @@ export const CommitPreview = () => {
 
   return (
     <m.div
-      className="mt-3 rounded-xl overflow-hidden border border-white/[0.09] bg-[#0e1016]"
+      className="mt-3 rounded-xl overflow-hidden border border-white/9 bg-[#0e1016]"
       {...(canAnimate
         ? {
             initial: { opacity: 0, y: 6 },
@@ -65,8 +65,8 @@ export const CommitPreview = () => {
         : {})}
     >
       {/* IDE tool window chrome — mimics JetBrains VCS panel header */}
-      <div className="flex items-center gap-2 px-3 py-1.5 border-b border-white/[0.06] bg-white/[0.015]">
-        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/[0.06]">
+      <div className="flex items-center gap-2 px-3 py-1.5 border-b border-white/6 bg-white/1.5">
+        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-white/6">
           <span className="w-1.5 h-1.5 rounded-full bg-brand/60" />
           <span className="font-mono text-[10px] text-gray-400 tracking-wide">Commit</span>
         </div>
@@ -90,10 +90,10 @@ export const CommitPreview = () => {
         </div>
 
         {/* Fake text area */}
-        <div className="relative rounded-md border border-white/[0.08] bg-white/[0.03] px-3 py-2 min-h-[32px]">
+        <div className="relative rounded-md border border-white/8 bg-white/3 px-3 py-2 min-h-[32px]">
           <span className="text-gray-200 text-[11px] font-mono leading-relaxed">
             {displayedText}
-            <span className="cursor-blink inline-block w-[1px] h-[0.85em] bg-brand/80 mx-px align-middle" />
+            <span className="cursor-blink inline-block w-px h-[0.85em] bg-brand/80 mx-px align-middle" />
           </span>
         </div>
       </div>

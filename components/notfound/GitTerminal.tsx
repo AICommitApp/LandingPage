@@ -56,7 +56,13 @@ function sanitizePath(raw: string): string {
 // ---- boot script (a function of the bad path, so the joke is personalized) -----
 type Step = { kind: 'type'; cmd: string } | { kind: 'print'; node: ReactNode; delay: number };
 
-const ART = ['  ▄█  ▄▄▄   █▄█    ▄▄▄', ' ▄██ █  █  █▄█ ▀  █  █   commit not found', '  █  ▀▄▄▀      ▀  ▀▄▄▀'];
+const ART = [
+  '█  █   ████   █  █',
+  '█  █   █  █   █  █',
+  '████   █  █   ████   commit not found',
+  '   █   █  █      █',
+  '   █   ████      █',
+];
 
 function bootScript(path: string): Step[] {
   return [
@@ -96,13 +102,13 @@ function RecoveryChips() {
   const chip = 'inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-[13px] transition-all hover:-translate-y-px';
   return (
     <div className="my-2 flex flex-wrap gap-2.5">
-      <button type="button" className={`${chip} border-brand/40 bg-brand/[0.08] text-gray-100 hover:border-brand hover:bg-brand/[0.16]`} onClick={() => chipRun?.('cd ~')}>
+      <button type="button" className={`${chip} border-brand/40 bg-brand/8 text-gray-100 hover:border-brand hover:bg-brand/16`} onClick={() => chipRun?.('cd ~')}>
         <A>cd ~</A><D>→</D><D>go home</D>
       </button>
-      <a href={MARKETPLACE_URL} target="_blank" rel="noopener noreferrer" className={`${chip} border-brand/40 bg-brand/[0.08] text-gray-100 hover:border-brand hover:bg-brand/[0.16]`}>
+      <a href={MARKETPLACE_URL} target="_blank" rel="noopener noreferrer" className={`${chip} border-brand/40 bg-brand/8 text-gray-100 hover:border-brand hover:bg-brand/16`}>
         <A>git remote -v</A><D>→</D><D>open Marketplace</D>
       </a>
-      <button type="button" className={`${chip} border-white/15 bg-white/[0.03] text-gray-100 hover:border-white/30 hover:bg-white/[0.06]`} onClick={() => chipRun?.('help')}>
+      <button type="button" className={`${chip} border-white/15 bg-white/3 text-gray-100 hover:border-white/30 hover:bg-white/6`} onClick={() => chipRun?.('help')}>
         <A>help</A><D>→</D><D>what can I type?</D>
       </button>
     </div>
@@ -284,7 +290,6 @@ export default function GitTerminal() {
       }
       setHistory(final);
       setBooted(true);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       return () => { gen.current++; };
     }
 
@@ -331,6 +336,7 @@ export default function GitTerminal() {
     };
     window.setTimeout(next, 300);
 
+    // gen.current is a generation counter (not a DOM ref); bumping it in cleanup is intentional.
     // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => { gen.current++; };
   }, [shouldReduceMotion]);
@@ -377,11 +383,11 @@ export default function GitTerminal() {
 
   return (
     <div
-      className="mx-auto flex h-[min(600px,72vh)] w-full max-w-2xl flex-col overflow-hidden rounded-xl border border-white/10 bg-[#0e1016]/90 shadow-2xl backdrop-blur-sm"
+      className="mx-auto flex h-[min(600px,72vh)] w-full max-w-2xl flex-col overflow-hidden rounded-xl border border-white/10 bg-[#0e1016]/90 shadow-2xl backdrop-blur-xs"
       onMouseDown={(e) => { if (!(e.target as HTMLElement).closest('a,button')) inputRef.current?.focus({ preventScroll: true }); }}
     >
       {/* Title bar */}
-      <div className="flex flex-shrink-0 items-center gap-2 border-b border-white/10 px-4 py-2.5">
+      <div className="flex shrink-0 items-center gap-2 border-b border-white/10 px-4 py-2.5">
         <span className="h-3 w-3 rounded-full bg-red-500/80" aria-hidden="true" />
         <span className="h-3 w-3 rounded-full bg-yellow-500/80" aria-hidden="true" />
         <span className="h-3 w-3 rounded-full bg-green-500/80" aria-hidden="true" />
@@ -396,7 +402,7 @@ export default function GitTerminal() {
       {/* Scrollback */}
       <div ref={scrollRef} aria-live="polite" className="flex-1 overflow-y-auto px-4 py-4 font-mono text-[13.5px] leading-relaxed">
         {history.map((l) => (
-          <div key={l.id} className="whitespace-pre-wrap break-words">
+          <div key={l.id} className="whitespace-pre-wrap wrap-break-word">
             {l.node}
           </div>
         ))}

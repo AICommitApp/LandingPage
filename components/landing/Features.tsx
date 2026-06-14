@@ -97,7 +97,7 @@ export const Features = () => {
             AI commit messages, native to your JetBrains workflow
           </h2>
         </m.div>
-        <div className="divide-y divide-white/[0.06]">
+        <div className="divide-y divide-white/6">
           {features.map((feature, index) => {
             const isRight = feature.align === 'right';
 
@@ -121,17 +121,17 @@ export const Features = () => {
                           <m.div
                             key={name}
                             className="flex items-center gap-2.5 px-4 py-3 rounded-xl
-                                       bg-white/[0.04] border border-white/[0.08]
+                                       bg-white/4 border border-white/8
                                        shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]
                                        cursor-default transition-colors duration-200
-                            hover:bg-brand/[0.06] hover:border-brand/20"
+                            hover:bg-brand/6 hover:border-brand/20"
                             variants={providerCardVariants}
                             initial="rest"
                             whileHover={canAnimate ? 'hover' : {}}
                             transition={springSnappy}
                           >
                             <m.span
-                              className="text-brand/70 flex-shrink-0"
+                              className="text-brand/70 shrink-0"
                               variants={providerIconVariants}
                               transition={springSnappy}
                             >
@@ -145,7 +145,7 @@ export const Features = () => {
                     </div>
                   ) : (
                     <div className="relative w-full max-w-[280px] aspect-square flex items-center justify-center">
-                      <div className="absolute inset-0 rounded-3xl bg-white/[0.03] border border-white/[0.07]" />
+                      <div className="absolute inset-0 rounded-3xl bg-white/3 border border-white/[0.07]" />
                       <div className="absolute inset-8 rounded-2xl border border-brand/10" />
                       <div className="relative flex flex-col items-center gap-4">
                         <div className="p-5 rounded-2xl bg-brand/10 border border-brand/20">

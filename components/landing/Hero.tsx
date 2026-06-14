@@ -122,16 +122,16 @@ export const Hero = () => {
             } : {})}
           >
             {/* Ambient glow behind screenshot */}
-            <div className="absolute -inset-6 bg-gradient-to-br from-brand/15 to-transparent rounded-3xl blur-3xl opacity-70 pointer-events-none" />
+            <div className="absolute -inset-6 bg-linear-to-br from-brand/15 to-transparent rounded-3xl blur-3xl opacity-70 pointer-events-none" />
 
             <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#12141b] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)]">
               {/* Fake IDE window chrome */}
-              <div className="flex items-center gap-1.5 px-4 py-3 bg-white/[0.04] border-b border-white/10">
+              <div className="flex items-center gap-1.5 px-4 py-3 bg-white/4 border-b border-white/10">
                 <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
                 <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
                 <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
               </div>
-              <div className="relative aspect-[16/11] overflow-hidden">
+              <div className="relative aspect-16/11 overflow-hidden">
                 <Image
                   src="/screenshots/s_0_action_icon.webp"
                   alt="AICommit one-click generation button in JetBrains IDE VCS panel"

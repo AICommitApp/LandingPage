@@ -3,35 +3,39 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint",
-    "test:seo": "node --test tests/seo-output.test.mjs"
+    "lint": "eslint .",
+    "test:seo": "node --test tests/seo-output.test.mjs",
+    "build:cf": "next build --webpack && opennextjs-cloudflare build --skipNextBuild",
+    "preview": "npm run build:cf && wrangler dev",
+    "deploy": "npm run build:cf && wrangler deploy"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^13.12.0",
+    "@opennextjs/cloudflare": "^1.19.11",
     "@types/node": "^20.12.0",
-    "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^15.4.10",
-    "framer-motion": "^11.11.10",
-    "lucide-react": "^0.453.0",
-    "next": "15.4.10",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.18.0",
+    "next": "^16.2.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "sharp": "^0.34.5",
     "typescript": "^5.6.3"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.16",
-    "autoprefixer": "^10.4.20",
+    "@tailwindcss/postcss": "^4.3.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.9",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14"
+    "tailwindcss": "^4.3.1",
+    "wrangler": "^4.100.0"
   },
   "browserslist": {
     "production": [
