@@ -8,6 +8,9 @@ const AGENT_RESOURCE_NO_INDEX_HEADERS = [
 const nextConfig = {
   reactStrictMode: true,
   compress: true,
+  // Required by @opennextjs/cloudflare — it adapts the standalone server bundle
+  // (.next/standalone) into a Cloudflare Worker.
+  output: 'standalone',
   // Keep Next.js scoped to this project instead of the parent dir to avoid
   // dev-server restarts and hot-update 404s when other lockfiles exist.
   outputFileTracingRoot: __dirname,
