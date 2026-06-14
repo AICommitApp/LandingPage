@@ -8,7 +8,6 @@ const AGENT_RESOURCE_NO_INDEX_HEADERS = [
 const nextConfig = {
   reactStrictMode: true,
   compress: true,
-  output: 'standalone',
   // Keep Next.js scoped to this project instead of the parent dir to avoid
   // dev-server restarts and hot-update 404s when other lockfiles exist.
   outputFileTracingRoot: __dirname,
