@@ -103,23 +103,36 @@ export const homeStructuredData = {
         `${SITE_URL}/screenshots/s_1_commit_panel.webp`,
         `${SITE_URL}/screenshots/s_2_template.webp`,
       ],
-      offers: {
-        '@type': 'Offer',
-        price: '1.00',
-        priceCurrency: 'USD',
-        availability: 'https://schema.org/InStock',
-        url: MARKETPLACE_URL,
-        priceSpecification: {
-          '@type': 'UnitPriceSpecification',
+      offers: [
+        {
+          '@type': 'Offer',
+          name: 'Personal',
           price: '1.00',
           priceCurrency: 'USD',
-          referenceQuantity: {
-            '@type': 'QuantitativeValue',
-            value: 1,
-            unitCode: 'MON',
+          availability: 'https://schema.org/InStock',
+          url: MARKETPLACE_URL,
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: '1.00',
+            priceCurrency: 'USD',
+            referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'MON' },
           },
         },
-      },
+        {
+          '@type': 'Offer',
+          name: 'Commercial',
+          price: '3.00',
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
+          url: MARKETPLACE_URL,
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: '3.00',
+            priceCurrency: 'USD',
+            referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'MON' },
+          },
+        },
+      ],
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: MARKETPLACE_RATING,

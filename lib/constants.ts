@@ -9,7 +9,8 @@ export const DOWNLOAD_COUNT = 22490;
 export const MARKETPLACE_RATING = 4.1;
 export const MARKETPLACE_RATING_COUNT = 15;
 
-// Bump when the page's substantive content changes. Feeds JSON-LD dateModified
-// and the "Last updated" lines in the agent files (llms.txt, llms-full.txt,
-// index.md, ai-agent.json).
+// Bump when the page's substantive content changes. Feeds the JSON-LD
+// `dateModified`. The "Last updated" lines in the agent files (llms.txt,
+// llms-full.txt, index.md, ai-agent.json) are hand-maintained, not derived
+// from this constant — bump them to match when content changes.
 export const LAST_UPDATED = '2026-06-14';

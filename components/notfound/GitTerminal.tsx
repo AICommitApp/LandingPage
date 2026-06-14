@@ -6,7 +6,8 @@
 // answers with `fatal: pathspec ... did not match`, prints an ASCII "404" + a broken
 // commit graph, then drops you at a live, interactive prompt (help / ls / git status /
 // git log / history with ↑↓ / Tab-complete). The same command handler powers the
-// clickable recovery chips, so typing and clicking share one path.
+// `cd ~` / `help` recovery chips, so typing and clicking share one path; the Marketplace
+// chip is a plain external link.
 //
 // Zero new dependencies: pure React + DOM + setTimeout. Reuses framer-motion's
 // useReducedMotion (already bundled), Zed Mono (font-mono) and .cursor-blink.
@@ -98,7 +99,7 @@ function RecoveryChips() {
       <button type="button" className={`${chip} border-brand/40 bg-brand/[0.08] text-gray-100 hover:border-brand hover:bg-brand/[0.16]`} onClick={() => chipRun?.('cd ~')}>
         <A>cd ~</A><D>→</D><D>go home</D>
       </button>
-      <a href={MARKETPLACE_URL} target="_blank" rel="noopener noreferrer" className={`${chip} border-brand/40 bg-brand/[0.08] text-gray-100 hover:border-brand hover:bg-brand/[0.16]`} onClick={(e) => { e.preventDefault(); chipRun?.('git remote -v'); }}>
+      <a href={MARKETPLACE_URL} target="_blank" rel="noopener noreferrer" className={`${chip} border-brand/40 bg-brand/[0.08] text-gray-100 hover:border-brand hover:bg-brand/[0.16]`}>
         <A>git remote -v</A><D>→</D><D>open Marketplace</D>
       </a>
       <button type="button" className={`${chip} border-white/15 bg-white/[0.03] text-gray-100 hover:border-white/30 hover:bg-white/[0.06]`} onClick={() => chipRun?.('help')}>
@@ -149,7 +150,8 @@ export default function GitTerminal() {
           <><A>origin</A>  {MARKETPLACE_URL} <D>(push)</D></>,
           <D>Opening JetBrains Marketplace…</D>,
         );
-        window.setTimeout(() => window.open(MARKETPLACE_URL, '_blank', 'noopener,noreferrer'), 500);
+        // Open synchronously, inside the keydown/click gesture, or popup blockers eat it.
+        window.open(MARKETPLACE_URL, '_blank', 'noopener,noreferrer');
         return;
       }
 
