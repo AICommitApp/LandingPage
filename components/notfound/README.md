@@ -55,8 +55,10 @@ that process is the `concept-shootout` Claude skill.
   Add the command to `TAB_OPTIONS` if it should Tab-complete.
 - **Change the boot script:** edit `bootScript(path)` — a list of `{ kind: 'type' | 'print' }`
   steps. `type` animates a command char-by-char; `print` reveals a line after `delay` ms.
-- **Recovery chips:** `RecoveryChips` (rendered inline in the scrollback). They route through
-  the same `run()` handler as typed input via the module-level `chipRun`.
+- **Recovery chips:** `RecoveryChips` (rendered inline in the scrollback). The `cd ~` and `help`
+  chips route through the same `run()` handler as typed input (via the module-level `chipRun`);
+  the Marketplace chip is a plain external `<a>` link so it opens natively (real link semantics,
+  no popup-blocker issues).
 
 ## Verify after changes
 

@@ -1,38 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AICommit — Landing Page
 
-## Getting Started
+Marketing site for **[AICommit](https://aicommit.app)** — a JetBrains IDE plugin that generates
+git commit messages from your staged diff. Live at **https://aicommit.app**.
 
-First, run the development server:
+Built with **Next.js 15** (Pages Router) + TypeScript + **Tailwind CSS**, with `framer-motion`
+for animation and self-hosted **Zed Sans / Zed Mono** fonts via `next/font/local`. Deployed on
+**Cloudflare Pages**.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Edit the home page from `pages/index.tsx`; the sections live in `components/landing/*`.
+Node ≥ 18 (see `.node-version`).
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Local dev server |
+| `npm run build` | Production build |
+| `npm run lint` | ESLint (`next/core-web-vitals`) |
+| `npm run test:seo` | Builds, then asserts the SEO output — SSR metadata, JSON-LD, `robots.txt`, `sitemap.xml`, the agent-readable files, and the `next.config.js` headers/redirects |
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Deployment — Cloudflare Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Deployed to **Cloudflare Pages** via its GitHub integration: every push to `main` triggers a
+build on Cloudflare's side. (The build/deploy check you see on commits and PRs is the Cloudflare
+Pages deployment — there are no GitHub Actions workflows in this repo.)
 
-## Learn More
+The build runs through **[`@cloudflare/next-on-pages`](https://github.com/cloudflare/next-on-pages)**,
+which adapts the Next.js output to the Pages runtime and translates `next.config.js` `redirects()`
+and `headers()` into Cloudflare routing — so the **www → apex 301**, the `X-Robots-Tag: noindex`
+on the agent files, and the long-lived cache headers all originate from `next.config.js`.
 
-To learn more about Next.js, take a look at the following resources:
+**Cloudflare Pages project settings:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Setting | Value |
+| --- | --- |
+| Build command | `npx @cloudflare/next-on-pages` |
+| Build output directory | `.vercel/output/static` |
+| Compatibility flags | `nodejs_compat` |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Domains: `aicommit.app` (apex) is the Pages custom domain; `www.aicommit.app` 301-redirects to it.
 
-## Deploy on Vercel
+## Project layout
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| Path | Purpose |
+| --- | --- |
+| `pages/index.tsx` | Home page |
+| `pages/404.tsx` | Branded git-terminal 404 (see `components/notfound/README.md`) |
+| `components/landing/` | Page sections (`Hero`, `Features`, `Reviews`, …) |
+| `components/ui/` | Shared UI bits |
+| `lib/seo.ts` | Titles, description, FAQ, and the JSON-LD structured data |
+| `public/` | `robots.txt`, `sitemap.xml`, OG image, fonts, and agent-readable resources (`llms.txt`, `llms-full.txt`, `index.md`, `.well-known/ai-agent.json`) |
+| `tests/seo-output.test.mjs` | Guards the SEO / structured-data output |
