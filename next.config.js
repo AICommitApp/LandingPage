@@ -74,12 +74,6 @@ const nextConfig = {
         ],
       },
       {
-        source: '/fonts/:path*',
-        headers: [
-          { key: 'Cache-Control', value: `public, max-age=${ONE_YEAR_SECONDS}, immutable` },
-        ],
-      },
-      {
         source: '/screenshots/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' },

@@ -284,7 +284,6 @@ export default function GitTerminal() {
       }
       setHistory(final);
       setBooted(true);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       return () => { gen.current++; };
     }
 
@@ -331,6 +330,7 @@ export default function GitTerminal() {
     };
     window.setTimeout(next, 300);
 
+    // gen.current is a generation counter (not a DOM ref); bumping it in cleanup is intentional.
     // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => { gen.current++; };
   }, [shouldReduceMotion]);
