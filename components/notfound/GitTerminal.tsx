@@ -56,7 +56,13 @@ function sanitizePath(raw: string): string {
 // ---- boot script (a function of the bad path, so the joke is personalized) -----
 type Step = { kind: 'type'; cmd: string } | { kind: 'print'; node: ReactNode; delay: number };
 
-const ART = ['  ▄█  ▄▄▄   █▄█    ▄▄▄', ' ▄██ █  █  █▄█ ▀  █  █   commit not found', '  █  ▀▄▄▀      ▀  ▀▄▄▀'];
+const ART = [
+  '█  █   ████   █  █',
+  '█  █   █  █   █  █',
+  '████   █  █   ████   commit not found',
+  '   █   █  █      █',
+  '   █   ████      █',
+];
 
 function bootScript(path: string): Step[] {
   return [

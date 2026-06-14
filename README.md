@@ -15,7 +15,7 @@ npm run dev          # http://localhost:3000
 ```
 
 Edit the home page from `pages/index.tsx`; the sections live in `components/landing/*`.
-Node ≥ 18 (see `.node-version`).
+Node 20+ (`.node-version` pins v22).
 
 ### Scripts
 

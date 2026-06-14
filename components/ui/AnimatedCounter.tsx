@@ -46,5 +46,11 @@ export const AnimatedCounter = ({
     return () => controls.stop();
   }, [value, shouldAnimate, shouldReduceMotion]);
 
-  return <span ref={ref} className={className} suppressHydrationWarning>{display}</span>;
+  // tabular-nums keeps every digit the same width so animating the value doesn't
+  // shift any text that follows it inline.
+  return (
+    <span ref={ref} className={`tabular-nums ${className ?? ''}`} suppressHydrationWarning>
+      {display}
+    </span>
+  );
 };
