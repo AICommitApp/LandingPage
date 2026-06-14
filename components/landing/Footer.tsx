@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Github } from 'lucide-react';
+import { SiGithub } from '@icons-pack/react-simple-icons';
 
 const links = [
   { label: 'FAQ', href: 'https://github.com/AICommitApp/community/blob/main/FAQ.md' },
@@ -40,7 +40,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-200 transition-colors duration-200"
             >
-              <Github className="w-4 h-4" />
+              <SiGithub size={16} color="currentColor" />
               GitHub
             </a>
           </nav>

@@ -59,11 +59,15 @@ test('homepage build output contains SSR SEO content and metadata', () => {
   const screenshotPreloads = [...html.matchAll(/<link rel="preload" as="image"[^>]*imageSrcSet="([^"]+)"/g)]
     .map((match) => match[1])
     .filter((srcset) => srcset.includes('s_0_action_icon'));
+  // React 19 can emit the same hero preload twice (one via next/head, one via React's
+  // resource Float); identical tags are deduped by the browser, so assert a single UNIQUE
+  // preload resource rather than a raw tag count.
+  const uniqueHeroPreloads = new Set(screenshotPreloads);
 
   assert.equal(
-    screenshotPreloads.length,
+    uniqueHeroPreloads.size,
     1,
-    `expected a single preload for the hero screenshot, got ${screenshotPreloads.length}`
+    `expected a single unique preload for the hero screenshot, got ${uniqueHeroPreloads.size} (${screenshotPreloads.length} tags)`
   );
 });
 
