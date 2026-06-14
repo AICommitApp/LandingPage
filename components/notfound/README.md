@@ -19,9 +19,8 @@ and Tab-complete. Fits AICommit's product (a git commit-message tool), so the jo
   `ssr: false`, so it becomes a separate async chunk that downloads **only when a 404 is hit**
   and never enters the homepage bundle. The dynamic `loading` placeholder reserves the
   terminal's exact height (`min(600px,72vh)`) so there is **no layout shift**.
-- **Static prerender.** `/404` builds to a static asset (`○` in `next build`), ~5.9 kB; on
-  Cloudflare Pages (`@cloudflare/next-on-pages`) it stays a static asset — no Worker, no
-  `runtime = 'edge'`.
+- **Static prerender.** `/404` builds to a static asset (`○` in `next build`), ~5.9 kB; the
+  OpenNext Worker (`@opennextjs/cloudflare`) serves it as a prerendered page — no per-request SSR.
 - **Pure React, no `innerHTML`.** Output lines are `ReactNode`s with Tailwind-colored `<span>`s
   (`A`/`D`/`G`/`R`/`B`/`W` helpers), not HTML strings. No `dangerouslySetInnerHTML`, so the
   rich multi-color git-graph and ASCII art stay XSS-safe by construction.

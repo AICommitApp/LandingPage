@@ -25,27 +25,28 @@ Node ≥ 18 (see `.node-version`).
 | `npm run build` | Production build |
 | `npm run lint` | ESLint (`next/core-web-vitals`) |
 | `npm run test:seo` | Builds, then asserts the SEO output — SSR metadata, JSON-LD, `robots.txt`, `sitemap.xml`, the agent-readable files, and the `next.config.js` headers/redirects |
+| `npm run build:cf` | Cloudflare build — `next build --webpack` then OpenNext adapt → `.open-next/` |
+| `npm run preview` | Build + run the Worker locally (`wrangler dev`) |
+| `npm run deploy` | Build + `wrangler deploy` |
 
-## Deployment — Cloudflare Pages
+Requires **Node 20+**. Builds use `--webpack` (Turbopack 16.x mishandles `next/font/local` multi-file `src` arrays).
 
-Deployed to **Cloudflare Pages** via its GitHub integration: every push to `main` triggers a
-build on Cloudflare's side. (The build/deploy check you see on commits and PRs is the Cloudflare
-Pages deployment — there are no GitHub Actions workflows in this repo.)
+## Deployment — Cloudflare (OpenNext)
 
-The build runs through **[`@cloudflare/next-on-pages`](https://github.com/cloudflare/next-on-pages)**,
-which adapts the Next.js output to the Pages runtime and translates `next.config.js` `redirects()`
-and `headers()` into Cloudflare routing — so the **www → apex 301**, the `X-Robots-Tag: noindex`
-on the agent files, and the long-lived cache headers all originate from `next.config.js`.
+Deployed to **Cloudflare** via [OpenNext](https://opennext.js.org/cloudflare) —
+**[`@opennextjs/cloudflare`](https://github.com/opennextjs/opennextjs-cloudflare)**, the official
+successor to the now-deprecated `@cloudflare/next-on-pages`. OpenNext adapts the Next.js
+**standalone** build into a Cloudflare **Worker**, so `next.config.js` `redirects()` and `headers()`
+run at the Worker runtime — the **www → apex 301**, the `X-Robots-Tag: noindex` on the agent files,
+and the long-lived cache headers all originate from `next.config.js` (no porting to
+`_redirects`/`_headers`). Worker entry + static-assets binding live in `wrangler.jsonc`;
+adapter config in `open-next.config.ts`.
 
-**Cloudflare Pages project settings:**
+The Cloudflare project build command is **`npm run build:cf`** (output `.open-next/worker.js`).
+See the [OpenNext Cloudflare guide](https://opennext.js.org/cloudflare/get-started) for connecting
+the repo / dashboard settings.
 
-| Setting | Value |
-| --- | --- |
-| Build command | `npx @cloudflare/next-on-pages` |
-| Build output directory | `.vercel/output/static` |
-| Compatibility flags | `nodejs_compat` |
-
-Domains: `aicommit.app` (apex) is the Pages custom domain; `www.aicommit.app` 301-redirects to it.
+Domains: `aicommit.app` (apex) is the custom domain; `www.aicommit.app` 301-redirects to it.
 
 ## Project layout
 
