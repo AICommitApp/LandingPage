@@ -70,10 +70,10 @@ export const ProductShowcase = () => {
             viewport: { once: true }
           } : {})}
         >
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-white tracking-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-white tracking-tight text-balance">
             Built into your JetBrains workflow
           </h2>
-          <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto text-pretty">
             Generate precise commit messages without leaving your editor.
             Works wherever you commit — VCS panel, terminal, or Git integration.
           </p>
@@ -97,7 +97,7 @@ export const ProductShowcase = () => {
                 }}
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
-                className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 group ${
+                className={`w-full text-left p-5 rounded-2xl border transition duration-300 group ${
                   activeIndex === index
                     ? 'bg-white/10 border-brand/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
                     : 'bg-white/5 border-white/10 hover:bg-white/8 hover:border-white/20'
@@ -112,7 +112,7 @@ export const ProductShowcase = () => {
                   : {})}
               >
                 <div className="flex items-start gap-4">
-                  <div className={`p-2.5 rounded-xl transition-all duration-300 ${
+                  <div className={`p-2.5 rounded-xl transition duration-300 ${
                     activeIndex === index
                       ? 'bg-brand/20 border border-brand/30'
                       : 'bg-white/10 border border-white/10 group-hover:bg-white/15'
@@ -246,7 +246,7 @@ export const ProductShowcase = () => {
                 id={`showcase-tab-mobile-${index}`}
                 tabIndex={activeIndex === index ? 0 : -1}
                 onClick={() => setActiveIndex(index)}
-                className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full border transition-all duration-300 ${
+                className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full border transition duration-300 ${
                   activeIndex === index
                     ? 'bg-brand/20 border-brand/50 text-white'
                     : 'bg-white/5 border-white/10 text-gray-300'

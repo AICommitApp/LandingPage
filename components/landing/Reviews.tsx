@@ -61,10 +61,10 @@ export const Reviews = () => {
               <p className="text-xs font-mono uppercase tracking-[0.28em] text-brand/70">
                 Customer feedback
               </p>
-              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mt-3">
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mt-3 text-balance">
                 Feedback from AICommit users
               </h2>
-              <p className="text-gray-400 mt-3 text-sm md:text-base max-w-xl leading-relaxed">
+              <p className="text-gray-400 mt-3 text-sm md:text-base max-w-xl leading-relaxed text-pretty">
                 <AnimatedCounter
                   value={DOWNLOAD_COUNT}
                   format={formatDownloadsText}
@@ -103,7 +103,7 @@ export const Reviews = () => {
                     />
                   </div>
                   <span className="relative flex h-1.5 w-1.5 mb-0.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-60 [animation-duration:3s]" />
+                    <span className="animate-ping motion-reduce:hidden absolute inline-flex h-full w-full rounded-full bg-brand opacity-60 [animation-duration:3s]" />
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand" />
                   </span>
                 </div>
@@ -124,8 +124,7 @@ export const Reviews = () => {
                 transition: { ...springBase, delay: index * 0.07 },
                 viewport: { once: true },
               } : {})}
-              className="p-6 rounded-2xl bg-white/4 border border-white/10
-                         shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
+              className="surface-card p-6"
             >
               {/* Stars */}
               <div className="flex gap-0.5 mb-4">
