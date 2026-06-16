@@ -93,7 +93,7 @@ export const Features = () => {
           <p className="text-xs font-mono uppercase tracking-[0.28em] text-brand/70 mb-3">
             Why developers choose AICommit
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight text-balance">
             AI commit messages, native to your JetBrains workflow
           </h2>
         </m.div>
@@ -141,7 +141,7 @@ export const Features = () => {
                           </m.div>
                         ))}
                       </div>
-                      <p className="text-center text-xs text-gray-600 mt-3">+ custom API endpoints</p>
+                      <p className="text-center text-xs text-gray-400 mt-3">+ custom API endpoints</p>
                     </div>
                   ) : (
                     <div className="relative w-full max-w-[280px] aspect-square flex items-center justify-center">
@@ -166,7 +166,7 @@ export const Features = () => {
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-400 leading-relaxed text-base md:text-lg">
+                  <p className="text-gray-400 leading-relaxed text-base md:text-lg text-pretty">
                     {feature.description}
                   </p>
                 </div>

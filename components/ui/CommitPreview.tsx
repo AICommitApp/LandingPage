@@ -72,17 +72,17 @@ export const CommitPreview = () => {
         </div>
         <div className="ml-auto flex items-center gap-1.5">
           <span className="relative flex h-1.5 w-1.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-50 [animation-duration:2s]" />
+            <span className="animate-ping motion-reduce:hidden absolute inline-flex h-full w-full rounded-full bg-brand opacity-50 [animation-duration:2s]" />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand/70" />
           </span>
-          <span className="font-mono text-[10px] text-gray-600">generating</span>
+          <span className="font-mono text-[10px] text-gray-400">generating</span>
         </div>
       </div>
 
       {/* Commit message input area — mimics IDE message field */}
       <div className="px-3 py-2.5">
         <div className="flex items-center justify-between mb-1.5">
-          <span className="text-[10px] text-gray-500 font-medium">Commit Message</span>
+          <span className="text-[10px] text-gray-400 font-medium">Commit Message</span>
           <div className="flex items-center gap-1 text-brand/60">
             <Sparkles className="w-3 h-3" />
             <span className="text-[10px]">AI</span>

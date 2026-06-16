@@ -37,17 +37,14 @@ export const Hero = () => {
               <p className="text-xs font-mono uppercase tracking-[0.32em] text-brand/70 mb-4">
                 JetBrains Marketplace plugin
               </p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.08] mb-6">
-                AI commit message
-                <br />
-                generator for
-                <br />
-                <span className="text-brand">JetBrains IDEs</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.08] mb-6 text-balance">
+                AI commit message generator for{' '}
+                <span className="text-brand whitespace-nowrap">JetBrains IDEs</span>
               </h1>
             </m.div>
 
             <m.p
-              className="text-base sm:text-lg text-gray-400 mb-10 max-w-lg leading-relaxed"
+              className="text-base sm:text-lg text-gray-400 mb-10 max-w-lg leading-relaxed text-pretty"
               {...(canAnimate ? {
                 initial: { opacity: 0, y: 16 },
                 animate: { opacity: 1, y: 0 },

@@ -47,12 +47,10 @@ export const FinalCTA = () => {
                   Free trial on Marketplace
                 </m.div>
 
-                <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">
-                  Stop writing commit
-                  <br />
-                  messages manually.
+                <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3 text-balance">
+                  Stop writing commit messages manually.
                 </h2>
-                <p className="text-gray-400 text-base max-w-md">
+                <p className="text-gray-400 text-base max-w-md text-pretty">
                   <AnimatedCounter
                     value={DOWNLOAD_COUNT}
                     format={(n) => n.toLocaleString() + '+'}

@@ -99,7 +99,7 @@ function gitLogLines(): ReactNode[] {
 // RecoveryChips is rendered inline in the scrollback; clicks route through the shared runner.
 let chipRun: ((cmd: string) => void) | null = null;
 function RecoveryChips() {
-  const chip = 'inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-[13px] transition-all hover:-translate-y-px';
+  const chip = 'inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-[13px] transition hover:-translate-y-px';
   return (
     <div className="my-2 flex flex-wrap gap-2.5">
       <button type="button" className={`${chip} border-brand/40 bg-brand/8 text-gray-100 hover:border-brand hover:bg-brand/16`} onClick={() => chipRun?.('cd ~')}>
