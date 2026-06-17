@@ -72,7 +72,7 @@ export const Header = () => {
       e.preventDefault();
       const el = document.querySelector(href);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        el.scrollIntoView({ behavior: shouldReduceMotion ? 'auto' : 'smooth' });
         setIsMenuOpen(false);
       }
     }
@@ -83,7 +83,7 @@ export const Header = () => {
       <div className="container mx-auto px-6 h-16 flex justify-between items-center">
 
         {/* Left — Logo + name */}
-        <a href="#" className="flex items-center gap-3" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+        <a href="#" className="flex items-center gap-3" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: shouldReduceMotion ? 'auto' : 'smooth' }); }}>
           <Image
             src="/favicon.svg"
             alt="AICommit Logo"
