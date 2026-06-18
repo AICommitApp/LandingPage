@@ -33,10 +33,10 @@ export default function NotFound() {
         <meta name="theme-color" content="#21252f" />
       </Head>
 
-      <div className="relative min-h-screen overflow-hidden text-white">
+      <div className="relative min-h-dvh overflow-hidden text-white">
         <Background />
 
-        <main className="relative z-20 flex min-h-screen flex-col items-center justify-center px-4 py-20">
+        <main className="relative z-20 flex min-h-dvh flex-col items-center justify-center px-4 py-20">
           <h1 className="mb-2 font-mono text-2xl font-bold text-brand md:text-3xl">404</h1>
           <p className="mb-8 font-mono text-sm text-gray-400">commit not found in this tree</p>
 

@@ -49,10 +49,10 @@ export const VideoSection = () => {
             viewport: { once: true },
           } : {})}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight text-balance">
             Watch AICommit in action
           </h2>
-          <p className="text-gray-400 mt-2 text-sm">
+          <p className="text-gray-400 mt-2 text-sm text-pretty">
             A quick walkthrough from staged files to a generated commit message inside a JetBrains IDE.
           </p>
         </m.div>
@@ -93,7 +93,8 @@ export const VideoSection = () => {
                   onClick={handlePlayVideo}
                   aria-label="Play demo video"
                 >
-                  <Play className="w-8 h-8 text-black fill-black" />
+                  {/* nudged right ~2px so the triangle sits at the optical centre */}
+                  <Play className="w-8 h-8 text-black fill-black translate-x-[2px]" />
                 </m.button>
               </div>
             )}
