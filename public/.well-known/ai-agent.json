@@ -30,7 +30,14 @@
     "faq": "https://github.com/AICommitApp/community/blob/main/FAQ.md",
     "eula": "https://github.com/AICommitApp/community/blob/main/EULA.md"
   },
-  "lastUpdated": "2026-06-14",
+  "lastUpdated": "2026-08-15",
+  "pages": [
+    "https://aicommit.app/",
+    "https://aicommit.app/ai-commit-message-intellij",
+    "https://aicommit.app/deepseek",
+    "https://aicommit.app/ollama",
+    "https://aicommit.app/capabilities"
+  ],
   "capabilities": {
     "generateCommitMessages": {
       "surface": "JetBrains IDE plugin",
@@ -40,6 +47,7 @@
         "Azure OpenAI",
         "Google Gemini",
         "Anthropic Claude",
+        "DeepSeek",
         "Ollama"
       ],
       "input": "Developer-selected staged changes inside the IDE",

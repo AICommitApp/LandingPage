@@ -88,6 +88,10 @@ test('robots.txt and sitemap.xml are published with absolute canonical URLs', ()
   assert.match(robots, /LLMs:\s*https:\/\/aicommit\.app\/llms\.txt/);
 
   assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/capabilities<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/deepseek<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/ollama<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/ai-commit-message-intellij<\/loc>/);
 });
 
 test('agent-readable markdown and manifest files are published', () => {
@@ -107,7 +111,13 @@ test('agent-readable markdown and manifest files are published', () => {
 
   assert.match(llmsFull, /## Agent and API surface/);
   assert.match(llmsFull, /AICommit does not operate a public HTTP API, OAuth authorization server, MCP server, or A2A task endpoint/);
-  assert.match(llmsFull, /OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama/);
+  assert.match(llmsFull, /OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, DeepSeek, and Ollama/);
+  assert.match(llmsFull, /DeepSeek is a first-class provider/);
+  assert.match(llms, /DeepSeek/);
+  assert.match(llms, /https:\/\/aicommit\.app\/capabilities/);
+  assert.match(llms, /https:\/\/aicommit\.app\/deepseek/);
+  assert.match(llms, /https:\/\/aicommit\.app\/ollama/);
+  assert.match(llms, /https:\/\/aicommit\.app\/ai-commit-message-intellij/);
 
   assert.match(indexMarkdown, /^# AI Commit Message Generator for JetBrains IDEs/m);
   assert.match(indexMarkdown, /\[Install AICommit on JetBrains Marketplace\]\(https:\/\/plugins\.jetbrains\.com\/plugin\/21289-aicommit\/\)/);
@@ -165,6 +175,89 @@ test('canonical host redirects and non-page agent resources are not search-index
       `${source} should be crawlable but explicitly excluded from search indexing`
     );
   }
+});
+
+test('inner pages ship unique titles, descriptions, and canonical URLs', () => {
+  ensureProductionBuild();
+
+  const pages = [
+    {
+      file: 'capabilities.html',
+      title: 'What AICommit ships | Sourced capabilities',
+      description: 'Sourced list of what AICommit actually does',
+      canonical: 'https://aicommit.app/capabilities',
+      required: ['CHANGELOG v3.7.0', 'not inserted into the commit', 'vendor.isVerified'],
+    },
+    {
+      file: 'deepseek.html',
+      title: 'DeepSeek commit messages in JetBrains IDEs | AICommit',
+      description: 'Use DeepSeek as a first-class provider in AICommit',
+      canonical: 'https://aicommit.app/deepseek',
+      required: ['Thinking Mode', 'never inserted into your commit'],
+    },
+    {
+      file: 'ollama.html',
+      title: 'Local AI commit messages with Ollama | AICommit',
+      description: 'Generate commit messages locally with Ollama',
+      canonical: 'https://aicommit.app/ollama',
+      required: ['One-click local setup', 'never leave your machine'],
+    },
+    {
+      file: 'ai-commit-message-intellij.html',
+      title: 'AI commit message generator for IntelliJ IDEA | AICommit',
+      description: 'Generate an AI commit message from your staged diff',
+      canonical: 'https://aicommit.app/ai-commit-message-intellij',
+      required: ['Commit tool window', 'DeepSeek'],
+    },
+  ];
+
+  for (const page of pages) {
+    const htmlPath = path.join(root, '.next', 'server', 'pages', page.file);
+    assert.ok(existsSync(htmlPath), `${page.file} should be in the production build`);
+    const html = readFileSync(htmlPath, 'utf8');
+    assert.match(html, new RegExp(page.title.replace(/[|]/g, '\\|')));
+    assert.match(html, new RegExp(page.description));
+    assert.match(html, new RegExp(`<link rel="canonical" href="${page.canonical}"`));
+    for (const needle of page.required) {
+      assert.match(html, new RegExp(needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    }
+  }
+});
+
+test('site copy does not name or link a third-party plugin', () => {
+  const roots = ['lib', 'components', 'pages', 'public'];
+  const files = [];
+  for (const dir of roots) {
+    const walk = (current) => {
+      for (const entry of readdirSync(path.join(root, current))) {
+        const rel = path.join(current, entry);
+        const abs = path.join(root, rel);
+        if (statSync(abs).isDirectory()) walk(rel);
+        else if (/\.(ts|tsx|txt|md|json|xml|mjs)$/.test(entry)) files.push(abs);
+      }
+    };
+    walk(dir);
+  }
+
+  for (const file of files) {
+    const text = readFileSync(file, 'utf8');
+    assert.doesNotMatch(text, /Blarc/);
+    assert.doesNotMatch(text, /21335/);
+    assert.doesNotMatch(text, /ai-commits-intellij-plugin/);
+    assert.doesNotMatch(text, /ko-fi\.com\/blarc/i);
+    assert.doesNotMatch(text, /other plugins?/i);
+  }
+});
+
+test('homepage provider copy includes DeepSeek and omits stale in-editor claims', () => {
+  ensureProductionBuild();
+
+  const html = readFileSync(buildMarker, 'utf8');
+  assert.match(html, /DeepSeek/);
+  assert.doesNotMatch(html, /code optimization/i);
+  assert.doesNotMatch(html, /code explanation/i);
+  assert.doesNotMatch(html, /documentation generation/i);
+  assert.doesNotMatch(html, /code conversion/i);
 });
 
 test('screenshot source assets are webp and kept compact', () => {

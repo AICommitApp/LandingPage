@@ -2,11 +2,15 @@
 
 > AICommit is a JetBrains plugin that generates commit messages from staged changes inside IntelliJ-platform IDEs.
 
-Last updated: 2026-06-14
+Last updated: 2026-08-15
 
 ## Essential links
 
 - [Homepage](https://aicommit.app/): Product overview and installation entry point.
+- [AI commit messages for IntelliJ](https://aicommit.app/ai-commit-message-intellij): How generation works inside the Commit tool window.
+- [DeepSeek](https://aicommit.app/deepseek): First-class DeepSeek provider and Thinking Mode.
+- [Ollama](https://aicommit.app/ollama): Local-first generation; staged diffs stay on the machine.
+- [Capabilities](https://aicommit.app/capabilities): Sourced list of what AICommit ships, each item linked to the changelog or plugin description.
 - [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/21289-aicommit/): Official plugin listing and installation source.
 - [Community and support](https://github.com/AICommitApp/community/): FAQ, EULA, issue reporting, and product support.
 - [Full agent context](https://aicommit.app/llms-full.txt): Extended product, privacy, integration, and API-surface notes.
@@ -17,7 +21,7 @@ Last updated: 2026-06-14
 
 AICommit runs inside JetBrains IDEs and drafts commit messages from the changes the developer has staged. The draft remains editable before commit.
 
-Supported provider options include OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama. Cloud generation sends content only to the provider configured by the user. Ollama supports local model workflows.
+Supported provider options include OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, DeepSeek, and Ollama, plus OpenAI-compatible custom endpoint profiles. Cloud generation sends content only to the provider configured by the user. Ollama supports local model workflows. DeepSeek Thinking Mode keeps reasoning out of the commit, history, and telemetry.
 
 It works across IntelliJ-platform IDEs, including IntelliJ IDEA, PyCharm, WebStorm, GoLand, Rider, PhpStorm, RubyMine, CLion, Android Studio, DataGrip, and RustRover.
 

@@ -33,12 +33,19 @@ const AzureIcon = () => (
   </svg>
 );
 
+const DeepSeekIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+    <path d="M12 3c4.97 0 9 3.134 9 7 0 2.21-1.343 4.184-3.44 5.5L19 21l-4.2-2.1C13.94 19.3 12.99 19.5 12 19.5c-4.97 0-9-3.134-9-7S7.03 3 12 3z" />
+  </svg>
+);
+
 const providers = [
-  { name: 'OpenAI',  Icon: OpenAIIcon  },
-  { name: 'Azure',   Icon: AzureIcon   },
-  { name: 'Gemini',  Icon: () => <SiGooglegemini size={20} color="currentColor" /> },
-  { name: 'Claude',  Icon: () => <SiClaude size={20} color="currentColor" /> },
-  { name: 'Ollama',  Icon: () => <SiOllama size={20} color="currentColor" /> },
+  { name: 'OpenAI',   Icon: OpenAIIcon },
+  { name: 'Azure',    Icon: AzureIcon },
+  { name: 'Gemini',   Icon: () => <SiGooglegemini size={20} color="currentColor" /> },
+  { name: 'Claude',   Icon: () => <SiClaude size={20} color="currentColor" /> },
+  { name: 'DeepSeek', Icon: DeepSeekIcon },
+  { name: 'Ollama',   Icon: () => <SiOllama size={20} color="currentColor" /> },
 ];
 
 // ── Feature data ───────────────────────────────────────────────────────────
@@ -58,7 +65,7 @@ const features = [
     label: 'Multi-Platform AI',
     title: 'Your model, your rules.',
     description:
-      'Works with OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama — including local models. Switch providers without touching a config file.',
+      'Works with OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, DeepSeek, and Ollama — including local models. Switch providers without touching a config file.',
     align: 'right',
     visual: 'providers',
   },

@@ -1,6 +1,6 @@
 # AI Commit Message Generator for JetBrains IDEs
 
-Last updated: 2026-06-14
+Last updated: 2026-08-15
 
 AICommit is a JetBrains plugin that generates commit messages from staged changes inside IntelliJ IDEA, WebStorm, and other IntelliJ-platform IDEs.
 
@@ -10,10 +10,18 @@ AICommit is a JetBrains plugin that generates commit messages from staged change
 
 - Built into the JetBrains Commit tool window.
 - Generates editable commit-message drafts from staged changes.
-- Supports OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama.
+- Supports OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, DeepSeek, and Ollama.
+- DeepSeek Thinking Mode keeps reasoning out of the commit, history, and telemetry.
 - Keeps provider credentials and model choices under the developer's control.
 - Supports local-first workflows through Ollama.
 - 22,490+ JetBrains Marketplace installs, rated 4.1/5.
+
+## Pages
+
+- [AI commit messages for IntelliJ](https://aicommit.app/ai-commit-message-intellij)
+- [DeepSeek](https://aicommit.app/deepseek)
+- [Ollama](https://aicommit.app/ollama)
+- [Capabilities](https://aicommit.app/capabilities)
 
 ## Common questions
 
@@ -23,7 +31,7 @@ AICommit is built for JetBrains IDEs and fits directly into the Commit tool wind
 
 ### Which AI providers are supported?
 
-AICommit supports OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama for local models.
+AICommit supports OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, DeepSeek, and Ollama for local models, plus OpenAI-compatible custom endpoint profiles.
 
 ### Does AICommit collect my code or commit messages?
 

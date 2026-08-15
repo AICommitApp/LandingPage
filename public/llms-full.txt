@@ -1,6 +1,6 @@
 # AICommit full agent context
 
-Last updated: 2026-06-14
+Last updated: 2026-08-15
 
 ## What AICommit is
 
@@ -18,7 +18,7 @@ The workflow is:
 
 ## Provider support
 
-AICommit supports OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama. Ollama is the local-first option for users who do not want staged diffs sent to a cloud provider.
+AICommit supports OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, DeepSeek, and Ollama. DeepSeek is a first-class provider (since v3.6.1), including Thinking Mode. Ollama is the local-first option for users who do not want staged diffs sent to a cloud provider. OpenAI-compatible custom endpoint profiles can be saved and switched from the tool window.
 
 ## Pricing
 
@@ -26,7 +26,7 @@ AICommit is a paid JetBrains Marketplace plugin with a 30-day free trial. Person
 
 ## Privacy model
 
-AICommit does not collect source code or generated commit messages for the landing-page service. For cloud generation, staged content is sent only to the provider configured by the user. Users control provider selection, credentials, and model configuration inside their IDE.
+AICommit does not collect source code or generated commit messages for the landing-page service. For cloud generation, staged content is sent only to the provider configured by the user. Users control provider selection, credentials, and model configuration inside their IDE. DeepSeek Thinking Mode reasoning is never inserted into commits, stored in history, or sent in telemetry. Telemetry is opt-out, with a full disclosure in Settings → About.
 
 ## Agent and API surface
 
@@ -37,6 +37,10 @@ This means there is currently no OpenAPI file, OAuth discovery document, MCP ser
 ## Canonical links
 
 - Homepage: https://aicommit.app/
+- AI commit messages for IntelliJ: https://aicommit.app/ai-commit-message-intellij
+- DeepSeek: https://aicommit.app/deepseek
+- Ollama: https://aicommit.app/ollama
+- Capabilities: https://aicommit.app/capabilities
 - JetBrains Marketplace: https://plugins.jetbrains.com/plugin/21289-aicommit/
 - Community repository: https://github.com/AICommitApp/community/
 - FAQ: https://github.com/AICommitApp/community/blob/main/FAQ.md

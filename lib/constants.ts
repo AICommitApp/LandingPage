@@ -13,4 +13,4 @@ export const MARKETPLACE_RATING_COUNT = 15;
 // `dateModified`. The "Last updated" lines in the agent files (llms.txt,
 // llms-full.txt, index.md, ai-agent.json) are hand-maintained, not derived
 // from this constant — bump them to match when content changes.
-export const LAST_UPDATED = '2026-06-14';
+export const LAST_UPDATED = '2026-08-15';

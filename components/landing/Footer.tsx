@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { SiGithub } from '@icons-pack/react-simple-icons';
+import { INNER_PAGE_LINKS } from '@/lib/site-pages';
 
 const links = [
   { label: 'FAQ', href: 'https://github.com/AICommitApp/community/blob/main/FAQ.md' },
@@ -23,6 +25,15 @@ export const Footer = () => {
 
           {/* Links */}
           <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {INNER_PAGE_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-gray-400 hover:text-gray-200 transition-colors duration-200"
+              >
+                {link.label}
+              </Link>
+            ))}
             {links.map((link) => (
               <a
                 key={link.label}

@@ -13,9 +13,41 @@ export const MARKETPLACE_URL = 'https://plugins.jetbrains.com/plugin/21289-aicom
 export const MARKETPLACE_REVIEWS_URL = `${MARKETPLACE_URL}reviews`;
 export const COMMUNITY_URL = 'https://github.com/AICommitApp/community/';
 
+export const PROVIDERS_SHORT =
+  'OpenAI, Azure OpenAI, Gemini, Claude, DeepSeek, and Ollama';
+export const PROVIDERS_LONG =
+  'OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, DeepSeek, and Ollama';
+
 export const HOME_TITLE = 'AI Commit Message Generator for JetBrains IDEs | AICommit';
 export const HOME_DESCRIPTION =
-  'AICommit is a JetBrains IDE plugin for AI commit messages — works with OpenAI, Azure OpenAI, Gemini, Claude, and Ollama, with privacy-first provider controls.';
+  `AICommit is a JetBrains IDE plugin for AI commit messages — works with ${PROVIDERS_SHORT}, with privacy-first provider controls.`;
+
+export const pageUrl = (path: string) =>
+  path === '/' ? HOME_URL : `${SITE_URL}${path}`;
+
+export const pageStructuredData = (opts: {
+  title: string;
+  description: string;
+  path: string;
+}) => {
+  const url = pageUrl(opts.path);
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${url}#webpage`,
+        url,
+        name: opts.title,
+        description: opts.description,
+        inLanguage: 'en',
+        dateModified: LAST_UPDATED,
+        isPartOf: { '@id': `${HOME_URL}#website` },
+        publisher: { '@id': `${HOME_URL}#organization` },
+      },
+    ],
+  } as const;
+};
 
 export const HOME_FAQ = [
   {
@@ -26,7 +58,7 @@ export const HOME_FAQ = [
   {
     question: 'Which AI providers are supported?',
     answer:
-      'AICommit supports OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, and Ollama for local models.',
+      `AICommit supports ${PROVIDERS_LONG} for local models, plus OpenAI-compatible custom endpoint profiles.`,
   },
   {
     question: 'Does AICommit collect my code or commit messages?',
@@ -94,7 +126,7 @@ export const homeStructuredData = {
       softwareRequirements: 'IntelliJ-platform IDE with the JetBrains Commit tool window',
       featureList: [
         'Generate commit messages from staged changes inside JetBrains IDEs',
-        'Use OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, or Ollama',
+        `Use ${PROVIDERS_LONG}`,
         'Edit generated commit messages before committing',
         'Keep cloud usage controlled by the provider and model configured by the user',
       ],

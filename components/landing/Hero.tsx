@@ -53,7 +53,7 @@ export const Hero = () => {
             >
               Generate AI commit messages in one click for IntelliJ IDEA, WebStorm,
               and other JetBrains IDEs. Works with OpenAI, Azure OpenAI, Gemini,
-              Claude, and Ollama with privacy-first provider controls.
+              Claude, DeepSeek, and Ollama with privacy-first provider controls.
             </m.p>
 
             <m.div

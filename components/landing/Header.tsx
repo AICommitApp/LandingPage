@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { m, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { HelpCircle, Bug, FileText, ChevronRight, Menu, X } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 
 const navLinks = [
-  { label: 'Features', href: '#features', external: false },
-  { label: 'Showcase', href: '#showcase', external: false },
-  { label: 'Reviews', href: '#reviews', external: false },
-  { label: 'FAQ', href: '#compatibility-faq', external: false },
+  { label: 'Features', href: '/#features', external: false },
+  { label: 'Capabilities', href: '/capabilities', external: false },
+  { label: 'Reviews', href: '/#reviews', external: false },
+  { label: 'FAQ', href: '/#compatibility-faq', external: false },
 ];
 
 const externalLinks = [
@@ -18,6 +20,7 @@ const externalLinks = [
 ];
 
 export const Header = () => {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -68,14 +71,17 @@ export const Header = () => {
   }, [isMenuOpen]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
+    const hashIndex = href.indexOf('#');
+    if (hashIndex !== -1 && router.pathname === '/') {
       e.preventDefault();
-      const el = document.querySelector(href);
+      const el = document.querySelector(href.slice(hashIndex));
       if (el) {
         el.scrollIntoView({ behavior: shouldReduceMotion ? 'auto' : 'smooth' });
         setIsMenuOpen(false);
       }
+      return;
     }
+    setIsMenuOpen(false);
   };
 
   return (
@@ -83,7 +89,16 @@ export const Header = () => {
       <div className="container mx-auto px-6 h-16 flex justify-between items-center">
 
         {/* Left — Logo + name */}
-        <a href="#" className="flex items-center gap-3" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: shouldReduceMotion ? 'auto' : 'smooth' }); }}>
+        <Link
+          href="/"
+          className="flex items-center gap-3"
+          onClick={(e) => {
+            if (router.pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: shouldReduceMotion ? 'auto' : 'smooth' });
+            }
+          }}
+        >
           <Image
             src="/favicon.svg"
             alt="AICommit Logo"
@@ -92,7 +107,7 @@ export const Header = () => {
             className="w-8 h-8"
           />
           <span className="font-semibold text-lg leading-none">AICommit</span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
