@@ -4,8 +4,13 @@
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-01-01",
   "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
   "assets": {
     "binding": "ASSETS",
     "directory": ".open-next/assets"
-  }
+  },
+  "routes": [
+    { "pattern": "aicommit.app/*", "zone_name": "aicommit.app" },
+    { "pattern": "www.aicommit.app/*", "zone_name": "aicommit.app" }
+  ]
 }
