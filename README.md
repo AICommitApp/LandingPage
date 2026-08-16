@@ -4,8 +4,8 @@ Marketing site for **[AICommit](https://aicommit.app)** — a JetBrains IDE plug
 git commit messages from your staged diff. Live at **https://aicommit.app**.
 
 Built with **Next.js 15** (Pages Router) + TypeScript + **Tailwind CSS**, with `framer-motion`
-for animation and self-hosted **Zed Sans / Zed Mono** fonts via `next/font/local`. Deployed on
-**Cloudflare Pages**.
+for animation and self-hosted **Zed Sans / Zed Mono** fonts via `next/font/local`. Deployed as a
+**Cloudflare Worker** via OpenNext.
 
 ## Getting started
 
@@ -42,9 +42,11 @@ and the long-lived cache headers all originate from `next.config.js` (no porting
 `_redirects`/`_headers`). Worker entry + static-assets binding live in `wrangler.jsonc`;
 adapter config in `open-next.config.ts`.
 
-The Cloudflare project build command is **`npm run build:cf`** (output `.open-next/worker.js`).
-See the [OpenNext Cloudflare guide](https://opennext.js.org/cloudflare/get-started) for connecting
-the repo / dashboard settings.
+Pushing `main` runs `.github/workflows/deploy.yml` (`npm run deploy`). That is the
+only production path. Do not use Cloudflare Pages Git builds (`@cloudflare/next-on-pages`).
+
+Create a Cloudflare API token from the **Edit Cloudflare Workers** template and store it
+as the repo secret `CLOUDFLARE_API_TOKEN`. Manual deploy remains `npm run deploy`.
 
 Domains: `aicommit.app` (apex) is the custom domain; `www.aicommit.app` 301-redirects to it.
 
