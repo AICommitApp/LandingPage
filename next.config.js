@@ -19,7 +19,7 @@ const nextConfig = {
   },
   experimental: {
     // Tree-shake icon packages so only imported icons are bundled.
-    optimizePackageImports: ['lucide-react', '@icons-pack/react-simple-icons'],
+    optimizePackageImports: ['lucide-react', '@icons-pack/react-simple-icons', '@lobehub/icons'],
   },
   async redirects() {
     return [
