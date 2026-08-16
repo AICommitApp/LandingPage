@@ -42,11 +42,10 @@ and the long-lived cache headers all originate from `next.config.js` (no porting
 `_redirects`/`_headers`). Worker entry + static-assets binding live in `wrangler.jsonc`;
 adapter config in `open-next.config.ts`.
 
-Pushing `main` runs `.github/workflows/deploy.yml` (`npm run deploy`). That is the
-only production path. Do not use Cloudflare Pages Git builds (`@cloudflare/next-on-pages`).
-
-Create a Cloudflare API token from the **Edit Cloudflare Workers** template and store it
-as the repo secret `CLOUDFLARE_API_TOKEN`. Manual deploy remains `npm run deploy`.
+Production deploys from **Workers Builds** on Worker `aicommit-landing` when `main`
+is updated (`npm run build:cf` then `npx wrangler deploy`). Do not use Cloudflare
+Pages Git builds (`@cloudflare/next-on-pages`); the Pages project is kept only as
+a domain/analytics archive. Manual deploy remains `npm run deploy`.
 
 Domains: `aicommit.app` (apex) is the custom domain; `www.aicommit.app` 301-redirects to it.
 
