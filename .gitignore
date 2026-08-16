@@ -41,3 +41,6 @@ next-env.d.ts
 
 # Owner-local product brief — not for the public repo
 PRODUCT.md
+DESIGN.md
+.impeccable/
+

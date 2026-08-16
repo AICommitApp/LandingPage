@@ -14,6 +14,10 @@ const page = (path: string, title: string, description: string): SitePage => ({
   description,
 });
 
+export const COMPARE_TITLE = 'AICommit vs typical open-source plugins';
+export const COMPARE_DESCRIPTION =
+  'Category comparison of AI commit plugins for JetBrains IDEs. No project is named. Every AICommit cell traces to the changelog or the plugin description.';
+
 export const CAPABILITIES_TITLE = 'What AICommit ships | Sourced capabilities';
 export const CAPABILITIES_DESCRIPTION =
   'Sourced list of what AICommit actually does — providers, Thinking Mode isolation, local Ollama, history, and privacy. Each item links to the changelog or the plugin description.';
@@ -30,8 +34,13 @@ export const INTELLIJ_TITLE = 'AI commit message generator for IntelliJ IDEA | A
 export const INTELLIJ_DESCRIPTION =
   'Generate an AI commit message from your staged diff inside the IntelliJ IDEA Commit tool window. One click, your provider, editable draft.';
 
+export const CHANGELOG_TITLE = 'AICommit changelog | What shipped';
+export const CHANGELOG_DESCRIPTION =
+  'Public changelog for the AICommit JetBrains plugin. Each release is parsed from CHANGELOG.md so sourced claims on this site have a page visitors can open.';
+
 export const SITE_PAGES: readonly SitePage[] = [
   page('/', HOME_TITLE, HOME_DESCRIPTION),
+  page('/changelog', CHANGELOG_TITLE, CHANGELOG_DESCRIPTION),
   page('/capabilities', CAPABILITIES_TITLE, CAPABILITIES_DESCRIPTION),
   page('/deepseek', DEEPSEEK_TITLE, DEEPSEEK_DESCRIPTION),
   page('/ollama', OLLAMA_TITLE, OLLAMA_DESCRIPTION),
@@ -39,7 +48,9 @@ export const SITE_PAGES: readonly SitePage[] = [
 ];
 
 export const INNER_PAGE_LINKS = [
+  { label: 'Compare', href: '/compare' },
   { label: 'Capabilities', href: '/capabilities' },
+  { label: 'Changelog', href: '/changelog' },
   { label: 'DeepSeek', href: '/deepseek' },
   { label: 'Ollama', href: '/ollama' },
   { label: 'IntelliJ', href: '/ai-commit-message-intellij' },

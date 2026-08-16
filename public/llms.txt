@@ -10,6 +10,7 @@ Last updated: 2026-08-15
 - [AI commit messages for IntelliJ](https://aicommit.app/ai-commit-message-intellij): How generation works inside the Commit tool window.
 - [DeepSeek](https://aicommit.app/deepseek): First-class DeepSeek provider and Thinking Mode.
 - [Ollama](https://aicommit.app/ollama): Local-first generation; staged diffs stay on the machine.
+- [Changelog](https://aicommit.app/changelog): Public release notes. The plugin source repository is private.
 - [Capabilities](https://aicommit.app/capabilities): Sourced list of what AICommit ships, each item linked to the changelog or plugin description.
 - [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/21289-aicommit/): Official plugin listing and installation source.
 - [Community and support](https://github.com/AICommitApp/community/): FAQ, EULA, issue reporting, and product support.

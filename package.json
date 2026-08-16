@@ -7,6 +7,8 @@
   },
   "scripts": {
     "dev": "next dev --webpack",
+    "predev": "node scripts/ingest-changelog.mjs",
+    "prebuild": "node scripts/ingest-changelog.mjs",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",

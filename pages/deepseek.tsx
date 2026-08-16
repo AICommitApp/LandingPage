@@ -3,23 +3,28 @@ import Link from 'next/link';
 import { SeoHead } from '@/components/landing/SeoHead';
 import { SiteChrome } from '@/components/landing/SiteChrome';
 import { PageIntro } from '@/components/landing/PageIntro';
+import { SourceCite } from '@/components/landing/SourceCite';
+import { changelogHref } from '@/lib/changelog';
 import { DEEPSEEK_DESCRIPTION, DEEPSEEK_TITLE } from '@/lib/site-pages';
 
 const facts = [
   {
     title: 'First-class provider',
     body: 'DeepSeek has been a built-in provider since v3.6.1, with inline first-run setup in the tool window.',
-    source: 'CHANGELOG v3.6.1',
+    sourceLabel: 'CHANGELOG v3.6.1',
+    sourceUrl: changelogHref('3.6.1'),
   },
   {
     title: 'Thinking Mode',
     body: 'v3.7.0 added a dedicated Thinking Mode experience with live reasoning progress and token statistics.',
-    source: 'CHANGELOG v3.7.0',
+    sourceLabel: 'CHANGELOG v3.7.0',
+    sourceUrl: changelogHref('3.7.0'),
   },
   {
     title: 'Reasoning stays out of the commit',
     body: 'Reasoning content is never inserted into your commit, stored in history, or sent in telemetry.',
-    source: 'CHANGELOG v3.7.0',
+    sourceLabel: 'CHANGELOG v3.7.0',
+    sourceUrl: changelogHref('3.7.0'),
   },
 ];
 
@@ -45,7 +50,9 @@ const DeepSeekPage = () => {
               <article key={fact.title} className="surface-card p-6">
                 <h2 className="text-xl font-bold text-white tracking-tight">{fact.title}</h2>
                 <p className="mt-3 text-gray-300 leading-relaxed">{fact.body}</p>
-                <p className="mt-3 font-mono text-xs text-gray-400">{fact.source}</p>
+                <p className="mt-3 text-xs text-gray-400">
+                  Source: <SourceCite href={fact.sourceUrl} label={fact.sourceLabel} />
+                </p>
               </article>
             ))}
           </div>

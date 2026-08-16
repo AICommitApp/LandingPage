@@ -3,23 +3,28 @@ import Link from 'next/link';
 import { SeoHead } from '@/components/landing/SeoHead';
 import { SiteChrome } from '@/components/landing/SiteChrome';
 import { PageIntro } from '@/components/landing/PageIntro';
+import { SourceCite } from '@/components/landing/SourceCite';
+import { changelogHref, PLUGIN_DESCRIPTION_URL } from '@/lib/changelog';
 import { OLLAMA_DESCRIPTION, OLLAMA_TITLE } from '@/lib/site-pages';
 
 const facts = [
   {
     title: 'One-click local setup',
     body: 'First-run includes one-click local Ollama quick setup, plus deep links from the tool window into the right Settings field.',
-    source: 'CHANGELOG v3.6.1',
+    sourceLabel: 'CHANGELOG v3.6.1',
+    sourceUrl: changelogHref('3.6.1'),
   },
   {
     title: 'Nothing leaves the machine',
     body: 'With Ollama, staged diffs stay on your machine. AICommit does not collect your code or commit messages.',
-    source: 'Plugin description',
+    sourceLabel: 'Plugin description',
+    sourceUrl: PLUGIN_DESCRIPTION_URL,
   },
   {
     title: 'Telemetry is opt-out',
     body: 'Telemetry is opt-out, with a full disclosure in Settings → About.',
-    source: 'Plugin description',
+    sourceLabel: 'Plugin description',
+    sourceUrl: PLUGIN_DESCRIPTION_URL,
   },
 ];
 
@@ -45,7 +50,9 @@ const OllamaPage = () => {
               <article key={fact.title} className="surface-card p-6">
                 <h2 className="text-xl font-bold text-white tracking-tight">{fact.title}</h2>
                 <p className="mt-3 text-gray-300 leading-relaxed">{fact.body}</p>
-                <p className="mt-3 font-mono text-xs text-gray-400">{fact.source}</p>
+                <p className="mt-3 text-xs text-gray-400">
+                  Source: <SourceCite href={fact.sourceUrl} label={fact.sourceLabel} />
+                </p>
               </article>
             ))}
           </div>

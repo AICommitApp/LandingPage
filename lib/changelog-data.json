@@ -1,0 +1,475 @@
+{
+  "releases": [
+    {
+      "version": "3.7.0",
+      "date": "2026-07-11",
+      "anchor": "v3.7.0",
+      "groups": [
+        {
+          "title": "Added",
+          "items": [
+            "Claude: Set up Claude directly from the Commit tool window when credentials are missing.",
+            "DeepSeek: Added a dedicated Thinking Mode experience with live reasoning progress and reliable token statistics. Reasoning content is never inserted into commits, stored in history, or sent in telemetry.",
+            "Diagnostics: Added a Copy diagnostic info action to make provider errors easier to troubleshoot.",
+            "Model Catalog: View model context windows and continue browsing bundled model data when the remote catalog is unavailable."
+          ]
+        },
+        {
+          "title": "Improved",
+          "items": [
+            "Settings: Redesigned provider configuration with dedicated pages, a clearer overview, consistent status indicators, inline reset actions, and clearer data-handling guidance.",
+            "Commit Tool Window: Simplified the layout, moved provider selection to the title bar, made temperature easier to edit, and clarified preparing, reasoning, success, and error states.",
+            "Accessibility: Improved keyboard navigation, focus behavior, contrast, responsive text wrapping, and light/dark theme consistency.",
+            "Providers and Models: Updated default model lists, improved compatibility across supported providers, and made the model catalog faster and more reliable."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Commit Selection: Commit message generation now respects the changes selected for the current commit when launched from the AICommit tool window.",
+            "Streaming: Incomplete responses now report an error instead of appearing successful; cancellation and provider or network failures are handled more reliably.",
+            "Commit UI: Fixed generation and refresh issues across different commit workflows.",
+            "Provider Setup: Temperature edits are saved before generation, and missing credentials now open the correct editable provider settings.",
+            "Model Catalog: Fixed lost selections and clarified the difference between an empty catalog and no search matches."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.6.1",
+      "date": "2026-05-26",
+      "anchor": "v3.6.1",
+      "groups": [
+        {
+          "title": "Added",
+          "items": [
+            "DeepSeek: first-class provider with inline first-run setup.",
+            "OpenAI-compatible: configure multiple profiles for custom endpoints and switch between them directly from the tool window.",
+            "First-run: one-click local Ollama quick setup and contextual deep links from the tool window into the right Settings tab/field.",
+            "History: commit-message history is now persisted per project.",
+            "Telemetry: opt-out toggle in Settings with a privacy disclosure in About.",
+            "UI: brand icons for built-in providers (OpenAI, Gemini, Azure, Claude, Ollama, DeepSeek) in the tool window provider dropdown and Settings provider tabs.",
+            "UI: added the guarded provider settings navigation foundation."
+          ]
+        },
+        {
+          "title": "Improved",
+          "items": [
+            "Onboarding: inline readiness guidance in the tool window after first success.",
+            "Settings: internal navigation between the Provider and About sections.",
+            "DeepSeek: refined Japanese and Korean copy.",
+            "UI: converged the phase 1 design tokens."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Settings: removed an outer horizontal scrollbar and constrained the Data Handling privacy notice width.",
+            "Commit Action: requires included changes at click time to avoid empty-selection generations.",
+            "OpenAI-compatible: preserve profile references when Settings loads before profiles are fully populated.",
+            "Telemetry: removed the IntelliJ internal `PluginManagerCore.getPlugin(PluginId)` call from plugin version reporting, resolving the Marketplace Internal API warning."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.6.0",
+      "date": "2026-05-24",
+      "anchor": "v3.6.0",
+      "groups": [
+        {
+          "title": "Added",
+          "items": [
+            "DeepSeek: first-class provider with inline first-run setup.",
+            "OpenAI-compatible: configure multiple profiles for custom endpoints and switch between them directly from the tool window.",
+            "First-run: one-click local Ollama quick setup and contextual deep links from the tool window into the right Settings tab/field.",
+            "History: commit-message history is now persisted per project.",
+            "Telemetry: opt-out toggle in Settings with a privacy disclosure in About.",
+            "UI: brand icons for built-in providers (OpenAI, Gemini, Azure, Claude, Ollama, DeepSeek) in the tool window provider dropdown and Settings provider tabs."
+          ]
+        },
+        {
+          "title": "Improved",
+          "items": [
+            "Onboarding: inline readiness guidance in the tool window after first success.",
+            "Settings: internal navigation between the Provider and About sections.",
+            "DeepSeek: refined Japanese and Korean copy."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Settings: removed an outer horizontal scrollbar and constrained the Data Handling privacy notice width.",
+            "Commit Action: requires included changes at click time to avoid empty-selection generations.",
+            "OpenAI-compatible: preserve profile references when Settings loads before profiles are fully populated."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.5.1",
+      "date": "2026-04-19",
+      "anchor": "v3.5.1",
+      "groups": [
+        {
+          "title": "Fixed",
+          "items": [
+            "OpenAI: preserve responses newline deltas."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.5.0",
+      "date": "2026-04-07",
+      "anchor": "v3.5.0",
+      "groups": [
+        {
+          "title": "Added",
+          "items": [
+            "Ollama: support for thinking models (e.g. DeepSeek-R1, kimi-k2.5) with adaptive context handling.",
+            "Live streaming progress in the result panel with automatic scroll-follow.",
+            "Settings: redesigned provider tabs with clearer active provider selection.",
+            "Added Gemini model list; updated default models across providers."
+          ]
+        },
+        {
+          "title": "Improved",
+          "items": [
+            "Standardized internal helper naming by removing misleading `ForTest` suffixes and keeping test-only helpers explicit.",
+            "Reduced provider service trace noise and kept key mismatch/switch traces in local debug flow.",
+            "Centralized provider capability decisions (temperature/role/token counting mode) under a shared entrypoint.",
+            "Routed diff chunking branch selection through capability token counting mode while preserving provider-specific behavior.",
+            "Made token metadata fallback decisions explicitly track source (`DIRECT/BACKEND/AZURE_OPENAI_FALLBACK/NONE`) for clearer diagnostics and tests."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "`getCurrentAI()` now deterministically resolves to the configured provider from Settings.",
+            "Unversioned file diff extraction now correctly handles deleted files and directories before text/binary branches.",
+            "`stopGenerate()` now uses snapshot-then-clear to avoid losing cancellation on concurrently added jobs."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.4.4",
+      "date": "2026-02-26",
+      "anchor": "v3.4.4",
+      "groups": [
+        {
+          "title": "Added",
+          "items": [
+            "Added catalog-based model management to make provider/model selection more consistent."
+          ]
+        },
+        {
+          "title": "Improved",
+          "items": [
+            "OpenAI now defaults to the `responses` endpoint mode.",
+            "Improved stability for streaming responses and model list refresh."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Kept prompt drafts when switching providers or models.",
+            "Prevented duplicate auto dialogs during a single interaction.",
+            "Improved OpenAI error messages for clearer troubleshooting.",
+            "Opened Settings directly when the API token is missing.",
+            "Improved localization for model-manager and no-model messages."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.4.3",
+      "date": "2026-02-25",
+      "anchor": "v3.4.3",
+      "groups": [
+        {
+          "title": "Added",
+          "items": [
+            "Added catalog-based model management to make provider/model selection more consistent."
+          ]
+        },
+        {
+          "title": "Improved",
+          "items": [
+            "OpenAI now defaults to the `responses` endpoint mode.",
+            "Improved stability for streaming responses and model list refresh."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Kept prompt drafts when switching providers or models.",
+            "Prevented duplicate auto dialogs during a single interaction.",
+            "Improved OpenAI error messages for clearer troubleshooting.",
+            "Opened Settings directly when the API token is missing.",
+            "Improved localization for model-manager and no-model messages."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.4.2",
+      "date": "2026-02-23",
+      "anchor": "v3.4.2",
+      "groups": [
+        {
+          "title": "Added",
+          "items": [
+            "Added catalog-based model management to make provider/model selection more consistent."
+          ]
+        },
+        {
+          "title": "Improved",
+          "items": [
+            "OpenAI now defaults to the `responses` endpoint mode.",
+            "Improved stability for streaming responses and model list refresh."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Kept prompt drafts when switching providers or models.",
+            "Prevented duplicate auto dialogs during a single interaction.",
+            "Improved OpenAI error messages for clearer troubleshooting.",
+            "Opened Settings directly when the API token is missing.",
+            "Improved localization for model-manager and no-model messages."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.4.1",
+      "date": "2026-02-12",
+      "anchor": "v3.4.1",
+      "groups": []
+    },
+    {
+      "version": "3.4.0",
+      "date": "2025-12-30",
+      "anchor": "v3.4.0",
+      "groups": []
+    },
+    {
+      "version": "3.3.0",
+      "date": "2025-09-26",
+      "anchor": "v3.3.0",
+      "groups": []
+    },
+    {
+      "version": "3.2.7",
+      "date": "2025-09-20",
+      "anchor": "v3.2.7",
+      "groups": []
+    },
+    {
+      "version": "3.2.6",
+      "date": "2025-09-15",
+      "anchor": "v3.2.6",
+      "groups": []
+    },
+    {
+      "version": "3.2.4",
+      "date": "2025-04-06",
+      "anchor": "v3.2.4",
+      "groups": []
+    },
+    {
+      "version": "3.2.3",
+      "date": "2025-04-06",
+      "anchor": "v3.2.3",
+      "groups": []
+    },
+    {
+      "version": "3.2.2",
+      "date": "2025-03-30",
+      "anchor": "v3.2.2",
+      "groups": []
+    },
+    {
+      "version": "3.2.1",
+      "date": "2024-12-28",
+      "anchor": "v3.2.1",
+      "groups": []
+    },
+    {
+      "version": "3.2.0",
+      "date": "2024-11-27",
+      "anchor": "v3.2.0",
+      "groups": []
+    },
+    {
+      "version": "3.1.2",
+      "date": "2024-10-27",
+      "anchor": "v3.1.2",
+      "groups": []
+    },
+    {
+      "version": "3.1.0",
+      "date": "2024-07-28",
+      "anchor": "v3.1.0",
+      "groups": []
+    },
+    {
+      "version": "3.0.9",
+      "date": "2024-07-21",
+      "anchor": "v3.0.9",
+      "groups": []
+    },
+    {
+      "version": "3.0.8",
+      "date": "2024-05-28",
+      "anchor": "v3.0.8",
+      "groups": []
+    },
+    {
+      "version": "3.0.7",
+      "date": "2024-05-14",
+      "anchor": "v3.0.7",
+      "groups": []
+    },
+    {
+      "version": "3.0.5",
+      "date": "2024-05-07",
+      "anchor": "v3.0.5",
+      "groups": []
+    },
+    {
+      "version": "3.0.4",
+      "date": "2024-04-27",
+      "anchor": "v3.0.4",
+      "groups": []
+    },
+    {
+      "version": "3.0.3",
+      "date": "2024-03-16",
+      "anchor": "v3.0.3",
+      "groups": []
+    },
+    {
+      "version": "2.2.6",
+      "date": "2023-11-11",
+      "anchor": "v2.2.6",
+      "groups": []
+    },
+    {
+      "version": "2.2.3",
+      "date": "2023-10-19",
+      "anchor": "v2.2.3",
+      "groups": []
+    },
+    {
+      "version": "2.2.2",
+      "date": "2023-07-31",
+      "anchor": "v2.2.2",
+      "groups": []
+    },
+    {
+      "version": "2.2.1",
+      "date": "2023-06-15",
+      "anchor": "v2.2.1",
+      "groups": []
+    },
+    {
+      "version": "2.1.4",
+      "date": "2023-05-28",
+      "anchor": "v2.1.4",
+      "groups": []
+    },
+    {
+      "version": "2.1.3",
+      "date": "2023-05-03",
+      "anchor": "v2.1.3",
+      "groups": []
+    },
+    {
+      "version": "2.1.2",
+      "date": "2023-04-13",
+      "anchor": "v2.1.2",
+      "groups": []
+    },
+    {
+      "version": "2.1.1",
+      "date": "2023-04-11",
+      "anchor": "v2.1.1",
+      "groups": []
+    },
+    {
+      "version": "2.1.0",
+      "date": "2023-04-10",
+      "anchor": "v2.1.0",
+      "groups": []
+    },
+    {
+      "version": "2.0.0",
+      "date": "2023-04-09",
+      "anchor": "v2.0.0",
+      "groups": []
+    },
+    {
+      "version": "1.2.4",
+      "date": "2023-04-07",
+      "anchor": "v1.2.4",
+      "groups": []
+    },
+    {
+      "version": "1.2.3",
+      "date": "2023-04-06",
+      "anchor": "v1.2.3",
+      "groups": []
+    },
+    {
+      "version": "1.2.1",
+      "date": "2023-04-03",
+      "anchor": "v1.2.1",
+      "groups": []
+    },
+    {
+      "version": "1.2.0",
+      "date": "2023-04-02",
+      "anchor": "v1.2.0",
+      "groups": []
+    },
+    {
+      "version": "1.1.4",
+      "date": "2023-03-29",
+      "anchor": "v1.1.4",
+      "groups": []
+    },
+    {
+      "version": "1.1.3",
+      "date": "2023-03-29",
+      "anchor": "v1.1.3",
+      "groups": []
+    },
+    {
+      "version": "1.1.1",
+      "date": "2023-03-26",
+      "anchor": "v1.1.1",
+      "groups": []
+    },
+    {
+      "version": "0.0.1",
+      "date": "2023-03-12",
+      "anchor": "v0.0.1",
+      "groups": [
+        {
+          "title": "Added",
+          "items": [
+            "Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)",
+            "Generating commit messages using OpenAI",
+            "Supporting custom prompts and various parameter adjustments",
+            "Support for Translations",
+            "Support for Rate Limiting",
+            "Support for Commit Message Templates(Order List for now)"
+          ]
+        }
+      ]
+    }
+  ]
+}

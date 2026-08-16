@@ -8,6 +8,7 @@ import { trackEvent } from '@/lib/analytics';
 
 const navLinks = [
   { label: 'Features', href: '/#features', external: false },
+  { label: 'Compare', href: '/compare', external: false },
   { label: 'Capabilities', href: '/capabilities', external: false },
   { label: 'Reviews', href: '/#reviews', external: false },
   { label: 'FAQ', href: '/#compatibility-faq', external: false },

@@ -71,23 +71,37 @@ const nextConfig = {
         headers: AGENT_RESOURCE_NO_INDEX_HEADERS,
       },
       {
-        source: '/_next/static/:path*',
-        headers: [
-          { key: 'Cache-Control', value: `public, max-age=${ONE_YEAR_SECONDS}, immutable` },
-        ],
-      },
-      {
         source: '/screenshots/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' },
         ],
       },
-      {
-        source: '/assets/:path*',
-        headers: [
-          { key: 'Cache-Control', value: `public, max-age=${ONE_YEAR_SECONDS}, immutable` },
-        ],
-      },
+      // Hashed production filenames can be cached forever. In `next dev` the
+      // same `/_next/static/...` URLs are reused across edits; an immutable
+      // year-long cache makes Fast Refresh hydrate yesterday's JS against
+      // today's HTML (hydration mismatch loop until Cmd-Shift-R).
+      ...(process.env.NODE_ENV === 'production'
+        ? [
+            {
+              source: '/_next/static/:path*',
+              headers: [
+                {
+                  key: 'Cache-Control',
+                  value: `public, max-age=${ONE_YEAR_SECONDS}, immutable`,
+                },
+              ],
+            },
+            {
+              source: '/assets/:path*',
+              headers: [
+                {
+                  key: 'Cache-Control',
+                  value: `public, max-age=${ONE_YEAR_SECONDS}, immutable`,
+                },
+              ],
+            },
+          ]
+        : []),
     ];
   },
 };

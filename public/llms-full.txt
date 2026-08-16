@@ -40,6 +40,7 @@ This means there is currently no OpenAPI file, OAuth discovery document, MCP ser
 - AI commit messages for IntelliJ: https://aicommit.app/ai-commit-message-intellij
 - DeepSeek: https://aicommit.app/deepseek
 - Ollama: https://aicommit.app/ollama
+- Changelog: https://aicommit.app/changelog
 - Capabilities: https://aicommit.app/capabilities
 - JetBrains Marketplace: https://plugins.jetbrains.com/plugin/21289-aicommit/
 - Community repository: https://github.com/AICommitApp/community/

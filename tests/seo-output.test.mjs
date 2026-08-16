@@ -88,6 +88,7 @@ test('robots.txt and sitemap.xml are published with absolute canonical URLs', ()
   assert.match(robots, /LLMs:\s*https:\/\/aicommit\.app\/llms\.txt/);
 
   assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/changelog<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/capabilities<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/deepseek<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/aicommit\.app\/ollama<\/loc>/);
@@ -114,6 +115,7 @@ test('agent-readable markdown and manifest files are published', () => {
   assert.match(llmsFull, /OpenAI, Azure OpenAI, Google Gemini, Anthropic Claude, DeepSeek, and Ollama/);
   assert.match(llmsFull, /DeepSeek is a first-class provider/);
   assert.match(llms, /DeepSeek/);
+  assert.match(llms, /https:\/\/aicommit\.app\/changelog/);
   assert.match(llms, /https:\/\/aicommit\.app\/capabilities/);
   assert.match(llms, /https:\/\/aicommit\.app\/deepseek/);
   assert.match(llms, /https:\/\/aicommit\.app\/ollama/);
@@ -182,6 +184,13 @@ test('inner pages ship unique titles, descriptions, and canonical URLs', () => {
 
   const pages = [
     {
+      file: 'changelog.html',
+      title: 'AICommit changelog | What shipped',
+      description: 'Public changelog for the AICommit JetBrains plugin',
+      canonical: 'https://aicommit.app/changelog',
+      required: ['Thinking Mode', '3.7.0', '3.6.1'],
+    },
+    {
       file: 'capabilities.html',
       title: 'What AICommit ships | Sourced capabilities',
       description: 'Sourced list of what AICommit actually does',
@@ -245,7 +254,7 @@ test('site copy does not name or link a third-party plugin', () => {
     assert.doesNotMatch(text, /21335/);
     assert.doesNotMatch(text, /ai-commits-intellij-plugin/);
     assert.doesNotMatch(text, /ko-fi\.com\/blarc/i);
-    assert.doesNotMatch(text, /other plugins?/i);
+    assert.doesNotMatch(text, /github\.com\/rosuH\/AICommit\/blob/);
   }
 });
 
